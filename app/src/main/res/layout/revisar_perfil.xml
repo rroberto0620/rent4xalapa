@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#323538"
+    android:padding="16dp">
+
+
+    <Button
+        android:id="@+id/btnBack"
+        android:layout_width="106dp"
+        android:layout_height="40dp"
+        android:text="Regresar"
+        android:background="@drawable/rounded_edit_text"
+        android:textColor="#FFFFFF"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp" />
+
+
+    <Button
+        android:id="@+id/btnDeleteAccount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Eliminar cuenta"
+        android:background="@drawable/rounded_edit_text"
+        android:textColor="#FFFFFF"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="16dp" />
+
+
+    <ImageView
+        android:id="@+id/imagen_perfil"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:background="#CCCCCC"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/btnBack"
+        android:layout_marginTop="20dp" />
+
+    <LinearLayout
+        android:id="@+id/profileContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@drawable/rounded_edit_text"
+        android:layout_below="@id/imagen_perfil"
+        android:layout_marginTop="20dp"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/tvName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nombre"
+            android:textSize="18sp"
+            android:textColor="@color/black"/>
+
+        <TextView
+            android:id="@+id/tvAge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Edad"
+            android:textSize="18sp"
+            android:layout_marginTop="4dp"
+            android:textColor="@color/black"/>
+
+        <TextView
+            android:id="@+id/tvEmail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="correo@prueba.com"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:layout_marginTop="4dp" />
+
+        <Button
+            android:id="@+id/btnEditProfile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Editar"
+            android:background="@drawable/rounded_edit_text"
+            android:textColor="#FFFFFF"
+            android:layout_marginTop="8dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/favoritesContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="#444444"
+        android:layout_below="@id/profileContainer"
+        android:layout_marginTop="20dp"
+        android:padding="16dp">
+
+        <ImageView
+            android:id="@+id/favoritesImage"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:background="#CCCCCC"
+            android:layout_gravity="center_vertical" />
+
+        <TextView
+            android:id="@+id/tvFavoritesDetails"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Favoritos"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="16dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="#444444"
+        android:layout_below="@id/favoritesContainer"
+        android:layout_marginTop="20dp"
+        android:padding="16dp">
+
+        <ImageView
+            android:id="@+id/rentalPropertyImage"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:background="#CCCCCC"
+            android:layout_gravity="center_vertical" />
+
+        <TextView
+            android:id="@+id/tvRentalPropertyDetails"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Propiedad en renta"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="16dp" />
+    </LinearLayout>
+</RelativeLayout>
