@@ -13,11 +13,10 @@
         android:theme="@style/Theme.Rent4Xalapa"
         tools:targetApi="31">
         <activity
-            android:name=".PublicacionesFavoritasActivity"
-            android:exported="false" />
-        <activity
             android:name=".EditarPerfilActivity"
             android:exported="false" />
+        <activity android:name=".registerActivity"
+            android:exported="false"/>
         <activity
             android:name=".LoginActivity"
             android:exported="true">

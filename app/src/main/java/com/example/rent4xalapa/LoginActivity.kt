@@ -18,9 +18,12 @@ class LoginActivity : AppCompatActivity() {
         binding=ActivityMainBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
+
         db= Usuarios(this@LoginActivity)
+        db.crearTabla()
         array = arrayListOf<Usuario>()
         array = db.seleccionarUsuarios()
+
         binding.tvRegistrar.setOnClickListener{
             irPantallaRegister()
         }
@@ -36,22 +39,36 @@ class LoginActivity : AppCompatActivity() {
         Toast.makeText(this@LoginActivity,mensaje, Toast.LENGTH_LONG).show()
     }
 
-    fun verificarCredenciales(){
+    fun verificarCredenciales() {
         val correo = binding.etEmail.text.toString()
         val contrasena = binding.etContrasena.text.toString()
-        for (usuario in array){
-            if(usuario.correo == correo && usuario.contrasena == contrasena){
-                mostrarToast("Iniciaste sesion "+"${usuario.nombre}")
-                irPantallaEditarPerfil(usuario.nombre,usuario.correo,usuario.contrasena,usuario.telefono,usuario.ine)
-            }else{
-                mostrarToast("Usuario y/o contraseña son incorrectos")
+        var usuarioEncontrado = false
+
+        for (usuario in array) {
+            if (usuario.correo == correo && usuario.contrasena == contrasena) {
+                irPantallaEditarPerfil(
+                    usuario.idUsuario,
+                    usuario.nombre,
+                    usuario.correo,
+                    usuario.contrasena,
+                    usuario.telefono,
+                    usuario.ine
+                )
+                usuarioEncontrado = true
+
+                break  // Salir del bucle una vez encontrado el usuario
             }
+        }
+
+        if (!usuarioEncontrado) {
+            mostrarToast("Usuario y/o contraseña son incorrectos")
         }
     }
 
 
-    fun irPantallaEditarPerfil(nombre:String, correo:String , contrasena:String , telefono:Int , ine:String){
+    fun irPantallaEditarPerfil(idUsuario:Int,nombre:String, correo:String , contrasena:String , telefono:Long , ine:String){
         val intent = Intent(this@LoginActivity,EditarPerfilActivity::class.java)
+        intent.putExtra("idUsuario",idUsuario)
         intent.putExtra("nombre",nombre)
         intent.putExtra("correo",correo)
         intent.putExtra("contrasena",contrasena)
@@ -66,5 +83,5 @@ class LoginActivity : AppCompatActivity() {
         startActivity(intent)
         finish()
     }
-    
+
 }

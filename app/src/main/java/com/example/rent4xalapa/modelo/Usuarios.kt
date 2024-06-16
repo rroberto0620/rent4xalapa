@@ -12,29 +12,34 @@ import com.example.rent4xalapa.poko.Usuario
 
 class Usuarios (contexto: Context) : SQLiteOpenHelper(contexto, NOMBRE_BD,null, VERSION_BD){
 
-companion object{
-    private const val NOMBRE_BD ="usuarios.db"
-    private const val NOMBRE_TABLA ="usuarios"
-    private const val COL_ID_USUARIO ="idUsuario"
-    private const val COL_NOMBRE ="nombre"
-    private const val COL_CORREO ="correo"
-    private const val COL_CONTRASENA ="contrasena"
-    private const val COL_TELEFONO ="telefono"
-    private const val COL_INE="INE"
-    private const val VERSION_BD =1
+    companion object{
+        private const val NOMBRE_BD ="usuarios.db"
+        private const val NOMBRE_TABLA ="usuarios"
+        private const val COL_ID_USUARIO ="idUsuario"
+        private const val COL_NOMBRE ="nombre"
+        private const val COL_CORREO ="correo"
+        private const val COL_CONTRASENA ="contrasena"
+        private const val COL_TELEFONO ="telefono"
+        private const val COL_INE="INE"
+        private const val VERSION_BD =1
 
-}
+    }
 
     override fun onCreate(p0: SQLiteDatabase?) {
-        val CREATE_TABLE_NOTAS = ("CREATE TABLE $NOMBRE_TABLA(" +
-                "$COL_ID_USUARIO INTEGER PRIMARY KEY AUTOINCREMENT," +
-                "$COL_NOMBRE," +
-                "$COL_CORREO," +
-                "$COL_CONTRASENA," +
-                "$COL_TELEFONO," +
-                "$COL_INE)"
-                )
+        val CREATE_TABLE_NOTAS = "CREATE TABLE $NOMBRE_TABLA( $COL_ID_USUARIO INTEGER PRIMARY KEY AUTOINCREMENT,$COL_NOMBRE VARCHAR(40),$COL_CORREO VARCHAR(40),$COL_CONTRASENA VARCHAR(20),$COL_TELEFONO INTEGER(10),$COL_INE VARCHAR(130))"
         p0!!.execSQL(CREATE_TABLE_NOTAS)
+    }
+
+    /*fun eliminarTabla(){
+        val db = writableDatabase
+        val ELIMINAR_TABLA = ("DROP TABLE $NOMBRE_TABLA")
+        db!!.execSQL(ELIMINAR_TABLA)
+    }*/
+
+    fun crearTabla(){
+        val db = writableDatabase
+        val valor = db.execSQL("CREATE TABLE IF NOT EXISTS $NOMBRE_TABLA( $COL_ID_USUARIO INTEGER PRIMARY KEY AUTOINCREMENT,$COL_NOMBRE VARCHAR(40),$COL_CORREO VARCHAR(40),$COL_CONTRASENA VARCHAR(20),$COL_TELEFONO INTEGER(10),$COL_INE VARCHAR(130))")
+        return valor
     }
 
 
@@ -63,14 +68,14 @@ companion object{
         val resultadoConsulta : Cursor = db.query(NOMBRE_TABLA,null,null,null,null,null,null)
         if (resultadoConsulta != null){
             while (resultadoConsulta.moveToNext()){
-                val idUsuario = resultadoConsulta.getLong(resultadoConsulta.getColumnIndex(
+                val idUsuario = resultadoConsulta.getInt(resultadoConsulta.getColumnIndex(
                     COL_ID_USUARIO))
                 val nombre = resultadoConsulta.getString(resultadoConsulta.getColumnIndex(COL_NOMBRE))
                 val correo = resultadoConsulta.getString(resultadoConsulta.getColumnIndex(
                     COL_CORREO))
                 val contrasena =resultadoConsulta.getString(resultadoConsulta.getColumnIndex(
                     COL_CONTRASENA))
-                val telefono = resultadoConsulta.getInt(resultadoConsulta.getColumnIndex(
+                val telefono = resultadoConsulta.getLong(resultadoConsulta.getColumnIndex(
                     COL_TELEFONO))
                 val ine=resultadoConsulta.getString(resultadoConsulta.getColumnIndex(COL_INE))
 

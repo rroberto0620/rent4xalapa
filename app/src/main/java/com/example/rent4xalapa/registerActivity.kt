@@ -25,7 +25,7 @@ class registerActivity : AppCompatActivity() {
 
         binding.btnRegistrarse.setOnClickListener{
             if(validarCamposCorrectos()){
-                val nuevoUsuario = Usuario(0,binding.etNombre.text.toString(),binding.etEmail.text.toString(),binding.etContrasena.text.toString(),binding.etNumeroTel.text.toString().toInt(),binding.etIdentifiacion.text.toString())
+                val nuevoUsuario = Usuario(0,binding.etNombre.text.toString(),binding.etEmail.text.toString(),binding.etContrasena.text.toString(),binding.etNumeroTel.text.toString().toLong(),binding.etIdentifiacion.text.toString())
                 agregarUsuario(nuevoUsuario)
             }
         }
@@ -78,7 +78,7 @@ class registerActivity : AppCompatActivity() {
         }
 
         return valido
-       }
+    }
 
     fun irPantallaLogin(){
         val intent = Intent(this@registerActivity, LoginActivity::class.java)
