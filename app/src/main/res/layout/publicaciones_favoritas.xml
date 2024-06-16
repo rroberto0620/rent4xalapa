@@ -10,7 +10,6 @@
         android:layout_height="match_parent"
         android:text="Favoritos"
         android:textSize="33sp"
-        android:shadowColor="@color/black"
         android:layout_centerHorizontal="true"/>
 
 </RelativeLayout>
