@@ -2,14 +2,74 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/gray_osc_personalizado">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/gray_osc_personalizado"
+    tools:context=".PublicacionesFavoritasActivity">
 
     <TextView
         android:id="@+id/tv_publicaciones_favoritas"
+        android:layout_width="200dp"
+        android:layout_marginTop="5dp"
+        android:textColor="@color/black"
+        android:layout_height="wrap_content"
+        android:background="@drawable/rounded_textview"
+        android:text="@string/favoritos"
+        android:textSize="25sp"
+        android:layout_marginBottom="10dp"
+        android:textAlignment="center"
+        android:layout_centerHorizontal="true"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/logo_sin_letras"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_publicaciones_favoritas"
+        android:layout_width="match_parent"
+        android:layout_height="620dp"
+        android:layout_below="@id/tv_publicaciones_favoritas"
+        android:layout_marginTop="2dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp" />
+
+    <LinearLayout
+        android:id="@+id/linear_menus"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:text="Favoritos"
-        android:textSize="33sp"
-        android:layout_centerHorizontal="true"/>
+        android:orientation="horizontal"
+        android:layout_below="@id/recycler_publicaciones_favoritas">
+
+        <ImageButton
+            android:id="@+id/imageButton_principal"
+            android:background="@color/white_personalizado"
+            android:layout_width="102.5dp"
+            android:layout_height="60dp"
+            android:src="@drawable/home_outline"/>
+
+        <ImageButton
+            android:id="@+id/imageButton_favoritos"
+            android:background="@color/white_personalizado"
+            android:layout_width="102.5dp"
+            android:layout_height="60dp"
+            android:src="@drawable/heart"/>
+
+        <ImageButton
+            android:id="@+id/imageButton_publicacion_nueva"
+            android:background="@color/white_personalizado"
+            android:layout_width="102.5dp"
+            android:layout_height="60dp"
+            android:src="@drawable/new_box"/>
+
+        <ImageButton
+            android:id="@+id/imageButton_mi_cuenta"
+            android:background="@color/white_personalizado"
+            android:layout_width="102.5dp"
+            android:layout_height="60dp"
+            android:src="@drawable/account_box"/>
+
+    </LinearLayout>
 
 </RelativeLayout>
