@@ -42,34 +42,26 @@
 
 
             <TextView
-                android:id="@+id/welcome_text"
+                android:id="@+id/tv_registrar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginBottom="8dp"
-                android:text="¡Bienvenido!"
+                android:text="Registrarse"
                 android:textColor="@android:color/white"
-                android:textSize="24sp"
+                android:textSize="40sp"
                 android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/login_text"
-                android:layout_width="wrap_content"
+            <EditText
+                android:id="@+id/et_nombre"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
                 android:layout_marginBottom="16dp"
-                android:text="Iniciar Sesion"
-                android:textColor="@android:color/white"
-                android:textSize="20sp"
-                android:textStyle="bold" />
-
-            <ImageView
-                android:id="@+id/logo"
-                android:layout_width="260dp"
-                android:layout_height="170dp"
-                android:layout_gravity="center"
-                android:layout_marginBottom="20dp"
-                android:src="@drawable/logo_letras" />
+                android:background="@drawable/rounded_edittext"
+                android:hint="Nombre completo"
+                android:inputType="text"
+                android:padding="10dp"
+                android:textColor="@color/black" />
 
             <EditText
                 android:id="@+id/et_email"
@@ -92,25 +84,44 @@
                 android:inputType="textPassword"
                 android:padding="10dp"
                 android:textColor="@color/black" />
+            <EditText
+                android:id="@+id/et_numero_tel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/rounded_edittext"
+                android:hint="Numero de telefono"
+                android:inputType="phone"
+                android:padding="10dp"
+                android:textColor="@color/black" />
+            <EditText
+                android:id="@+id/et_identifiacion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/rounded_edittext"
+                android:hint="imagen"
+                android:padding="10dp"
+                android:textColor="@color/black" />
 
             <Button
-                android:id="@+id/btn_login"
+                android:id="@+id/btn_registrarse"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
                 android:backgroundTint="@android:color/holo_blue_dark"
-                android:text="Iniciar Sesion"
+                android:text="Registrarse"
                 android:textColor="@android:color/white" />
 
             <TextView
-                android:id="@+id/tv_registrar"
+                android:id="@+id/tv_tiene_cuenta"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="¿No tienes una cuenta? Registrarse"
+                android:text="¿Ya tienes un cuenta? Inicia sesion"
                 android:textColor="@android:color/white" />
 
         </LinearLayout>
-</androidx.cardview.widget.CardView>
+    </androidx.cardview.widget.CardView>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
