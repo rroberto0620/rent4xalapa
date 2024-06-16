@@ -42,12 +42,24 @@ class LoginActivity : AppCompatActivity() {
         for (usuario in array){
             if(usuario.correo == correo && usuario.contrasena == contrasena){
                 mostrarToast("Iniciaste sesion "+"${usuario.nombre}")
+                irPantallaEditarPerfil(usuario.nombre,usuario.correo,usuario.contrasena,usuario.telefono,usuario.ine)
             }else{
                 mostrarToast("Usuario y/o contraseña son incorrectos")
             }
         }
     }
 
+
+    fun irPantallaEditarPerfil(nombre:String, correo:String , contrasena:String , telefono:Int , ine:String){
+        val intent = Intent(this@LoginActivity,EditarPerfilActivity::class.java)
+        intent.putExtra("nombre",nombre)
+        intent.putExtra("correo",correo)
+        intent.putExtra("contrasena",contrasena)
+        intent.putExtra("telefono",telefono)
+        intent.putExtra("ine",ine)
+        startActivity(intent)
+        finish()
+    }
 
     fun irPantallaRegister(){
         val intent = Intent(this@LoginActivity, registerActivity::class.java)

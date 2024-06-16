@@ -36,7 +36,6 @@ class registerActivity : AppCompatActivity() {
     }
 
 
-
     fun agregarUsuario(usuario: Usuario){
         val resultadoInsercion = modelo.insertarUsuarios(usuario)
         var mensaje = ""

@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     android:padding="16dp"
-    android:background="#4C4F51">
+    android:background="#4C4F51"
+    tools:context=".EditarPerfilActivity">
 
     <ImageView
         android:id="@+id/backgroundImage"
@@ -54,26 +55,6 @@
             android:layout_marginBottom="16dp" />
 
         <TextView
-            android:id="@+id/tv_edad"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Edad"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:layout_marginBottom="8dp"
-            android:textColor="@color/white"/>
-
-        <EditText
-            android:id="@+id/et_edad"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Ingrese su edad"
-            android:inputType="number"
-            android:background="@drawable/rounded_edit_text"
-            android:padding="12dp"
-            android:layout_marginBottom="16dp" />
-
-        <TextView
             android:id="@+id/tv_correo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -94,21 +75,41 @@
             android:layout_marginBottom="16dp" />
 
         <TextView
-            android:id="@+id/tv_nacimiento"
+            android:id="@+id/tv_contrasena"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Nacimiento"
+            android:layout_marginBottom="8dp"
+            android:text="Contraseña"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/et_contrasena"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/rounded_edit_text"
+            android:hint="Ingrese su nueva contraseña"
+            android:inputType="number"
+            android:padding="12dp" />
+
+        <TextView
+            android:id="@+id/tv_telefono"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Numero Telefonico"
             android:textSize="18sp"
             android:textStyle="bold"
             android:layout_marginBottom="8dp"
             android:textColor="@color/white"/>
 
         <EditText
-            android:id="@+id/et_nacimiento"
+            android:id="@+id/et_telefono"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Ingrese su fecha de nacimiento"
-            android:inputType="date"
+            android:hint="Ingrese su numero"
+            android:inputType="phone"
             android:background="@drawable/rounded_edit_text"
             android:padding="12dp"
             android:layout_marginBottom="16dp" />
