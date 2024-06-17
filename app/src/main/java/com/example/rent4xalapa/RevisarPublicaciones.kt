@@ -22,7 +22,7 @@ class RevisarPublicaciones : AppCompatActivity() {
         }
 
         binding.btnRealizar.setOnClickListener {
-            irPantallaRealizarCita()
+//            irPantallaRealizarCita()
         }
     }
 
@@ -53,9 +53,9 @@ class RevisarPublicaciones : AppCompatActivity() {
     }
 
 
-    fun irPantallaRealizarCita(){
-        val intent = Intent(this@RevisarPublicaciones, RealizarCita::class.java)
-        startActivity(intent)
-        finish()
-    }
+//    fun irPantallaRealizarCita(){
+//        val intent = Intent(this@RevisarPublicaciones, RealizarCita::class.java)
+//        startActivity(intent)
+//        finish()
+//    }
 }

@@ -15,6 +15,8 @@
         <activity
             android:name=".EditarPerfilActivity"
             android:exported="false" />
+        <activity android:name=".RevisarPerfilActivity"
+            android:exported="false"/>
         <activity android:name=".registerActivity"
             android:exported="false"/>
         <activity

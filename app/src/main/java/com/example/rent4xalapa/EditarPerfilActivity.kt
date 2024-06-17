@@ -39,7 +39,7 @@ class EditarPerfilActivity : AppCompatActivity() {
         binding.etTelefono.setText(telefono.toString())
 
         binding.btnBack.setOnClickListener {
-            irPantallaLogin()
+            irVerPerfil()
         }
         binding.btnActualizar.setOnClickListener {
             val usuario = Usuario(idUsuario.toInt(), binding.etNombre.text.toString(), binding.etCorreo.text.toString(), binding.etContrasena.text.toString(), binding.etTelefono.text.toString().toLong(),"")
@@ -54,7 +54,7 @@ class EditarPerfilActivity : AppCompatActivity() {
         var msg = ""
         if(resultadoActualizado>0){
             msg ="Usuario actualizado"
-            irPantallaLogin()
+            irVerPerfil()
         }else{
             msg = "Error al actualizar usuario"
         }
@@ -66,8 +66,31 @@ class EditarPerfilActivity : AppCompatActivity() {
         Toast.makeText(this, mensaje, Toast.LENGTH_LONG).show()
     }
 
-    fun irPantallaLogin(){
-        val intent = Intent(this@EditarPerfilActivity, LoginActivity::class.java)
+    fun irVerPerfil(){
+        for (usuario in array) {
+            if (usuario.correo == correo && usuario.contrasena == contrasena) {
+                irPantallaRevisarPerfil(
+                    usuario.idUsuario,
+                    usuario.nombre,
+                    usuario.correo,
+                    usuario.contrasena,
+                    usuario.telefono,
+                    usuario.ine
+                )
+
+
+                break  // Salir del bucle una vez encontrado el usuario
+            }
+        }
+    }
+    fun irPantallaRevisarPerfil(idUsuario:Int,nombre:String, correo:String , contrasena:String , telefono:Long , ine:String){
+        val intent = Intent(this@EditarPerfilActivity, RevisarPerfilActivity::class.java)
+        intent.putExtra("idUsuario",idUsuario)
+        intent.putExtra("nombre",nombre)
+        intent.putExtra("correo",correo)
+        intent.putExtra("contrasena",contrasena)
+        intent.putExtra("telefono",telefono)
+        intent.putExtra("ine",ine)
         startActivity(intent)
         finish()
     }
