@@ -29,6 +29,7 @@ class RevisarPublicacionesActivity : AppCompatActivity() {
     private var entradaCompartida = 0
     private var cochera = 0
     private var aire = 0
+    private var imagenes = ""
     private var longitud = 0
     private var latitud = 0
     private var calificacion = 0
@@ -62,10 +63,11 @@ class RevisarPublicacionesActivity : AppCompatActivity() {
         entradaCompartida = intent.getIntExtra("entrada compartida", 0)
         cochera = intent.getIntExtra("cochera", 0)
         aire = intent.getIntExtra("aire acondicionado", 0)
+        imagenes = intent.getStringExtra("imagenes")!!
         calificacion = intent.getIntExtra("calificacion", 0)
         idUsuario = intent.getIntExtra("idUsuario", 0)
 
-
+        binding.tvNombreDepa.setText("ID Publicacion: "+"$idPublicacion")
         binding.tvNombreDepa.setText("Titulo: "+"$titulo")
         binding.tvNombreDepa.setText("Descripcion: "+"$descripcion")
         binding.tvNombreDepa.setText("Direccion: "+"$direccion")
@@ -73,12 +75,14 @@ class RevisarPublicacionesActivity : AppCompatActivity() {
         binding.tvNombreDepa.setText("Numero de habitaciones: "+"$numHabitaciones")
         binding.tvNombreDepa.setText("Costo: "+"$costo")
         binding.tvdetallesLugar.setText("Pet Friendly: "+"$petFriendly")
-        binding.tvdetallesLugar.setText("Servicios: "+"$petFriendly")
-        binding.tvdetallesLugar.setText("Amueblado: "+"$petFriendly")
-        binding.tvdetallesLugar.setText("Entrada Compartida: "+"$petFriendly")
-        binding.tvdetallesLugar.setText("Tiene cochera: "+"$petFriendly")
-        binding.tvdetallesLugar.setText("Aire acondicionado: "+"$petFriendly")
+        binding.tvdetallesLugar.setText("Servicios: "+"$servicios")
+        binding.tvdetallesLugar.setText("Amueblado: "+"$amueblado")
+        binding.tvdetallesLugar.setText("Entrada Compartida: "+"$entradaCompartida")
+        binding.tvdetallesLugar.setText("Tiene cochera: "+"$cochera")
+        binding.tvdetallesLugar.setText("Aire acondicionado: "+"$aire")
+        binding.tvdetallesLugar.setText("Imagenes: "+"$imagenes")
         binding.tvdetallesLugar.setText("Calificacion: "+"$calificacion")
+        binding.tvdetallesLugar.setText("ID Usuario: "+"$idUsuario")
 
 
 
@@ -88,6 +92,9 @@ class RevisarPublicacionesActivity : AppCompatActivity() {
 
         binding.btnRealizar.setOnClickListener {
             irPantallaRealizarCita()
+        }
+        binding.btnRegresar.setOnClickListener {
+            irPantallaPrincipal()
         }
     }
 
@@ -120,6 +127,12 @@ class RevisarPublicacionesActivity : AppCompatActivity() {
 
     fun irPantallaRealizarCita(){
         val intent = Intent(this@RevisarPublicacionesActivity, RealizarCitaActivity::class.java)
+        startActivity(intent)
+        finish()
+    }
+
+    fun irPantallaPrincipal(){
+        val intent = Intent(this@RevisarPublicacionesActivity, PrincipalPublicacionesActivity::class.java)
         startActivity(intent)
         finish()
     }
