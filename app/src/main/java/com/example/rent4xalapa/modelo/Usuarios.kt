@@ -103,5 +103,12 @@ class Usuarios (contexto: Context) : SQLiteOpenHelper(contexto, NOMBRE_BD,null, 
         return filasAfectadas
     }
 
+    fun eliminarUsuario(idUsuario: Int): Int{
+        val db = writableDatabase
+        val resultado = db.delete(NOMBRE_TABLA,"$COL_ID_USUARIO=?", arrayOf(idUsuario.toString()))
+        db.close()
+        return resultado
+    }
+
 
 }

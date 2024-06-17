@@ -64,6 +64,9 @@ class RevisarPerfilActivity : AppCompatActivity() {
         binding.imageButtonPublicacionNueva.setOnClickListener {
             irPantallaRealizarPublicacion()
         }
+        binding.btnDeleteAccount.setOnClickListener {
+            eliminarUsuario(idUsuario)
+        }
     }
 
     fun irActivityEditar(){
@@ -94,9 +97,28 @@ class RevisarPerfilActivity : AppCompatActivity() {
         startActivity(intent)
         finish()
     }
+    fun eliminarUsuario(idUsuario: Int) {
+        val resultado = modelo.eliminarUsuario(idUsuario)
+        var mensaje = ""
+        if (resultado > 0) {
+            mensaje = "Usuario eliminado correctamente"
+        } else {
+            mensaje = "Hubo un error al eliminar el usuario"
+        }
+        Toast.makeText(this@RevisarPerfilActivity, mensaje, Toast.LENGTH_LONG).show()
+        if (resultado > 0) {
+            irPantallaLogin()
+        }
+    }
 
     fun irPantallaPublicaciones(){
         val intent = Intent(this@RevisarPerfilActivity, PrincipalPublicacionesActivity::class.java)
+        startActivity(intent)
+        finish()
+    }
+
+    fun irPantallaLogin(){
+        val intent = Intent(this@RevisarPerfilActivity,LoginActivity::class.java)
         startActivity(intent)
         finish()
     }
