@@ -29,6 +29,8 @@ class RevisarPublicacionesActivity : AppCompatActivity() {
     private var entradaCompartida = 0
     private var cochera = 0
     private var aire = 0
+    private var longitud = 0
+    private var latitud = 0
     private var calificacion = 0
     private var idUsuario = 0
 
