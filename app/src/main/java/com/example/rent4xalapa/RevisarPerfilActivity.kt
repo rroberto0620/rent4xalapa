@@ -64,7 +64,7 @@ class RevisarPerfilActivity : AppCompatActivity() {
         }
 
         binding.imageButtonFavoritos.setOnClickListener {
-            irPantallaPublicacionesFavoritas()
+            irActivityPublicacionesFavoritas()
         }
 
         binding.imageButtonPrincipal.setOnClickListener {
@@ -72,7 +72,7 @@ class RevisarPerfilActivity : AppCompatActivity() {
         }
 
         binding.imageButtonPublicacionNueva.setOnClickListener {
-            irPantallaRealizarPublicacion()
+            irActivityRealizarPublicacion()
         }
         binding.btnDeleteAccount.setOnClickListener {
             eliminarUsuario(idUsuario)
@@ -157,13 +157,61 @@ class RevisarPerfilActivity : AppCompatActivity() {
         finish()
     }
 
-    fun irPantallaPublicacionesFavoritas(){
+    fun irActivityPublicacionesFavoritas(){
+        for (usuario in array) {
+            if (usuario.correo == correo && usuario.contrasena == contrasena) {
+                irPantallaPublicacionesFavoritas(
+                    usuario.idUsuario,
+                    usuario.nombre,
+                    usuario.correo,
+                    usuario.contrasena,
+                    usuario.telefono,
+                    usuario.ine,
+                    usuario.perfil
+                )
+                break  // Salir del bucle una vez encontrado el usuario
+            }
+        }
+    }
+
+    fun irPantallaPublicacionesFavoritas(idUsuario:Int,nombre:String, correo:String , contrasena:String , telefono:Long , ine:String,perfil:String){
         val intent = Intent(this@RevisarPerfilActivity,PublicacionesFavoritasActivity::class.java)
+        intent.putExtra("idUsuario",idUsuario)
+        intent.putExtra("nombre",nombre)
+        intent.putExtra("correo",correo)
+        intent.putExtra("contrasena",contrasena)
+        intent.putExtra("telefono",telefono)
+        intent.putExtra("ine",ine)
+        intent.putExtra("perfil",perfil)
         startActivity(intent)
     }
 
-    fun irPantallaRealizarPublicacion(){
+    fun irActivityRealizarPublicacion(){
+        for (usuario in array) {
+            if (usuario.correo == correo && usuario.contrasena == contrasena) {
+                irPantallaRealizarPublicacion(
+                    usuario.idUsuario,
+                    usuario.nombre,
+                    usuario.correo,
+                    usuario.contrasena,
+                    usuario.telefono,
+                    usuario.ine,
+                    usuario.perfil
+                )
+                break  // Salir del bucle una vez encontrado el usuario
+            }
+        }
+    }
+
+    fun irPantallaRealizarPublicacion(idUsuario:Int,nombre:String, correo:String , contrasena:String , telefono:Long , ine:String,perfil:String){
         val intent = Intent(this@RevisarPerfilActivity,RealizarPublicacionesActivity::class.java)
+        intent.putExtra("idUsuario",idUsuario)
+        intent.putExtra("nombre",nombre)
+        intent.putExtra("correo",correo)
+        intent.putExtra("contrasena",contrasena)
+        intent.putExtra("telefono",telefono)
+        intent.putExtra("ine",ine)
+        intent.putExtra("perfil",perfil)
         startActivity(intent)
     }
 

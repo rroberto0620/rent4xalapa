@@ -78,7 +78,7 @@ class PublicacionesBD (contexto: Context) : SQLiteOpenHelper(contexto, NOMBRE_BD
         return filasAfectadas
     }
 
-    @SuppressLint("Range")
+    @SuppressLint("Range", "Recycle")
     fun obtenerPublicaciones(idUsuario:Int): ArrayList<Publicacion>{
         val publicaciones = arrayListOf<Publicacion>()
         val db = readableDatabase

@@ -2,6 +2,7 @@ package com.example.rent4xalapa
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -49,44 +50,33 @@ class PrincipalPublicacionesActivity: AppCompatActivity(), ListenerRecyclerPubli
         perfil = intent.getStringExtra("perfil")!!
 
         binding.imageButtonFavoritos.setOnClickListener {
-            irPantallaPublicacionesFavoritas()
+            irActivityPublicacionesFavoritas()
         }
 
         binding.imageButtonPublicacionNueva.setOnClickListener {
-            irPantallaRealizarPublicacion(idUsuario,nombre,correo, contrasena, telefono, ine, perfil)
+            irActivityRealizarPublicacion()
         }
 
         binding.imageButtonMiCuenta.setOnClickListener {
-            for (usuario in array) {
-                if (usuario.correo == correo && usuario.contrasena == contrasena) {
-                    irPantallaMiCuenta(
-                        usuario.idUsuario,
-                        usuario.nombre,
-                        usuario.correo,
-                        usuario.contrasena,
-                        usuario.telefono,
-                        usuario.ine,
-                        usuario.perfil
-                    )
-
-                    break  // Salir del bucle una vez encontrado el usuario
-                }
-            }
+            irActivityRevisarPerfil()
         }
-        cargarMisPublicaciones()
+
         configurarRecyclePublicaciones()
     }
 
     override fun onResume(){
         super.onResume()
+        cargarMisPublicaciones()
     }
 
     fun cargarMisPublicaciones(){
         val publicaciones = modeloPublicaciones.obtenerPublicaciones(idUsuario)
+        Toast.makeText(this@PrincipalPublicacionesActivity, "Las publicaciones = "+ publicaciones.size, Toast.LENGTH_LONG).show()
         if(publicaciones.size > 0){
+            binding.recyclerPublicaciones.visibility = View.VISIBLE
             binding.recyclerPublicaciones.adapter = PublicacionesAdapter(publicaciones,this)
         }else{
-            Toast.makeText(this@PrincipalPublicacionesActivity, "No se pueden mostrar las publicaciones $idUsuario", Toast.LENGTH_LONG).show()
+            Toast.makeText(this@PrincipalPublicacionesActivity, "No se pueden mostrar las publicaciones = "+ idUsuario, Toast.LENGTH_LONG).show()
         }
     }
 
@@ -95,9 +85,50 @@ class PrincipalPublicacionesActivity: AppCompatActivity(), ListenerRecyclerPubli
         binding.recyclerPublicaciones.setHasFixedSize(true)
     }
 
-    fun irPantallaPublicacionesFavoritas(){
+    fun irActivityPublicacionesFavoritas(){
+        for (usuario in array) {
+            if (usuario.correo == correo && usuario.contrasena == contrasena) {
+                irPantallaPublicacionesFavoritas(
+                    usuario.idUsuario,
+                    usuario.nombre,
+                    usuario.correo,
+                    usuario.contrasena,
+                    usuario.telefono,
+                    usuario.ine,
+                    usuario.perfil
+                )
+                break  // Salir del bucle una vez encontrado el usuario
+            }
+        }
+    }
+
+    fun irPantallaPublicacionesFavoritas(idUsuario:Int,nombre:String, correo:String , contrasena:String , telefono:Long , ine:String,perfil:String){
         val intent = Intent(this@PrincipalPublicacionesActivity,PublicacionesFavoritasActivity::class.java)
+        intent.putExtra("idUsuario",idUsuario)
+        intent.putExtra("nombre",nombre)
+        intent.putExtra("correo",correo)
+        intent.putExtra("contrasena",contrasena)
+        intent.putExtra("telefono",telefono)
+        intent.putExtra("ine",ine)
+        intent.putExtra("perfil",perfil)
         startActivity(intent)
+    }
+
+    fun irActivityRealizarPublicacion(){
+        for (usuario in array) {
+            if (usuario.correo == correo && usuario.contrasena == contrasena) {
+                irPantallaRealizarPublicacion(
+                    usuario.idUsuario,
+                    usuario.nombre,
+                    usuario.correo,
+                    usuario.contrasena,
+                    usuario.telefono,
+                    usuario.ine,
+                    usuario.perfil
+                )
+                break  // Salir del bucle una vez encontrado el usuario
+            }
+        }
     }
 
     fun irPantallaRealizarPublicacion(idUsuario:Int,nombre:String, correo:String , contrasena:String , telefono:Long , ine:String,perfil:String){
@@ -112,7 +143,24 @@ class PrincipalPublicacionesActivity: AppCompatActivity(), ListenerRecyclerPubli
         startActivity(intent)
     }
 
-    fun irPantallaMiCuenta(idUsuario:Int,nombre:String, correo:String , contrasena:String , telefono:Long , ine:String,perfil:String){
+    fun irActivityRevisarPerfil(){
+        for (usuario in array) {
+            if (usuario.correo == correo && usuario.contrasena == contrasena) {
+                irPantallaRevisarPerfil(
+                    usuario.idUsuario,
+                    usuario.nombre,
+                    usuario.correo,
+                    usuario.contrasena,
+                    usuario.telefono,
+                    usuario.ine,
+                    usuario.perfil
+                )
+                break  // Salir del bucle una vez encontrado el usuario
+            }
+        }
+    }
+
+    fun irPantallaRevisarPerfil(idUsuario:Int,nombre:String, correo:String , contrasena:String , telefono:Long , ine:String,perfil:String){
         val intent = Intent(this@PrincipalPublicacionesActivity,RevisarPerfilActivity::class.java)
         intent.putExtra("idUsuario",idUsuario)
         intent.putExtra("nombre",nombre)
@@ -125,10 +173,10 @@ class PrincipalPublicacionesActivity: AppCompatActivity(), ListenerRecyclerPubli
     }
 
     override fun clicFavoritoPublicacion(publicacion: Publicacion, posicion: Int) {
-        TODO("Not yet implemented")
+        Toast.makeText(this@PrincipalPublicacionesActivity, "Posicion $posicion, Titulo: ${publicacion.titulo}", Toast.LENGTH_LONG).show()
     }
 
     override fun clicVerPublicacion(publicacion: Publicacion, posicion: Int) {
-        TODO("Not yet implemented")
+        Toast.makeText(this@PrincipalPublicacionesActivity, "Posicion $posicion, Titulo: ${publicacion.titulo}", Toast.LENGTH_LONG).show()
     }
 }

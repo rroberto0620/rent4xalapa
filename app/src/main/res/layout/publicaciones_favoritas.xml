@@ -20,6 +20,7 @@
         android:layout_centerHorizontal="true"/>
 
     <TextView
+        android:alpha="0.1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:drawableLeft="@drawable/logo_sin_letras"
@@ -29,7 +30,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_publicaciones_favoritas"
         android:layout_width="match_parent"
-        android:layout_height="620dp"
+        android:layout_height="710dp"
         android:layout_below="@id/tv_publicaciones_favoritas"
         android:layout_marginTop="2dp"
         android:layout_marginStart="8dp"
