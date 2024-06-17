@@ -71,7 +71,7 @@ class PublicacionesBD (contexto: Context) : SQLiteOpenHelper(contexto, NOMBRE_BD
         contentValue.put(COL_AIRE,publicacion.aire)
         contentValue.put(COL_IMAGENES,publicacion.imagenes)
         contentValue.put(COL_LONGITUD,publicacion.longitud)
-        contentValue.put(COL_LATITUD,publicacion.longitud)
+        contentValue.put(COL_LATITUD,publicacion.latitud)
         contentValue.put(COL_ID_USUARIO,publicacion.idUsuario)
         val filasAfectadas = db.insert(NOMBRE_TABLA,null,contentValue)
         db.close()

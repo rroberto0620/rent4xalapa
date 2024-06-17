@@ -33,6 +33,8 @@
             android:exported="false"/>
         <activity android:name=".RealizarCitaActivity"
             android:exported="false"/>
+        <activity android:name=".RevisarPublicacionesActivity"
+            android:exported="false"/>
         <activity
             android:name=".LoginActivity"
             android:exported="true">

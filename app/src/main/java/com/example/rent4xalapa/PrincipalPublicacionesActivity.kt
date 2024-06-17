@@ -177,6 +177,26 @@ class PrincipalPublicacionesActivity: AppCompatActivity(), ListenerRecyclerPubli
     }
 
     override fun clicVerPublicacion(publicacion: Publicacion, posicion: Int) {
+        val intent = Intent(this@PrincipalPublicacionesActivity,RevisarPublicacionesActivity::class.java)
+        intent.putExtra("idPublicacion",publicacion.idPublicacion)
+        intent.putExtra("titulo",publicacion.titulo)
+        intent.putExtra("descripcion",publicacion.descripcion)
+        intent.putExtra("direccion",publicacion.direccion)
+        intent.putExtra("tipo",publicacion.tipo)
+        intent.putExtra("numHabitaciones",publicacion.numHabitaciones)
+        intent.putExtra("costo",publicacion.costo)
+        intent.putExtra("petFriendly",publicacion.petFriendly)
+        intent.putExtra("servicios",publicacion.servicios)
+        intent.putExtra("amueblado",publicacion.amueblado)
+        intent.putExtra("entradaCompartida",publicacion.entradaCompartida)
+        intent.putExtra("cochera",publicacion.cochera)
+        intent.putExtra("aire",publicacion.aire)
+        intent.putExtra("imagenes",publicacion.imagenes)
+        intent.putExtra("latitud",publicacion.latitud)
+        intent.putExtra("longitud",publicacion.longitud)
+        intent.putExtra("calificacion",publicacion.calificacion)
+        intent.putExtra("idUser",publicacion.idUsuario)
+        startActivity(intent)
         Toast.makeText(this@PrincipalPublicacionesActivity, "Posicion $posicion, Titulo: ${publicacion.titulo}", Toast.LENGTH_LONG).show()
     }
 }

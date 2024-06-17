@@ -21,8 +21,8 @@ class RevisarPublicacionesActivity : AppCompatActivity() {
     private var descripcion = ""
     private var direccion = ""
     private var tipo = ""
-    private var numHabitaciones = ""
-    private var costo = 0
+    private var numHabitaciones = 0
+    private var costo = 0.0
     private var petFriendly = 0
     private var servicios = 0
     private var amueblado = 0
@@ -55,8 +55,8 @@ class RevisarPublicacionesActivity : AppCompatActivity() {
         descripcion = intent.getStringExtra("descripcion")!!
         direccion = intent.getStringExtra("direccion")!!
         tipo = intent.getStringExtra("tipo")!!
-        numHabitaciones = intent.getStringExtra("numero de habitaciones")!!
-        costo = intent.getIntExtra("costo", 0)
+        numHabitaciones = intent.getIntExtra("numHabitaciones",0)
+        costo = intent.getDoubleExtra("costo", 0.0)
         petFriendly = intent.getIntExtra("petFriendly", 0)
         servicios = intent.getIntExtra("servicios", 0)
         amueblado = intent.getIntExtra("amueblado", 0)
@@ -65,7 +65,7 @@ class RevisarPublicacionesActivity : AppCompatActivity() {
         aire = intent.getIntExtra("aire acondicionado", 0)
         imagenes = intent.getStringExtra("imagenes")!!
         calificacion = intent.getIntExtra("calificacion", 0)
-        idUsuario = intent.getIntExtra("idUsuario", 0)
+        idUsuario = intent.getIntExtra("idUser", 0)
 
         binding.tvNombreDepa.setText("ID Publicacion: "+"$idPublicacion")
         binding.tvNombreDepa.setText("Titulo: "+"$titulo")

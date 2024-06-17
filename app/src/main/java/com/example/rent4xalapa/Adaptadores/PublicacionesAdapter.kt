@@ -20,9 +20,28 @@ class PublicacionesAdapter(val publicaciones: List<Publicacion>, val listenerRec
 
     override fun onBindViewHolder(holder: ViewHolderPublicacion, position: Int) {
         val publicacion = publicaciones.get(position)
+        val idPublicacion = publicacion.idPublicacion
+        val tituloValor = publicacion.titulo
+        val descripcionValor = publicacion.descripcion
+        val direccion = publicacion.direccion
+        val tipo = publicacion.tipo
+        val numHabitaciones = publicacion.numHabitaciones
+        val costo = publicacion.costo
+        val petFriendly = publicacion.petFriendly
+        val servicios = publicacion.servicios
+        val amueblado = publicacion.amueblado
+        val entradaCompartida = publicacion.entradaCompartida
+        val cochera = publicacion.cochera
+        val aire = publicacion.aire
+        val imagenes = publicacion.imagenes
+        val latitud = publicacion.latitud
+        val longitud = publicacion.longitud
+        val calificacion = publicacion.calificacion
+        val idUser = publicacion.idUsuario
 
         holder.tv2TituloPublicacion.text = publicacion.titulo
         holder.tv2DescripcionPublicacion.text = publicacion.descripcion
+
 
         /*holder.imageButtonFavoritoPublicacion.setOnClickListener {
             listenerRecyclerPublicaciones.clicFavoritoPublicacion(publicacion,position)
