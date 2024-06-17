@@ -1,11 +1,14 @@
 package com.example.rent4xalapa
 
+import android.app.Dialog
 import android.os.Bundle
 import android.content.DialogInterface
 import android.content.Intent
+import android.widget.Button
 import androidx.appcompat.app.AlertDialog
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.compose.material3.Button
 import com.bumptech.glide.Glide
 import com.example.rent4xalapa.databinding.RevisarPerfilBinding
 import com.example.rent4xalapa.databinding.RevisarPublicacionesBinding
@@ -141,7 +144,7 @@ class RevisarPublicacionesActivity : AppCompatActivity() {
 
 
         binding.btnCalificar.setOnClickListener {
-            AbrirCalificar()
+            abrirDialogoCalificar()
         }
 
         binding.btnRealizar.setOnClickListener {
@@ -152,31 +155,53 @@ class RevisarPublicacionesActivity : AppCompatActivity() {
         }
     }
 
-    fun AbrirCalificar() {
-        val builder = AlertDialog.Builder(this@RevisarPublicacionesActivity)
-        builder.setTitle("Calificar publicación")
-        builder.setMessage("Selecciona una calificación del 1 al 5")
 
 
-        val calificaciones = arrayOf("1", "2", "3", "4", "5")
-        val calificacionSeleccionada = IntArray(1)
+    private fun abrirDialogoCalificar() {
+        val dialog = Dialog(this)
+        dialog.setContentView(R.layout.layour_calificar)  // Asignar el layout del diálogo personalizado
 
+        // Asignar acciones a los botones de estrellas
+        val btn1Estrella = dialog.findViewById<Button>(R.id.btn1Estrella)
+        val btn2Estrella = dialog.findViewById<Button>(R.id.btn2Estrella)
+        val btn3Estrella = dialog.findViewById<Button>(R.id.btn3Estrella)
+        val btn4Estrella = dialog.findViewById<Button>(R.id.btn4Estrella)
+        val btn5Estrella = dialog.findViewById<Button>(R.id.btn5Estrella)
 
-        builder.setSingleChoiceItems(calificaciones, -1, DialogInterface.OnClickListener { dialog, which ->
-            calificacionSeleccionada[0] = which
-        })
-
-        builder.setPositiveButton("Calificar") { dialog, _ ->
-            val calificacion = calificaciones[calificacionSeleccionada[0]]
-            Toast.makeText(this@RevisarPublicacionesActivity, "Gracias por calificar con $calificacion estrellas", Toast.LENGTH_SHORT).show()
+        btn1Estrella.setOnClickListener {
+            calificarConEstrellas(1)
+            dialog.dismiss()
         }
 
-        builder.setNegativeButton("Cancelar", null)
+        btn2Estrella.setOnClickListener {
+            calificarConEstrellas(2)
+            dialog.dismiss()
+        }
 
+        btn3Estrella.setOnClickListener {
+            calificarConEstrellas(3)
+            dialog.dismiss()
+        }
 
-        val dialog = builder.create()
+        btn4Estrella.setOnClickListener {
+            calificarConEstrellas(4)
+            dialog.dismiss()
+        }
+
+        btn5Estrella.setOnClickListener {
+            calificarConEstrellas(5)
+            dialog.dismiss()
+        }
+
         dialog.show()
     }
+
+    private fun calificarConEstrellas(calificacion: Int) {
+        Toast.makeText(this, "Gracias por calificar con $calificacion estrellas", Toast.LENGTH_SHORT).show()
+        // Aquí puedes realizar cualquier acción adicional con la calificación seleccionada
+    }
+
+
 
 
     fun irPantallaRealizarCita(){

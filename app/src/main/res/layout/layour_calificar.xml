@@ -1,0 +1,38 @@
+<!-- dialogo_calificar.xml -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <Button
+        android:id="@+id/btn1Estrella"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="1 Estrella" />
+
+    <Button
+        android:id="@+id/btn2Estrella"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="2 Estrellas" />
+
+    <Button
+        android:id="@+id/btn3Estrella"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="3 Estrellas" />
+
+    <Button
+        android:id="@+id/btn4Estrella"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="4 Estrellas" />
+
+    <Button
+        android:id="@+id/btn5Estrella"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="5 Estrellas" />
+
+</LinearLayout>
