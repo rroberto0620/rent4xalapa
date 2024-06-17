@@ -100,7 +100,16 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
                 android:background="@drawable/rounded_edittext"
-                android:hint="imagen"
+                android:hint="URL de imagen de INE"
+                android:padding="10dp"
+                android:textColor="@color/black" />
+            <EditText
+                android:id="@+id/et_perfil"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/rounded_edittext"
+                android:hint="URL de imagen de perfil"
                 android:padding="10dp"
                 android:textColor="@color/black" />
 

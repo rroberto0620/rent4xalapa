@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.bumptech.glide.Glide
 
 import com.example.rent4xalapa.databinding.ActivityRegisterBinding
 import com.example.rent4xalapa.modelo.Usuarios
@@ -25,7 +26,7 @@ class RegisterActivity : AppCompatActivity() {
 
         binding.btnRegistrarse.setOnClickListener{
             if(validarCamposCorrectos()){
-                val nuevoUsuario = Usuario(0,binding.etNombre.text.toString(),binding.etEmail.text.toString(),binding.etContrasena.text.toString(),binding.etNumeroTel.text.toString().toLong(),binding.etIdentifiacion.text.toString())
+                val nuevoUsuario = Usuario(0,binding.etNombre.text.toString(),binding.etEmail.text.toString(),binding.etContrasena.text.toString(),binding.etNumeroTel.text.toString().toLong(),binding.etIdentifiacion.text.toString(),binding.etPerfil.text.toString())
                 agregarUsuario(nuevoUsuario)
             }
         }
@@ -33,6 +34,8 @@ class RegisterActivity : AppCompatActivity() {
         binding.tvTieneCuenta.setOnClickListener {
             irPantallaLogin()
         }
+
+
     }
 
 

@@ -15,6 +15,8 @@ class PrincipalPublicacionesActivity: AppCompatActivity() {
     private var correo = ""
     private var contrasena = ""
     private var telefono:Long = 0
+    private var ine = ""
+    private var perfil = ""
 
     private lateinit var modelo : Usuarios
     private lateinit var array: ArrayList<Usuario>
@@ -34,6 +36,8 @@ class PrincipalPublicacionesActivity: AppCompatActivity() {
         correo = intent.getStringExtra("correo")!!
         contrasena = intent.getStringExtra("contrasena")!!
         telefono = intent.getLongExtra("telefono",0)
+        ine = intent.getStringExtra("ine")!!
+        perfil = intent.getStringExtra("perfil")!!
 
         binding.imageButtonFavoritos.setOnClickListener {
             irPantallaPublicacionesFavoritas()
@@ -52,7 +56,8 @@ class PrincipalPublicacionesActivity: AppCompatActivity() {
                         usuario.correo,
                         usuario.contrasena,
                         usuario.telefono,
-                        usuario.ine
+                        usuario.ine,
+                        usuario.perfil
                     )
 
                     break  // Salir del bucle una vez encontrado el usuario
@@ -74,7 +79,7 @@ class PrincipalPublicacionesActivity: AppCompatActivity() {
         startActivity(intent)
     }
 
-    fun irPantallaMiCuenta(idUsuario:Int,nombre:String, correo:String , contrasena:String , telefono:Long , ine:String){
+    fun irPantallaMiCuenta(idUsuario:Int,nombre:String, correo:String , contrasena:String , telefono:Long , ine:String,perfil:String){
         val intent = Intent(this@PrincipalPublicacionesActivity,RevisarPerfilActivity::class.java)
         intent.putExtra("idUsuario",idUsuario)
         intent.putExtra("nombre",nombre)
@@ -82,6 +87,7 @@ class PrincipalPublicacionesActivity: AppCompatActivity() {
         intent.putExtra("contrasena",contrasena)
         intent.putExtra("telefono",telefono)
         intent.putExtra("ine",ine)
+        intent.putExtra("perfil",perfil)
         startActivity(intent)
     }
 }

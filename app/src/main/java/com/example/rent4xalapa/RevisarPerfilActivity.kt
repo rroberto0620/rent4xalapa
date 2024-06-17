@@ -2,8 +2,10 @@ package com.example.rent4xalapa
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.bumptech.glide.Glide
 
 import com.example.rent4xalapa.databinding.RevisarPerfilBinding
 import com.example.rent4xalapa.modelo.Usuarios
@@ -13,11 +15,15 @@ class RevisarPerfilActivity : AppCompatActivity() {
 
     private lateinit var binding: RevisarPerfilBinding
 
+
+
     private var idUsuario=0
     private var nombre = ""
     private var correo = ""
     private var contrasena = ""
     private var telefono:Long = 0
+    private var ine = ""
+    private var perfil = ""
 
 
     private lateinit var modelo : Usuarios
@@ -38,12 +44,17 @@ class RevisarPerfilActivity : AppCompatActivity() {
         correo = intent.getStringExtra("correo")!!
         contrasena = intent.getStringExtra("contrasena")!!
         telefono = intent.getLongExtra("telefono",0)
+        ine = intent.getStringExtra("ine")!!
+        perfil = intent.getStringExtra("perfil")!!
 
 
 
         binding.tvName.setText("Nombre: "+"$nombre")
         binding.tvTelefono.setText("Telefono: "+"$telefono")
         binding.tvEmail.setText("Correo: "+"$correo")
+        Glide.with(this).load(ine).into(binding.imagenIne)
+        Glide.with(this).load(perfil).into(binding.imagenPerfil)
+
 
         binding.btnEditProfile.setOnClickListener {
             irActivityEditar()
@@ -77,13 +88,14 @@ class RevisarPerfilActivity : AppCompatActivity() {
                     usuario.correo,
                     usuario.contrasena,
                     usuario.telefono,
-                    usuario.ine
+                    usuario.ine,
+                    usuario.perfil
                 )
                 break  // Salir del bucle una vez encontrado el usuario
             }
         }
     }
-    fun irPantallaEditarPerfil(idUsuario:Int,nombre:String, correo:String , contrasena:String , telefono:Long , ine:String){
+    fun irPantallaEditarPerfil(idUsuario:Int,nombre:String, correo:String , contrasena:String , telefono:Long , ine:String,perfil:String){
         val intent = Intent(this@RevisarPerfilActivity, EditarPerfilActivity::class.java)
         intent.putExtra("idUsuario",idUsuario)
         intent.putExtra("nombre",nombre)
@@ -91,6 +103,7 @@ class RevisarPerfilActivity : AppCompatActivity() {
         intent.putExtra("contrasena",contrasena)
         intent.putExtra("telefono",telefono)
         intent.putExtra("ine",ine)
+        intent.putExtra("perfil",perfil)
         startActivity(intent)
         finish()
     }
@@ -117,14 +130,15 @@ class RevisarPerfilActivity : AppCompatActivity() {
                     usuario.correo,
                     usuario.contrasena,
                     usuario.telefono,
-                    usuario.ine
+                    usuario.ine,
+                    usuario.perfil
                 )
                 break  // Salir del bucle una vez encontrado el usuario
             }
         }
     }
 
-    fun irPantallaPublicaciones(idUsuario:Int,nombre:String, correo:String , contrasena:String , telefono:Long , ine:String){
+    fun irPantallaPublicaciones(idUsuario:Int,nombre:String, correo:String , contrasena:String , telefono:Long , ine:String,perfil:String){
         val intent = Intent(this@RevisarPerfilActivity, PrincipalPublicacionesActivity::class.java)
         intent.putExtra("idUsuario",idUsuario)
         intent.putExtra("nombre",nombre)
@@ -132,6 +146,7 @@ class RevisarPerfilActivity : AppCompatActivity() {
         intent.putExtra("contrasena",contrasena)
         intent.putExtra("telefono",telefono)
         intent.putExtra("ine",ine)
+        intent.putExtra("perfil",perfil)
         startActivity(intent)
         finish()
     }

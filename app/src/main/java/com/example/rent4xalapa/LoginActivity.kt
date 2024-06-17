@@ -19,8 +19,12 @@ class LoginActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
+
+
+
         db= Usuarios(this@LoginActivity)
-        db.crearTabla()
+
+      db.crearTabla()
         array = arrayListOf<Usuario>()
         array = db.seleccionarUsuarios()
 
@@ -52,7 +56,8 @@ class LoginActivity : AppCompatActivity() {
                     usuario.correo,
                     usuario.contrasena,
                     usuario.telefono,
-                    usuario.ine
+                    usuario.ine,
+                    usuario.perfil
                 )
                 usuarioEncontrado = true
 
@@ -66,7 +71,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
 
-    fun irPantallaPrincipalPublicaciones(idUsuario:Int,nombre:String, correo:String , contrasena:String , telefono:Long , ine:String){
+    fun irPantallaPrincipalPublicaciones(idUsuario:Int,nombre:String, correo:String , contrasena:String , telefono:Long , ine:String,perfil:String){
         val intent = Intent(this@LoginActivity,PrincipalPublicacionesActivity::class.java)
         intent.putExtra("idUsuario",idUsuario)
         intent.putExtra("nombre",nombre)
@@ -74,6 +79,7 @@ class LoginActivity : AppCompatActivity() {
         intent.putExtra("contrasena",contrasena)
         intent.putExtra("telefono",telefono)
         intent.putExtra("ine",ine)
+        intent.putExtra("perfil",perfil)
         startActivity(intent)
         finish()
     }

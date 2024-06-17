@@ -21,24 +21,25 @@ class Usuarios (contexto: Context) : SQLiteOpenHelper(contexto, NOMBRE_BD,null, 
         private const val COL_CONTRASENA ="contrasena"
         private const val COL_TELEFONO ="telefono"
         private const val COL_INE="INE"
+        private const val COL_PERFIL="perfil"
         private const val VERSION_BD =1
 
     }
 
     override fun onCreate(p0: SQLiteDatabase?) {
-        val CREATE_TABLE_NOTAS = "CREATE TABLE $NOMBRE_TABLA( $COL_ID_USUARIO INTEGER PRIMARY KEY AUTOINCREMENT,$COL_NOMBRE VARCHAR(40),$COL_CORREO VARCHAR(40),$COL_CONTRASENA VARCHAR(20),$COL_TELEFONO INTEGER(10),$COL_INE VARCHAR(130))"
+        val CREATE_TABLE_NOTAS = "CREATE TABLE $NOMBRE_TABLA( $COL_ID_USUARIO INTEGER PRIMARY KEY AUTOINCREMENT,$COL_NOMBRE VARCHAR(40),$COL_CORREO VARCHAR(40),$COL_CONTRASENA VARCHAR(20),$COL_TELEFONO INTEGER(10),$COL_INE VARCHAR(130),$COL_PERFIL VARCHAR(130))"
         p0!!.execSQL(CREATE_TABLE_NOTAS)
     }
 
-    /*fun eliminarTabla(){
+    fun eliminarTabla(){
         val db = writableDatabase
         val ELIMINAR_TABLA = ("DROP TABLE $NOMBRE_TABLA")
         db!!.execSQL(ELIMINAR_TABLA)
-    }*/
+    }
 
     fun crearTabla(){
         val db = writableDatabase
-        val valor = db.execSQL("CREATE TABLE IF NOT EXISTS $NOMBRE_TABLA( $COL_ID_USUARIO INTEGER PRIMARY KEY AUTOINCREMENT,$COL_NOMBRE VARCHAR(40),$COL_CORREO VARCHAR(40),$COL_CONTRASENA VARCHAR(20),$COL_TELEFONO INTEGER(10),$COL_INE VARCHAR(130))")
+        val valor = db.execSQL("CREATE TABLE IF NOT EXISTS $NOMBRE_TABLA( $COL_ID_USUARIO INTEGER PRIMARY KEY AUTOINCREMENT,$COL_NOMBRE VARCHAR(40),$COL_CORREO VARCHAR(40),$COL_CONTRASENA VARCHAR(20),$COL_TELEFONO INTEGER(10),$COL_INE VARCHAR(130),$COL_PERFIL VARCHAR(130))")
         return valor
     }
 
@@ -55,6 +56,7 @@ class Usuarios (contexto: Context) : SQLiteOpenHelper(contexto, NOMBRE_BD,null, 
         valoresInsert.put(COL_CONTRASENA, usuario.contrasena)
         valoresInsert.put(COL_TELEFONO,usuario.telefono)
         valoresInsert.put(COL_INE,usuario.ine)
+        valoresInsert.put(COL_PERFIL,usuario.perfil)
 
         val filasAfectadas = db.insert(NOMBRE_TABLA,null,valoresInsert)
         db.close()
@@ -78,9 +80,10 @@ class Usuarios (contexto: Context) : SQLiteOpenHelper(contexto, NOMBRE_BD,null, 
                 val telefono = resultadoConsulta.getLong(resultadoConsulta.getColumnIndex(
                     COL_TELEFONO))
                 val ine=resultadoConsulta.getString(resultadoConsulta.getColumnIndex(COL_INE))
+                val perfil = resultadoConsulta.getString(resultadoConsulta.getColumnIndex(COL_PERFIL))
 
 
-                val usuario = Usuario(idUsuario,nombre,correo,contrasena,telefono,ine)
+                val usuario = Usuario(idUsuario,nombre,correo,contrasena,telefono,ine,perfil)
                 misUsuarios.add(usuario)
             }
             resultadoConsulta.close()
@@ -97,6 +100,8 @@ class Usuarios (contexto: Context) : SQLiteOpenHelper(contexto, NOMBRE_BD,null, 
             put(COL_CORREO, usuario.correo)
             put(COL_CONTRASENA, usuario.contrasena)
             put(COL_TELEFONO, usuario.telefono)
+            put(COL_INE,usuario.ine)
+            put(COL_PERFIL,usuario.perfil)
         }
         val filasAfectadas = db.update(NOMBRE_TABLA,valoresUpdate,"${COL_ID_USUARIO} = ?", arrayOf(usuario.idUsuario.toString()))
         db.close()

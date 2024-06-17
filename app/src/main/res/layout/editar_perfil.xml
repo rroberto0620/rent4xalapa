@@ -128,10 +128,28 @@
             android:id="@+id/et_identificacion"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Ingrese su identificación"
+            android:hint="URL de su identificacion"
             android:inputType="text"
             android:background="@drawable/rounded_edit_text"
-            android:padding="50dp"
+            android:padding="12dp"
+            android:layout_marginBottom="16dp" />
+        <TextView
+            android:id="@+id/tv_perfil"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Perfil"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="8dp"
+            android:textColor="@color/white"/>
+        <EditText
+            android:id="@+id/et_perfil"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="URL de perfil"
+            android:inputType="text"
+            android:background="@drawable/rounded_edit_text"
+            android:padding="12dp"
             android:layout_marginBottom="16dp" />
 
     </LinearLayout>
