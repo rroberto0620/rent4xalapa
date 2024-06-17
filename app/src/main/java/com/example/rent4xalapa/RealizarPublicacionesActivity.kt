@@ -48,6 +48,7 @@ class RealizarPublicacionesActivity : AppCompatActivity() {
                 entradaCompartida = if (binding.cbEntradaCompartida.isChecked) 1 else 0,
                 cochera = if (binding.cbCochera.isChecked) 1 else 0,
                 aire = if (binding.cbAire.isChecked) 1 else 0,
+                imagenes = binding.etImagenesUrl.text.toString(),
                 longitud = 0.0,
                 latitud = 0.0,
                 calificacion = 0,

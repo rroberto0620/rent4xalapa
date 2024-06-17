@@ -14,6 +14,7 @@ data class Publicacion(
     val entradaCompartida: Int,
     val cochera: Int,
     val aire: Int,
+    val imagenes: String,
     val longitud: Double,
     val latitud:Double,
     val calificacion:Int,
