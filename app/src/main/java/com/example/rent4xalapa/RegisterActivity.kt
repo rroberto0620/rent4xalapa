@@ -9,7 +9,7 @@ import com.example.rent4xalapa.databinding.ActivityRegisterBinding
 import com.example.rent4xalapa.modelo.Usuarios
 import com.example.rent4xalapa.poko.Usuario
 
-class registerActivity : AppCompatActivity() {
+class RegisterActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityRegisterBinding
     private lateinit var modelo : Usuarios
@@ -50,7 +50,7 @@ class registerActivity : AppCompatActivity() {
             mensaje = "Hubo un error al guardar la nota, intentelo más tarde"
 
         }
-        Toast.makeText(this@registerActivity, mensaje,Toast.LENGTH_LONG).show()
+        Toast.makeText(this@RegisterActivity, mensaje,Toast.LENGTH_LONG).show()
     }
 
 
@@ -81,7 +81,7 @@ class registerActivity : AppCompatActivity() {
     }
 
     fun irPantallaLogin(){
-        val intent = Intent(this@registerActivity, LoginActivity::class.java)
+        val intent = Intent(this@RegisterActivity, LoginActivity::class.java)
         startActivity(intent)
         finish()
     }

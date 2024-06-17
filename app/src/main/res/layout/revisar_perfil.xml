@@ -1,12 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/logo_sin_letras"
+    android:background="@color/gray_osc_personalizado"
     tools:context=".RevisarPerfilActivity">
+
+    <TextView
+        android:alpha="0.1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/logo_sin_letras"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"/>
+
+    <TextView
+        android:id="@+id/tv_mi_cuenta"
+        android:layout_width="200dp"
+        android:layout_marginTop="5dp"
+        android:textColor="@color/black"
+        android:layout_height="wrap_content"
+        android:background="@drawable/rounded_textview"
+        android:text="Mi Cuenta"
+        android:textSize="25sp"
+        android:layout_marginBottom="10dp"
+        android:textAlignment="center"
+        android:layout_centerHorizontal="true"/>
 
     <View
         android:id="@+id/dark_overlay"
@@ -19,29 +40,30 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+
     <Button
         android:id="@+id/btnBack"
-        android:layout_width="106dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="16dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="45dp"
         android:layout_marginTop="16dp"
         android:backgroundTint="@android:color/holo_blue_dark"
         android:text="Regresar"
         android:textColor="#FFFFFF"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_below="@id/tv_mi_cuenta" />
 
     <Button
         android:id="@+id/btnDeleteAccount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
+        android:layout_marginStart="60dp"
         android:backgroundTint="@color/red_personalizado"
         android:text="Eliminar cuenta"
         android:textColor="#FFFFFF"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_toRightOf="@id/btnBack"
+        android:layout_below="@id/tv_mi_cuenta"/>
 
     <ImageView
         android:id="@+id/imagen_perfil"
@@ -59,11 +81,11 @@
         android:id="@+id/profileContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="40dp"
         android:background="@drawable/rounded_edit_text"
         android:orientation="vertical"
         android:padding="16dp"
-        app:layout_constraintTop_toBottomOf="@+id/imagen_perfil">
+        android:layout_below="@id/imagen_perfil">
 
         <TextView
             android:id="@+id/tvName"
@@ -101,6 +123,44 @@
             android:backgroundTint="@android:color/holo_blue_dark"
             android:text="Editar"
             android:textColor="@color/white" />
+
     </LinearLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <LinearLayout
+        android:id="@+id/linear_menus"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:gravity="bottom"
+        android:layout_below="@id/profileContainer">
+
+        <ImageButton
+            android:id="@+id/imageButton_principal"
+            android:background="@color/white_personalizado"
+            android:layout_width="102.5dp"
+            android:layout_height="60dp"
+            android:src="@drawable/home_outline"/>
+
+        <ImageButton
+            android:id="@+id/imageButton_favoritos"
+            android:background="@color/white_personalizado"
+            android:layout_width="102.5dp"
+            android:layout_height="60dp"
+            android:src="@drawable/heart"/>
+
+        <ImageButton
+            android:id="@+id/imageButton_publicacion_nueva"
+            android:background="@color/white_personalizado"
+            android:layout_width="102.5dp"
+            android:layout_height="60dp"
+            android:src="@drawable/new_box"/>
+
+        <ImageButton
+            android:id="@+id/imageButton_mi_cuenta"
+            android:background="@color/white_personalizado"
+            android:layout_width="102.5dp"
+            android:layout_height="60dp"
+            android:src="@drawable/account_box"/>
+
+    </LinearLayout>
+</RelativeLayout>

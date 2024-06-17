@@ -17,7 +17,15 @@
             android:exported="false" />
         <activity android:name=".RevisarPerfilActivity"
             android:exported="false"/>
-        <activity android:name=".registerActivity"
+        <activity android:name=".RegisterActivity"
+            android:exported="false"/>
+        <activity android:name=".PrincipalPublicacionesActivity"
+            android:exported="false"/>
+        <activity android:name=".PublicacionesFavoritasActivity"
+            android:exported="false"/>
+        <activity android:name=".RealizarPublicacionesActivity"
+            android:exported="false"/>
+        <activity android:name=".RealizarCitaActivity"
             android:exported="false"/>
         <activity
             android:name=".LoginActivity"

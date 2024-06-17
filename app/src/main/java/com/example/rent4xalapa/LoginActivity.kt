@@ -46,7 +46,7 @@ class LoginActivity : AppCompatActivity() {
 
         for (usuario in array) {
             if (usuario.correo == correo && usuario.contrasena == contrasena) {
-                irPantallaVerPerfil(
+                irPantallaPrincipalPublicaciones(
                     usuario.idUsuario,
                     usuario.nombre,
                     usuario.correo,
@@ -66,8 +66,8 @@ class LoginActivity : AppCompatActivity() {
     }
 
 
-    fun irPantallaVerPerfil(idUsuario:Int,nombre:String, correo:String , contrasena:String , telefono:Long , ine:String){
-        val intent = Intent(this@LoginActivity,RevisarPerfilActivity::class.java)
+    fun irPantallaPrincipalPublicaciones(idUsuario:Int,nombre:String, correo:String , contrasena:String , telefono:Long , ine:String){
+        val intent = Intent(this@LoginActivity,PrincipalPublicacionesActivity::class.java)
         intent.putExtra("idUsuario",idUsuario)
         intent.putExtra("nombre",nombre)
         intent.putExtra("correo",correo)
@@ -79,7 +79,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
     fun irPantallaRegister(){
-        val intent = Intent(this@LoginActivity, registerActivity::class.java)
+        val intent = Intent(this@LoginActivity, RegisterActivity::class.java)
         startActivity(intent)
         finish()
     }

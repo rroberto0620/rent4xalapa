@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Rent4Xalapa</string>
     <string name="favoritos">Favoritos</string>
+    <string name="realizar_cita">Realizar cita</string>
 </resources>

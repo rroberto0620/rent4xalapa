@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
     android:background="@drawable/logo_sin_letras"
-    tools:context=".RevisarPublicaciones">
+    tools:context=".RevisarPublicacionesActivity">
 
     <View
         android:id="@+id/dark_overlay"

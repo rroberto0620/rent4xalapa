@@ -50,7 +50,19 @@ class RevisarPerfilActivity : AppCompatActivity() {
             irActivityEditar()
         }
         binding.btnBack.setOnClickListener {
-            irPantallaLogin()
+            irPantallaPublicaciones()
+        }
+
+        binding.imageButtonFavoritos.setOnClickListener {
+            irPantallaPublicacionesFavoritas()
+        }
+
+        binding.imageButtonPrincipal.setOnClickListener {
+            irPantallaPublicaciones()
+        }
+
+        binding.imageButtonPublicacionNueva.setOnClickListener {
+            irPantallaRealizarPublicacion()
         }
     }
 
@@ -83,9 +95,20 @@ class RevisarPerfilActivity : AppCompatActivity() {
         finish()
     }
 
-    fun irPantallaLogin(){
-        val intent = Intent(this@RevisarPerfilActivity, LoginActivity::class.java)
+    fun irPantallaPublicaciones(){
+        val intent = Intent(this@RevisarPerfilActivity, PrincipalPublicacionesActivity::class.java)
         startActivity(intent)
         finish()
     }
+
+    fun irPantallaPublicacionesFavoritas(){
+        val intent = Intent(this@RevisarPerfilActivity,PublicacionesFavoritasActivity::class.java)
+        startActivity(intent)
+    }
+
+    fun irPantallaRealizarPublicacion(){
+        val intent = Intent(this@RevisarPerfilActivity,RealizarPublicacionesActivity::class.java)
+        startActivity(intent)
+    }
+
 }

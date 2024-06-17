@@ -3,12 +3,11 @@ package com.example.rent4xalapa
 import android.os.Bundle
 import android.content.DialogInterface
 import androidx.appcompat.app.AlertDialog
-import android.content.Intent
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.rent4xalapa.databinding.RevisarPublicacionesBinding
 
-class RevisarPublicaciones : AppCompatActivity() {
+class RevisarPublicacionesActivity : AppCompatActivity() {
 
     private lateinit var binding: RevisarPublicacionesBinding
 
@@ -27,7 +26,7 @@ class RevisarPublicaciones : AppCompatActivity() {
     }
 
     fun AbrirCalificar() {
-        val builder = AlertDialog.Builder(this@RevisarPublicaciones)
+        val builder = AlertDialog.Builder(this@RevisarPublicacionesActivity)
         builder.setTitle("Calificar publicación")
         builder.setMessage("Selecciona una calificación del 1 al 5")
 
@@ -42,7 +41,7 @@ class RevisarPublicaciones : AppCompatActivity() {
 
         builder.setPositiveButton("Calificar") { dialog, _ ->
             val calificacion = calificaciones[calificacionSeleccionada[0]]
-            Toast.makeText(this@RevisarPublicaciones, "Gracias por calificar con $calificacion estrellas", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this@RevisarPublicacionesActivity, "Gracias por calificar con $calificacion estrellas", Toast.LENGTH_SHORT).show()
         }
 
         builder.setNegativeButton("Cancelar", null)
