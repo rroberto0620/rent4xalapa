@@ -1,6 +1,7 @@
 package com.example.rent4xalapa
 
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -8,7 +9,9 @@ import androidx.fragment.app.FragmentManager
 import com.example.rent4xalapa.databinding.PrincipalPublicacionesBinding
 import com.example.rent4xalapa.databinding.RealizarPublicacionesBinding
 import com.example.rent4xalapa.modelo.PublicacionesBD
+import com.example.rent4xalapa.modelo.Usuarios
 import com.example.rent4xalapa.poko.Publicacion
+import com.example.rent4xalapa.poko.Usuario
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -23,13 +26,35 @@ class RealizarPublicacionesActivity : AppCompatActivity(), OnMapReadyCallback {
     private var idUsuario = 0
     private var longitud = 0.0
     private var latitud = 0.0
+    private var nombre = ""
+    private var correo = ""
+    private var contrasena = ""
+    private var telefono:Long = 0
+    private var ine = ""
+    private var perfil = ""
+
+    private lateinit var modeloUsuarios : Usuarios
+    private lateinit var array: ArrayList<Usuario>
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = RealizarPublicacionesBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
+
+        modeloUsuarios=Usuarios(this@RealizarPublicacionesActivity)
+        array = arrayListOf<Usuario>()
+        array = modeloUsuarios.seleccionarUsuarios()
+
         modelo = PublicacionesBD(this@RealizarPublicacionesActivity)
         idUsuario = intent.getIntExtra("idUsuario",0)
+        nombre = intent.getStringExtra("nombre")!!
+        correo = intent.getStringExtra("correo")!!
+        contrasena = intent.getStringExtra("contrasena")!!
+        telefono = intent.getLongExtra("telefono",0)
+        ine = intent.getStringExtra("ine")!!
+        perfil = intent.getStringExtra("perfil")!!
         binding.btnRealizarPublicacion.setOnClickListener {
             if (validarCamposCorrectos()) {
                 val nuevaPublicacion = crearPublicacion()
@@ -37,6 +62,9 @@ class RealizarPublicacionesActivity : AppCompatActivity(), OnMapReadyCallback {
                     agregarPublicacion(nuevaPublicacion)
                 }
             }
+        }
+        binding.btnCancelar.setOnClickListener {
+            irActivityPublicaciones()
         }
         createFragment()
     }
@@ -135,5 +163,36 @@ class RealizarPublicacionesActivity : AppCompatActivity(), OnMapReadyCallback {
             valido = false
         }
         return valido
+    }
+
+    fun irPantallaPublicaciones(idUsuario:Int,nombre:String, correo:String , contrasena:String , telefono:Long , ine:String,perfil:String){
+        val intent = Intent(this@RealizarPublicacionesActivity, PrincipalPublicacionesActivity::class.java)
+        intent.putExtra("idUsuario",idUsuario)
+        intent.putExtra("nombre",nombre)
+        intent.putExtra("correo",correo)
+        intent.putExtra("contrasena",contrasena)
+        intent.putExtra("telefono",telefono)
+        intent.putExtra("ine",ine)
+        intent.putExtra("perfil",perfil)
+        startActivity(intent)
+        finish()
+    }
+
+
+    fun irActivityPublicaciones(){
+        for (usuario in array) {
+            if (usuario.correo == correo && usuario.contrasena == contrasena) {
+                irPantallaPublicaciones(
+                    usuario.idUsuario,
+                    usuario.nombre,
+                    usuario.correo,
+                    usuario.contrasena,
+                    usuario.telefono,
+                    usuario.ine,
+                    usuario.perfil
+                )
+                break  // Salir del bucle una vez encontrado el usuario
+            }
+        }
     }
 }
