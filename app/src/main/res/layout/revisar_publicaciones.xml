@@ -65,25 +65,7 @@
                 android:layout_marginTop="10dp"
                 android:background="#CCCCCC" />
 
-            <LinearLayout
-                android:id="@+id/profileContainer"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
-                android:background="@drawable/rounded_edit_text"
-                android:orientation="vertical"
-                android:padding="10dp">
 
-                <TextView
-                    android:id="@+id/tvIdPublicacion"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
-                    android:text="ID Publicacion: "
-                    android:textColor="@color/black"
-                    android:textSize="18sp" />
-
-            </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/ubicacion_contenedor"
@@ -254,6 +236,7 @@
                     android:textSize="18sp" />
 
                 <TextView
+                    android:id="@+id/tv_aire"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="20dp"
@@ -261,29 +244,9 @@
                     android:textColor="@color/black"
                     android:textSize="18sp" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="20dp"
-                    android:text="imagenes"
-                    android:textColor="@color/black"
-                    android:textSize="18sp" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="20dp"
-                    android:text="latitud"
-                    android:textColor="@color/black"
-                    android:textSize="18sp" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="20dp"
-                    android:text="idUsuario"
-                    android:textColor="@color/black"
-                    android:textSize="18sp" />
+
 
             </LinearLayout>
 

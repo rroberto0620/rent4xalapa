@@ -18,6 +18,8 @@ class PublicacionesAdapter(val publicaciones: List<Publicacion>, val listenerRec
         return ViewHolderPublicacion(view)
     }
 
+
+
     override fun onBindViewHolder(holder: ViewHolderPublicacion, position: Int) {
         val publicacion = publicaciones.get(position)
         val idPublicacion = publicacion.idPublicacion

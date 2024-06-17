@@ -6,6 +6,7 @@ import android.content.Intent
 import androidx.appcompat.app.AlertDialog
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.bumptech.glide.Glide
 import com.example.rent4xalapa.databinding.RevisarPerfilBinding
 import com.example.rent4xalapa.databinding.RevisarPublicacionesBinding
 import com.example.rent4xalapa.modelo.PublicacionesBD
@@ -67,22 +68,52 @@ class RevisarPublicacionesActivity : AppCompatActivity() {
         calificacion = intent.getIntExtra("calificacion", 0)
         idUsuario = intent.getIntExtra("idUser", 0)
 
-        binding.tvNombreDepa.setText("ID Publicacion: "+"$idPublicacion")
-        binding.tvNombreDepa.setText("Titulo: "+"$titulo")
-        binding.tvNombreDepa.setText("Descripcion: "+"$descripcion")
-        binding.tvNombreDepa.setText("Direccion: "+"$direccion")
-        binding.tvNombreDepa.setText("Tipo: "+"$tipo")
-        binding.tvNombreDepa.setText("Numero de habitaciones: "+"$numHabitaciones")
-        binding.tvNombreDepa.setText("Costo: "+"$costo")
-        binding.tvdetallesLugar.setText("Pet Friendly: "+"$petFriendly")
-        binding.tvdetallesLugar.setText("Servicios: "+"$servicios")
-        binding.tvdetallesLugar.setText("Amueblado: "+"$amueblado")
-        binding.tvdetallesLugar.setText("Entrada Compartida: "+"$entradaCompartida")
-        binding.tvdetallesLugar.setText("Tiene cochera: "+"$cochera")
-        binding.tvdetallesLugar.setText("Aire acondicionado: "+"$aire")
-        binding.tvdetallesLugar.setText("Imagenes: "+"$imagenes")
-        binding.tvdetallesLugar.setText("Calificacion: "+"$calificacion")
-        binding.tvdetallesLugar.setText("ID Usuario: "+"$idUsuario")
+
+        binding.tvTitulo.setText("Titulo: "+"$titulo")
+        binding.tvDescripcion.setText("Descripcion: "+"$descripcion")
+        binding.tvDireccion.setText("Direccion: "+"$direccion")
+        binding.tvTipo.setText("Tipo: "+"$tipo")
+        binding.tvNumHabitaciones.setText("Numero de habitaciones: "+"$numHabitaciones")
+        binding.tvCosto.setText("Costo: "+"$costo")
+        //Pet Friendly
+        if (petFriendly == 1){
+            binding.tvPetFriendly.setText("Pet Friendly: Si")
+        }else{
+            binding.tvPetFriendly.setText("Pet Friendly: No")
+        }
+        //Servicios
+        if(servicios == 1){
+            binding.tvServicios.setText("Servicios: Si")
+        }else{
+            binding.tvServicios.setText("Servicios: No")
+        }
+        //Amueblado
+        if(amueblado == 1){
+            binding.tvAmueblado.setText("Amueblado: Si")
+        }else{
+            binding.tvAmueblado.setText("Amueblado: No")
+        }
+        //Entrada Compartida
+        if(entradaCompartida == 1){
+            binding.tvEntradaCompartida.setText("Entrada Compartida: Si")
+        }else{
+            binding.tvEntradaCompartida.setText("Entrada Compartida: No")
+        }
+        //Cochera
+        if(cochera == 1){
+            binding.tvCochera.setText("Tiene cochera: Si")
+        }else{
+            binding.tvCochera.setText("Tiene cochera: No")
+        }
+        //Aire acondicionado
+        if(aire == 1){
+            binding.tvAire.setText("Aire acondicionado: Si")
+        }else{
+            binding.tvAire.setText("Aire acondicionado: No")
+        }
+
+
+        Glide.with(this).load(imagenes).into(binding.imagenPerfil)
 
 
 
