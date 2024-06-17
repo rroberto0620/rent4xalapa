@@ -188,6 +188,16 @@ class PrincipalPublicacionesActivity: AppCompatActivity(), ListenerRecyclerPubli
 
     override fun clicVerPublicacion(publicacion: Publicacion, posicion: Int) {
         val intent = Intent(this@PrincipalPublicacionesActivity,RevisarPublicacionesActivity::class.java)
+
+        intent.putExtra("idUsuario",idUsuario)
+        intent.putExtra("nombre",nombre)
+        intent.putExtra("correo",correo)
+        intent.putExtra("contrasena",contrasena)
+        intent.putExtra("telefono",telefono)
+        intent.putExtra("ine",ine)
+        intent.putExtra("perfil",perfil)
+
+
         intent.putExtra("idPublicacion",publicacion.idPublicacion)
         intent.putExtra("titulo",publicacion.titulo)
         intent.putExtra("descripcion",publicacion.descripcion)

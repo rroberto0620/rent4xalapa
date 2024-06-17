@@ -28,6 +28,14 @@ class RevisarPublicacionesActivity : AppCompatActivity(), OnMapReadyCallback {
     private lateinit var binding: RevisarPublicacionesBinding
     private lateinit var map: GoogleMap
 
+    private var idUsuario1=0
+    private var nombre = ""
+    private var correo = ""
+    private var contrasena = ""
+    private var telefono:Long = 0
+    private var ine = ""
+    private var perfil = ""
+
     private var idPublicacion = 0
     private var titulo = ""
     private var descripcion = ""
@@ -46,13 +54,6 @@ class RevisarPublicacionesActivity : AppCompatActivity(), OnMapReadyCallback {
     private var latitud = 0.0
     private var calificacion = 0
     private var idUsuario = 0
-
-//    private var nombre = ""
-//    private var correo = ""
-//    private var contrasena = ""
-//    private var telefono:Long = 0
-//    private var ine = ""
-//    private var perfil = ""
 
     private lateinit var modeloUsuarios : Usuarios
     private lateinit var arrayUsu: ArrayList<Usuario>
@@ -75,12 +76,13 @@ class RevisarPublicacionesActivity : AppCompatActivity(), OnMapReadyCallback {
 
         array = arrayListOf<Publicacion>()
 
-//        nombre = intent.getStringExtra("nombre")!!
-//        correo = intent.getStringExtra("correo")!!
-//        contrasena = intent.getStringExtra("contrasena")!!
-//        telefono = intent.getLongExtra("telefono",0)
-//        ine = intent.getStringExtra("ine")!!
-//        perfil = intent.getStringExtra("perfil")!!
+        idUsuario1 = intent.getIntExtra("idUsuario",0)
+        nombre = intent.getStringExtra("nombre")!!
+        correo = intent.getStringExtra("correo")!!
+        contrasena = intent.getStringExtra("contrasena")!!
+        telefono = intent.getLongExtra("telefono",0)
+        ine = intent.getStringExtra("ine")!!
+        perfil = intent.getStringExtra("perfil")!!
 
 
         idPublicacion = intent.getIntExtra("idPublicacion", 0)
@@ -159,7 +161,7 @@ class RevisarPublicacionesActivity : AppCompatActivity(), OnMapReadyCallback {
             irPantallaRealizarCita()
         }
         binding.btnRegresar.setOnClickListener {
-//            irActivityPublicaciones()
+           irActivityPublicaciones()
         }
         createFragment()
     }
@@ -230,34 +232,34 @@ class RevisarPublicacionesActivity : AppCompatActivity(), OnMapReadyCallback {
     }
 
 
-//    fun irPantallaPublicaciones(idUsuario:Int,nombre:String, correo:String , contrasena:String , telefono:Long , ine:String,perfil:String){
-//        val intent = Intent(this@RevisarPublicacionesActivity, PrincipalPublicacionesActivity::class.java)
-//        intent.putExtra("idUsuario",idUsuario)
-//        intent.putExtra("nombre",nombre)
-//        intent.putExtra("correo",correo)
-//        intent.putExtra("contrasena",contrasena)
-//        intent.putExtra("telefono",telefono)
-//        intent.putExtra("ine",ine)
-//        intent.putExtra("perfil",perfil)
-//        startActivity(intent)
-//        finish()
-//    }
+    fun irPantallaPublicaciones(idUsuario:Int,nombre:String, correo:String , contrasena:String , telefono:Long , ine:String,perfil:String){
+        val intent = Intent(this@RevisarPublicacionesActivity, PrincipalPublicacionesActivity::class.java)
+        intent.putExtra("idUsuario",idUsuario)
+        intent.putExtra("nombre",nombre)
+        intent.putExtra("correo",correo)
+        intent.putExtra("contrasena",contrasena)
+        intent.putExtra("telefono",telefono)
+        intent.putExtra("ine",ine)
+        intent.putExtra("perfil",perfil)
+        startActivity(intent)
+        finish()
+   }
 
 
-//    fun irActivityPublicaciones(){
-//        for (usuario in arrayUsu) {
-//            if (usuario.correo == correo && usuario.contrasena == contrasena) {
-//                irPantallaPublicaciones(
-//                    usuario.idUsuario,
-//                    usuario.nombre,
-//                    usuario.correo,
-//                    usuario.contrasena,
-//                    usuario.telefono,
-//                    usuario.ine,
-//                    usuario.perfil
-//                )
-//                break  // Salir del bucle una vez encontrado el usuario
-//            }
-//        }
-//    }
+    fun irActivityPublicaciones(){
+        for (usuario in arrayUsu) {
+            if (usuario.correo == correo && usuario.contrasena == contrasena) {
+                irPantallaPublicaciones(
+                    usuario.idUsuario,
+                    usuario.nombre,
+                    usuario.correo,
+                    usuario.contrasena,
+                    usuario.telefono,
+                    usuario.ine,
+                    usuario.perfil
+                )
+                break  // Salir del bucle una vez encontrado el usuario
+            }
+        }
+    }
 }

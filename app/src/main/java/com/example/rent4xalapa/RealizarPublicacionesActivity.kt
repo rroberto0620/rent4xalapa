@@ -62,6 +62,7 @@ class RealizarPublicacionesActivity : AppCompatActivity(), OnMapReadyCallback {
                     agregarPublicacion(nuevaPublicacion)
                 }
             }
+            irActivityPublicaciones()
         }
         binding.btnCancelar.setOnClickListener {
             irActivityPublicaciones()
