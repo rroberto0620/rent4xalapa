@@ -3,15 +3,25 @@ package com.example.rent4xalapa
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.FragmentManager
 import com.example.rent4xalapa.databinding.PrincipalPublicacionesBinding
 import com.example.rent4xalapa.databinding.RealizarPublicacionesBinding
 import com.example.rent4xalapa.modelo.PublicacionesBD
 import com.example.rent4xalapa.poko.Publicacion
+import com.google.android.gms.maps.CameraUpdateFactory
+import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.OnMapReadyCallback
+import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.MarkerOptions
 
-class RealizarPublicacionesActivity : AppCompatActivity() {
+class RealizarPublicacionesActivity : AppCompatActivity(), OnMapReadyCallback {
     private lateinit var binding : RealizarPublicacionesBinding
+    private lateinit var map:GoogleMap
     private lateinit var modelo : PublicacionesBD
     private var idUsuario = 0
+    private var longitud = 0.0
+    private var latitud = 0.0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = RealizarPublicacionesBinding.inflate(layoutInflater)
@@ -19,7 +29,6 @@ class RealizarPublicacionesActivity : AppCompatActivity() {
         setContentView(view)
         modelo = PublicacionesBD(this@RealizarPublicacionesActivity)
         idUsuario = intent.getIntExtra("idUsuario",0)
-
         binding.btnRealizarPublicacion.setOnClickListener {
             if (validarCamposCorrectos()) {
                 val nuevaPublicacion = crearPublicacion()
@@ -28,9 +37,36 @@ class RealizarPublicacionesActivity : AppCompatActivity() {
                 }
             }
         }
-
+        createFragment()
     }
 
+    private fun createFragment(){
+        val mapFragment: SupportMapFragment = supportFragmentManager.findFragmentById(R.id.frag_ubicacion) as SupportMapFragment
+        mapFragment.getMapAsync(this)
+    }
+
+    override fun onMapReady(googleMap: GoogleMap) {
+        map = googleMap
+        // Agregar un marcador inicial en una ubicación predeterminada
+        val initialLocation = LatLng(19.541858509261434, -96.92754932747631) // Reemplaza con la ubicación deseada
+        val initialMarker = map.addMarker(MarkerOptions().position(initialLocation).title("Marcador inicial"))
+        map.moveCamera(CameraUpdateFactory.newLatLngZoom(initialLocation, 10f))
+        // Configurar un listener para obtener la latitud y longitud donde se hace clic en el mapa
+        map.setOnMapClickListener { latLng ->
+            // Limpiar marcadores existentes si deseas agregar solo un marcador a la vez
+            map.clear()
+
+            // Agregar un marcador en la ubicación clicada
+            val marker = map.addMarker(MarkerOptions().position(latLng).title("Nuevo marcador"))
+
+            // Obtener la latitud y longitud del marcador
+            val latitude = latLng.latitude
+            val longitude = latLng.longitude
+            latitud = latLng.latitude
+            longitud = latLng.longitude
+            Toast.makeText(this, "Latitud: $latitude, Longitud: $longitude", Toast.LENGTH_LONG).show()
+        }
+    }
 
     private fun crearPublicacion(): Publicacion? {
         return try {
@@ -49,8 +85,8 @@ class RealizarPublicacionesActivity : AppCompatActivity() {
                 cochera = if (binding.cbCochera.isChecked) 1 else 0,
                 aire = if (binding.cbAire.isChecked) 1 else 0,
                 imagenes = binding.etImagenesUrl.text.toString(),
-                longitud = 0.0,
-                latitud = 0.0,
+                longitud = longitud,
+                latitud = latitud,
                 calificacion = 0,
                 idUsuario = idUsuario
             )
@@ -97,8 +133,6 @@ class RealizarPublicacionesActivity : AppCompatActivity() {
             binding.etCosto.setError("El costo es obligatorio")
             valido = false
         }
-
-
         return valido
     }
 }

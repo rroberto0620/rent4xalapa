@@ -230,12 +230,12 @@
             </LinearLayout>
 
 
-            <ImageView
-                android:id="@+id/iv_ubicacion"
+            <fragment
+                android:id="@+id/frag_ubicacion"
                 android:layout_width="match_parent"
-                android:layout_height="150dp"
+                android:layout_height="300dp"
                 android:background="@drawable/rounded_edit_text"
-
+                android:name="com.google.android.gms.maps.SupportMapFragment"
                 android:contentDescription="Ubicacion"
                 android:layout_marginBottom="10dp" />
 

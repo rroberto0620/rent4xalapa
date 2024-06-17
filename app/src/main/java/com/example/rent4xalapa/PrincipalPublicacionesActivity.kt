@@ -2,15 +2,18 @@ package com.example.rent4xalapa
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.rent4xalapa.Adaptadores.PublicacionesAdapter
 import com.example.rent4xalapa.databinding.PrincipalPublicacionesBinding
+import com.example.rent4xalapa.interfaces.ListenerRecyclerPublicaciones
 import com.example.rent4xalapa.modelo.PublicacionesBD
 import com.example.rent4xalapa.modelo.Usuarios
+import com.example.rent4xalapa.poko.Publicacion
 import com.example.rent4xalapa.poko.Usuario
 
-class PrincipalPublicacionesActivity: AppCompatActivity() {
+class PrincipalPublicacionesActivity: AppCompatActivity(), ListenerRecyclerPublicaciones {
     private lateinit var binding : PrincipalPublicacionesBinding
 
     private var idUsuario=0
@@ -70,16 +73,26 @@ class PrincipalPublicacionesActivity: AppCompatActivity() {
                 }
             }
         }
+        cargarMisPublicaciones()
         configurarRecyclePublicaciones()
+    }
+
+    override fun onResume(){
+        super.onResume()
+    }
+
+    fun cargarMisPublicaciones(){
+        val publicaciones = modeloPublicaciones.obtenerPublicaciones(idUsuario)
+        if(publicaciones.size > 0){
+            binding.recyclerPublicaciones.adapter = PublicacionesAdapter(publicaciones,this)
+        }else{
+            Toast.makeText(this@PrincipalPublicacionesActivity, "No se pueden mostrar las publicaciones $idUsuario", Toast.LENGTH_LONG).show()
+        }
     }
 
     private fun configurarRecyclePublicaciones() {
         binding.recyclerPublicaciones.layoutManager = LinearLayoutManager(this@PrincipalPublicacionesActivity)
         binding.recyclerPublicaciones.setHasFixedSize(true)
-
-        val publicaciones = modeloPublicaciones.obtenerPublicaciones(idUsuario)
-        publicacionesAdapter = PublicacionesAdapter(publicaciones)
-        binding.recyclerPublicaciones.adapter = publicacionesAdapter
     }
 
     fun irPantallaPublicacionesFavoritas(){
@@ -109,5 +122,13 @@ class PrincipalPublicacionesActivity: AppCompatActivity() {
         intent.putExtra("ine",ine)
         intent.putExtra("perfil",perfil)
         startActivity(intent)
+    }
+
+    override fun clicFavoritoPublicacion(publicacion: Publicacion, posicion: Int) {
+        TODO("Not yet implemented")
+    }
+
+    override fun clicVerPublicacion(publicacion: Publicacion, posicion: Int) {
+        TODO("Not yet implemented")
     }
 }

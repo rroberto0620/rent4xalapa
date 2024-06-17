@@ -77,7 +77,7 @@
                     android:background="#969797"/>
 
                 <Button
-                    android:id="@+id/tv_ver_publicacion"
+                    android:id="@+id/btn_ver_publicacion"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:text="Ver publicacion"
