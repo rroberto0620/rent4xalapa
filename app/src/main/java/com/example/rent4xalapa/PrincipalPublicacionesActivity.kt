@@ -3,6 +3,7 @@ package com.example.rent4xalapa
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.rent4xalapa.databinding.PrincipalPublicacionesBinding
 import com.example.rent4xalapa.modelo.Usuarios
 import com.example.rent4xalapa.poko.Usuario
@@ -64,10 +65,13 @@ class PrincipalPublicacionesActivity: AppCompatActivity() {
                 }
             }
         }
-
+        configurarRecyclePublicaciones()
     }
 
-
+    private fun configurarRecyclePublicaciones(){
+        binding.recyclerPublicaciones.layoutManager = LinearLayoutManager(this@PrincipalPublicacionesActivity)
+        binding.recyclerPublicaciones.setHasFixedSize(true)
+    }
 
     fun irPantallaPublicacionesFavoritas(){
         val intent = Intent(this@PrincipalPublicacionesActivity,PublicacionesFavoritasActivity::class.java)
