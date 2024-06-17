@@ -28,6 +28,17 @@ class PublicacionesFavoritasActivity : AppCompatActivity() {
 
     }
 
+    fun irPantallaRevisarPerfil(idUsuario:Int,nombre:String, correo:String , contrasena:String , telefono:Long , ine:String){
+        val intent = Intent(this@PublicacionesFavoritasActivity, RevisarPerfilActivity::class.java)
+        intent.putExtra("idUsuario",idUsuario)
+        intent.putExtra("nombre",nombre)
+        intent.putExtra("correo",correo)
+        intent.putExtra("contrasena",contrasena)
+        intent.putExtra("telefono",telefono)
+        intent.putExtra("ine",ine)
+        startActivity(intent)
+        finish()
+    }
 
     fun irPantallaPublicaciones(){
         val intent = Intent(this@PublicacionesFavoritasActivity, PrincipalPublicacionesActivity::class.java)

@@ -49,7 +49,7 @@ class RevisarPerfilActivity : AppCompatActivity() {
             irActivityEditar()
         }
         binding.btnBack.setOnClickListener {
-            irPantallaPublicaciones()
+            irActivityPublicaciones()
         }
 
         binding.imageButtonFavoritos.setOnClickListener {
@@ -57,7 +57,7 @@ class RevisarPerfilActivity : AppCompatActivity() {
         }
 
         binding.imageButtonPrincipal.setOnClickListener {
-            irPantallaPublicaciones()
+            irActivityPublicaciones()
         }
 
         binding.imageButtonPublicacionNueva.setOnClickListener {
@@ -79,8 +79,6 @@ class RevisarPerfilActivity : AppCompatActivity() {
                     usuario.telefono,
                     usuario.ine
                 )
-
-
                 break  // Salir del bucle una vez encontrado el usuario
             }
         }
@@ -110,8 +108,30 @@ class RevisarPerfilActivity : AppCompatActivity() {
         }
     }
 
-    fun irPantallaPublicaciones(){
+    fun irActivityPublicaciones(){
+        for (usuario in array) {
+            if (usuario.correo == correo && usuario.contrasena == contrasena) {
+                irPantallaPublicaciones(
+                    usuario.idUsuario,
+                    usuario.nombre,
+                    usuario.correo,
+                    usuario.contrasena,
+                    usuario.telefono,
+                    usuario.ine
+                )
+                break  // Salir del bucle una vez encontrado el usuario
+            }
+        }
+    }
+
+    fun irPantallaPublicaciones(idUsuario:Int,nombre:String, correo:String , contrasena:String , telefono:Long , ine:String){
         val intent = Intent(this@RevisarPerfilActivity, PrincipalPublicacionesActivity::class.java)
+        intent.putExtra("idUsuario",idUsuario)
+        intent.putExtra("nombre",nombre)
+        intent.putExtra("correo",correo)
+        intent.putExtra("contrasena",contrasena)
+        intent.putExtra("telefono",telefono)
+        intent.putExtra("ine",ine)
         startActivity(intent)
         finish()
     }
