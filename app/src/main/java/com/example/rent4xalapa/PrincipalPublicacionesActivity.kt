@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.rent4xalapa.Adaptadores.PublicacionesAdapter
 import com.example.rent4xalapa.databinding.PrincipalPublicacionesBinding
 import com.example.rent4xalapa.interfaces.ListenerRecyclerPublicaciones
+import com.example.rent4xalapa.modelo.FavoritosBD
 import com.example.rent4xalapa.modelo.PublicacionesBD
 import com.example.rent4xalapa.modelo.Usuarios
 import com.example.rent4xalapa.poko.Publicacion
@@ -28,6 +29,8 @@ class PrincipalPublicacionesActivity: AppCompatActivity(), ListenerRecyclerPubli
     private lateinit var modelo : Usuarios
     private lateinit var array: ArrayList<Usuario>
     private lateinit var modeloPublicaciones: PublicacionesBD
+    private lateinit var modeloFavoritos: FavoritosBD
+    private lateinit var db : FavoritosBD
     private lateinit var publicacionesAdapter: PublicacionesAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,9 +40,15 @@ class PrincipalPublicacionesActivity: AppCompatActivity(), ListenerRecyclerPubli
 
         modelo= Usuarios(this@PrincipalPublicacionesActivity)
         modeloPublicaciones = PublicacionesBD(this@PrincipalPublicacionesActivity)
+        modeloFavoritos = FavoritosBD(this@PrincipalPublicacionesActivity)
 
         array = arrayListOf<Usuario>()
         array = modelo.seleccionarUsuarios()
+
+        db= FavoritosBD(this@PrincipalPublicacionesActivity)
+        modeloFavoritos= FavoritosBD(this@PrincipalPublicacionesActivity)
+        modeloFavoritos.crearTabla()
+        db.crearTabla()
 
         idUsuario = intent.getIntExtra("idUsuario",0)
         nombre = intent.getStringExtra("nombre")!!
@@ -70,7 +79,7 @@ class PrincipalPublicacionesActivity: AppCompatActivity(), ListenerRecyclerPubli
     }
 
     fun cargarMisPublicaciones(){
-        val publicaciones = modeloPublicaciones.seleccionarNotas()
+        val publicaciones = modeloPublicaciones.seleccionarPublicaciones()
         Toast.makeText(this@PrincipalPublicacionesActivity, "Las publicaciones = "+ publicaciones.size, Toast.LENGTH_LONG).show()
         if(publicaciones.size > 0){
             binding.recyclerPublicaciones.visibility = View.VISIBLE
@@ -173,7 +182,8 @@ class PrincipalPublicacionesActivity: AppCompatActivity(), ListenerRecyclerPubli
     }
 
     override fun clicFavoritoPublicacion(publicacion: Publicacion, posicion: Int) {
-        Toast.makeText(this@PrincipalPublicacionesActivity, "Posicion $posicion, Titulo: ${publicacion.titulo}", Toast.LENGTH_LONG).show()
+        modeloFavoritos.agregarFavorito(publicacion)
+        Toast.makeText(this@PrincipalPublicacionesActivity, "Se agrego a favorito "+publicacion.idPublicacion, Toast.LENGTH_LONG).show()
     }
 
     override fun clicVerPublicacion(publicacion: Publicacion, posicion: Int) {

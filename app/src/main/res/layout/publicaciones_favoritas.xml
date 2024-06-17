@@ -28,7 +28,7 @@
         android:layout_centerVertical="true"/>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_publicaciones_favoritas"
+        android:id="@+id/recycler_publicaciones"
         android:layout_width="match_parent"
         android:layout_height="710dp"
         android:layout_below="@id/tv_publicaciones_favoritas"
@@ -41,7 +41,7 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:orientation="horizontal"
-        android:layout_below="@id/recycler_publicaciones_favoritas">
+        android:layout_below="@id/recycler_publicaciones">
 
         <ImageButton
             android:id="@+id/imageButton_principal"

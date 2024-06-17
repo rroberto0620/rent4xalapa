@@ -64,12 +64,16 @@
                 android:layout_marginTop="6dp"
                 android:layout_below="@id/tv_descripcion_publicacion">
 
-                <ImageButton
-                    android:id="@+id/imageButton_favorito_publicacion"
-                    android:background="@color/white_personalizado"
-                    android:layout_width="102.5dp"
-                    android:layout_height="60dp"
-                    android:src="@drawable/heart"/>
+                <Button
+                    android:id="@+id/btn_favorito"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Agregar favorita"
+                    android:backgroundTint="@color/red_personalizado"
+                    android:gravity="center_horizontal"
+                    android:layout_weight="1"
+
+                    android:textColor="@color/black"/>
 
                 <View
                     android:layout_width="1dp"

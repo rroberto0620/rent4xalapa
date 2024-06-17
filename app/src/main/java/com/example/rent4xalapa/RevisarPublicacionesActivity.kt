@@ -8,7 +8,6 @@ import android.widget.Button
 import androidx.appcompat.app.AlertDialog
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.material3.Button
 import com.bumptech.glide.Glide
 import com.example.rent4xalapa.databinding.RevisarPerfilBinding
 import com.example.rent4xalapa.databinding.RevisarPublicacionesBinding
@@ -16,11 +15,18 @@ import com.example.rent4xalapa.modelo.PublicacionesBD
 import com.example.rent4xalapa.modelo.Usuarios
 import com.example.rent4xalapa.poko.Publicacion
 import com.example.rent4xalapa.poko.Usuario
+import com.google.android.gms.maps.CameraUpdateFactory
+import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.OnMapReadyCallback
+import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.MarkerOptions
 
 
-class RevisarPublicacionesActivity : AppCompatActivity() {
+class RevisarPublicacionesActivity : AppCompatActivity(), OnMapReadyCallback {
 
     private lateinit var binding: RevisarPublicacionesBinding
+    private lateinit var map: GoogleMap
 
     private var idPublicacion = 0
     private var titulo = ""
@@ -36,8 +42,8 @@ class RevisarPublicacionesActivity : AppCompatActivity() {
     private var cochera = 0
     private var aire = 0
     private var imagenes = ""
-    private var longitud = 0
-    private var latitud = 0
+    private var longitud = 0.0
+    private var latitud = 0.0
     private var calificacion = 0
     private var idUsuario = 0
 
@@ -93,6 +99,8 @@ class RevisarPublicacionesActivity : AppCompatActivity() {
         imagenes = intent.getStringExtra("imagenes")!!
         calificacion = intent.getIntExtra("calificacion", 0)
         idUsuario = intent.getIntExtra("idUsuario", 0)
+        latitud = intent.getDoubleExtra("latitud",0.0)
+        longitud = intent.getDoubleExtra("longitud",0.0)
 
 
         binding.tvTitulo.setText("Titulo: "+"$titulo")
@@ -153,9 +161,20 @@ class RevisarPublicacionesActivity : AppCompatActivity() {
         binding.btnRegresar.setOnClickListener {
 //            irActivityPublicaciones()
         }
+        createFragment()
     }
 
-
+    private fun createFragment(){
+        val mapFragment: SupportMapFragment = supportFragmentManager.findFragmentById(R.id.frag_ubicacion2) as SupportMapFragment
+        mapFragment.getMapAsync(this)
+    }
+    override fun onMapReady(googleMap: GoogleMap) {
+        map = googleMap
+        // Agregar un marcador inicial en una ubicación predeterminada
+        val initialLocation = LatLng(latitud,longitud) // Reemplaza con la ubicación deseada
+        val initialMarker = map.addMarker(MarkerOptions().position(initialLocation).title("Marcador inicial"))
+        map.moveCamera(CameraUpdateFactory.newLatLngZoom(initialLocation, 10f))
+    }
 
     private fun abrirDialogoCalificar() {
         val dialog = Dialog(this)
@@ -209,6 +228,7 @@ class RevisarPublicacionesActivity : AppCompatActivity() {
         startActivity(intent)
         finish()
     }
+
 
 //    fun irPantallaPublicaciones(idUsuario:Int,nombre:String, correo:String , contrasena:String , telefono:Long , ine:String,perfil:String){
 //        val intent = Intent(this@RevisarPublicacionesActivity, PrincipalPublicacionesActivity::class.java)

@@ -3,11 +3,19 @@ package com.example.rent4xalapa
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
+import android.widget.Toast
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.rent4xalapa.Adaptadores.PublicacionesAdapter
 import com.example.rent4xalapa.databinding.PublicacionesFavoritasBinding
+import com.example.rent4xalapa.interfaces.ListenerRecyclerPublicaciones
+import com.example.rent4xalapa.modelo.FavoritosBD
+import com.example.rent4xalapa.modelo.PublicacionesBD
 import com.example.rent4xalapa.modelo.Usuarios
+import com.example.rent4xalapa.poko.Publicacion
 import com.example.rent4xalapa.poko.Usuario
 
-class PublicacionesFavoritasActivity : AppCompatActivity() {
+class PublicacionesFavoritasActivity : AppCompatActivity(), ListenerRecyclerPublicaciones {
     private var idUsuario=0
     private var nombre = ""
     private var correo = ""
@@ -16,9 +24,12 @@ class PublicacionesFavoritasActivity : AppCompatActivity() {
     private var ine = ""
     private var perfil = ""
 
-    private lateinit var modelo : Usuarios
     private lateinit var binding : PublicacionesFavoritasBinding
     private lateinit var array: ArrayList<Usuario>
+    private lateinit var modelo : Usuarios
+    private lateinit var modeloPublicaciones: PublicacionesBD
+    private lateinit var modeloFavoritos: FavoritosBD
+    private lateinit var db : FavoritosBD
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = PublicacionesFavoritasBinding.inflate(layoutInflater)
@@ -26,10 +37,12 @@ class PublicacionesFavoritasActivity : AppCompatActivity() {
         setContentView(view)
 
         modelo= Usuarios(this@PublicacionesFavoritasActivity)
-
+        modeloPublicaciones = PublicacionesBD(this@PublicacionesFavoritasActivity)
+        modeloFavoritos = FavoritosBD(this@PublicacionesFavoritasActivity)
 
         array = arrayListOf<Usuario>()
         array = modelo.seleccionarUsuarios()
+
 
         idUsuario = intent.getIntExtra("idUsuario",0)
         nombre = intent.getStringExtra("nombre")!!
@@ -50,7 +63,28 @@ class PublicacionesFavoritasActivity : AppCompatActivity() {
         binding.imageButtonMiCuenta.setOnClickListener {
             irActivityRevisarPerfil()
         }
+        configurarRecyclePublicaciones()
+    }
 
+    override fun onResume(){
+        super.onResume()
+        cargarMisPublicaciones()
+    }
+
+    fun cargarMisPublicaciones(){
+        val publicaciones = modeloPublicaciones.seleccionarPublicaciones()
+        Toast.makeText(this@PublicacionesFavoritasActivity, "Las publicaciones = "+ publicaciones.size, Toast.LENGTH_LONG).show()
+        if(publicaciones.size > 0){
+            binding.recyclerPublicaciones.visibility = View.VISIBLE
+            binding.recyclerPublicaciones.adapter = PublicacionesAdapter(publicaciones,this)
+        }else{
+            Toast.makeText(this@PublicacionesFavoritasActivity, "No se pueden mostrar las publicaciones = "+ idUsuario, Toast.LENGTH_LONG).show()
+        }
+    }
+
+    private fun configurarRecyclePublicaciones() {
+        binding.recyclerPublicaciones.layoutManager = LinearLayoutManager(this@PublicacionesFavoritasActivity)
+        binding.recyclerPublicaciones.setHasFixedSize(true)
     }
 
     fun irActivityRevisarPerfil(){
@@ -140,5 +174,13 @@ class PublicacionesFavoritasActivity : AppCompatActivity() {
         intent.putExtra("ine",ine)
         intent.putExtra("perfil",perfil)
         startActivity(intent)
+    }
+
+    override fun clicFavoritoPublicacion(publicacion: Publicacion, posicion: Int) {
+        TODO("Not yet implemented")
+    }
+
+    override fun clicVerPublicacion(publicacion: Publicacion, posicion: Int) {
+        TODO("Not yet implemented")
     }
 }
