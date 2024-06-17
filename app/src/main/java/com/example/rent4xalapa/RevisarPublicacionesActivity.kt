@@ -10,7 +10,9 @@ import com.bumptech.glide.Glide
 import com.example.rent4xalapa.databinding.RevisarPerfilBinding
 import com.example.rent4xalapa.databinding.RevisarPublicacionesBinding
 import com.example.rent4xalapa.modelo.PublicacionesBD
+import com.example.rent4xalapa.modelo.Usuarios
 import com.example.rent4xalapa.poko.Publicacion
+import com.example.rent4xalapa.poko.Usuario
 
 
 class RevisarPublicacionesActivity : AppCompatActivity() {
@@ -36,6 +38,17 @@ class RevisarPublicacionesActivity : AppCompatActivity() {
     private var calificacion = 0
     private var idUsuario = 0
 
+//    private var nombre = ""
+//    private var correo = ""
+//    private var contrasena = ""
+//    private var telefono:Long = 0
+//    private var ine = ""
+//    private var perfil = ""
+
+    private lateinit var modeloUsuarios : Usuarios
+    private lateinit var arrayUsu: ArrayList<Usuario>
+
+
     private lateinit var modelo : PublicacionesBD
     private lateinit var array: ArrayList<Publicacion>
 
@@ -47,9 +60,19 @@ class RevisarPublicacionesActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
         modelo=PublicacionesBD(this@RevisarPublicacionesActivity)
+        modeloUsuarios=Usuarios(this@RevisarPublicacionesActivity)
+        arrayUsu = arrayListOf<Usuario>()
+        arrayUsu = modeloUsuarios.seleccionarUsuarios()
 
         array = arrayListOf<Publicacion>()
-        //array = modelo.obtenerPublicaciones(idUsuario)
+
+//        nombre = intent.getStringExtra("nombre")!!
+//        correo = intent.getStringExtra("correo")!!
+//        contrasena = intent.getStringExtra("contrasena")!!
+//        telefono = intent.getLongExtra("telefono",0)
+//        ine = intent.getStringExtra("ine")!!
+//        perfil = intent.getStringExtra("perfil")!!
+
 
         idPublicacion = intent.getIntExtra("idPublicacion", 0)
         titulo = intent.getStringExtra("titulo")!!
@@ -66,7 +89,7 @@ class RevisarPublicacionesActivity : AppCompatActivity() {
         aire = intent.getIntExtra("aire acondicionado", 0)
         imagenes = intent.getStringExtra("imagenes")!!
         calificacion = intent.getIntExtra("calificacion", 0)
-        idUsuario = intent.getIntExtra("idUser", 0)
+        idUsuario = intent.getIntExtra("idUsuario", 0)
 
 
         binding.tvTitulo.setText("Titulo: "+"$titulo")
@@ -125,7 +148,7 @@ class RevisarPublicacionesActivity : AppCompatActivity() {
             irPantallaRealizarCita()
         }
         binding.btnRegresar.setOnClickListener {
-            irPantallaPrincipal()
+//            irActivityPublicaciones()
         }
     }
 
@@ -162,9 +185,34 @@ class RevisarPublicacionesActivity : AppCompatActivity() {
         finish()
     }
 
-    fun irPantallaPrincipal(){
-        val intent = Intent(this@RevisarPublicacionesActivity, PrincipalPublicacionesActivity::class.java)
-        startActivity(intent)
-        finish()
-    }
+//    fun irPantallaPublicaciones(idUsuario:Int,nombre:String, correo:String , contrasena:String , telefono:Long , ine:String,perfil:String){
+//        val intent = Intent(this@RevisarPublicacionesActivity, PrincipalPublicacionesActivity::class.java)
+//        intent.putExtra("idUsuario",idUsuario)
+//        intent.putExtra("nombre",nombre)
+//        intent.putExtra("correo",correo)
+//        intent.putExtra("contrasena",contrasena)
+//        intent.putExtra("telefono",telefono)
+//        intent.putExtra("ine",ine)
+//        intent.putExtra("perfil",perfil)
+//        startActivity(intent)
+//        finish()
+//    }
+
+
+//    fun irActivityPublicaciones(){
+//        for (usuario in arrayUsu) {
+//            if (usuario.correo == correo && usuario.contrasena == contrasena) {
+//                irPantallaPublicaciones(
+//                    usuario.idUsuario,
+//                    usuario.nombre,
+//                    usuario.correo,
+//                    usuario.contrasena,
+//                    usuario.telefono,
+//                    usuario.ine,
+//                    usuario.perfil
+//                )
+//                break  // Salir del bucle una vez encontrado el usuario
+//            }
+//        }
+//    }
 }
