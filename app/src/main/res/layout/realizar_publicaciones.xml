@@ -133,6 +133,7 @@
                         android:layout_weight="1"
                         android:text="¿Es pet friendly?" />
                     <CheckBox
+                        android:id="@+id/cb_petfriendly"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
                 </LinearLayout>
@@ -148,6 +149,7 @@
                         android:layout_weight="1"
                         android:text="¿Cuenta con todos los servicios (agua, luz, drenaje, internet)?" />
                     <CheckBox
+                        android:id="@+id/cb_servicios"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
                 </LinearLayout>
@@ -163,6 +165,7 @@
                         android:layout_weight="1"
                         android:text="¿Está amueblado?" />
                     <CheckBox
+                        android:id="@+id/cb_amueblado"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
                 </LinearLayout>
@@ -178,6 +181,7 @@
                         android:layout_weight="1"
                         android:text="¿La entrada es compartida con otras personas?" />
                     <CheckBox
+                        android:id="@+id/cb_entrada_compartida"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
                 </LinearLayout>
@@ -193,6 +197,7 @@
                         android:layout_weight="1"
                         android:text="¿Tiene cochera?" />
                     <CheckBox
+                        android:id="@+id/cb_cochera"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
                 </LinearLayout>
@@ -208,6 +213,7 @@
                         android:layout_weight="1"
                         android:text="¿Cuenta con aire acondicionado?" />
                     <CheckBox
+                        android:id="@+id/cb_aire"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
                 </LinearLayout>

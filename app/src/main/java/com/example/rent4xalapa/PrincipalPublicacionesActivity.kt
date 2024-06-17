@@ -4,7 +4,9 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.rent4xalapa.Adaptadores.PublicacionesAdapter
 import com.example.rent4xalapa.databinding.PrincipalPublicacionesBinding
+import com.example.rent4xalapa.modelo.PublicacionesBD
 import com.example.rent4xalapa.modelo.Usuarios
 import com.example.rent4xalapa.poko.Usuario
 
@@ -21,6 +23,8 @@ class PrincipalPublicacionesActivity: AppCompatActivity() {
 
     private lateinit var modelo : Usuarios
     private lateinit var array: ArrayList<Usuario>
+    private lateinit var modeloPublicaciones: PublicacionesBD
+    private lateinit var publicacionesAdapter: PublicacionesAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = PrincipalPublicacionesBinding.inflate(layoutInflater)
@@ -28,6 +32,7 @@ class PrincipalPublicacionesActivity: AppCompatActivity() {
         setContentView(view)
 
         modelo= Usuarios(this@PrincipalPublicacionesActivity)
+        modeloPublicaciones = PublicacionesBD(this@PrincipalPublicacionesActivity)
 
         array = arrayListOf<Usuario>()
         array = modelo.seleccionarUsuarios()
@@ -45,7 +50,7 @@ class PrincipalPublicacionesActivity: AppCompatActivity() {
         }
 
         binding.imageButtonPublicacionNueva.setOnClickListener {
-            irPantallaRealizarPublicacion()
+            irPantallaRealizarPublicacion(idUsuario,nombre,correo, contrasena, telefono, ine, perfil)
         }
 
         binding.imageButtonMiCuenta.setOnClickListener {
@@ -68,9 +73,13 @@ class PrincipalPublicacionesActivity: AppCompatActivity() {
         configurarRecyclePublicaciones()
     }
 
-    private fun configurarRecyclePublicaciones(){
+    private fun configurarRecyclePublicaciones() {
         binding.recyclerPublicaciones.layoutManager = LinearLayoutManager(this@PrincipalPublicacionesActivity)
         binding.recyclerPublicaciones.setHasFixedSize(true)
+
+        val publicaciones = modeloPublicaciones.obtenerPublicaciones(idUsuario)
+        publicacionesAdapter = PublicacionesAdapter(publicaciones)
+        binding.recyclerPublicaciones.adapter = publicacionesAdapter
     }
 
     fun irPantallaPublicacionesFavoritas(){
@@ -78,8 +87,15 @@ class PrincipalPublicacionesActivity: AppCompatActivity() {
         startActivity(intent)
     }
 
-    fun irPantallaRealizarPublicacion(){
+    fun irPantallaRealizarPublicacion(idUsuario:Int,nombre:String, correo:String , contrasena:String , telefono:Long , ine:String,perfil:String){
         val intent = Intent(this@PrincipalPublicacionesActivity,RealizarPublicacionesActivity::class.java)
+        intent.putExtra("idUsuario",idUsuario)
+        intent.putExtra("nombre",nombre)
+        intent.putExtra("correo",correo)
+        intent.putExtra("contrasena",contrasena)
+        intent.putExtra("telefono",telefono)
+        intent.putExtra("ine",ine)
+        intent.putExtra("perfil",perfil)
         startActivity(intent)
     }
 

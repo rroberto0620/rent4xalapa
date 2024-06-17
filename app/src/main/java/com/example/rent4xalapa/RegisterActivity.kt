@@ -50,7 +50,7 @@ class RegisterActivity : AppCompatActivity() {
             binding.etNumeroTel.setText("")
             binding.etIdentifiacion.setText("")
         }else{
-            mensaje = "Hubo un error al guardar la nota, intentelo más tarde"
+            mensaje = "Hubo un error al guardar el usuario, intentelo más tarde"
 
         }
         Toast.makeText(this@RegisterActivity, mensaje,Toast.LENGTH_LONG).show()

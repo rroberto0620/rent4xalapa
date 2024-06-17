@@ -5,12 +5,14 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.rent4xalapa.databinding.ActivityMainBinding
+import com.example.rent4xalapa.modelo.PublicacionesBD
 import com.example.rent4xalapa.modelo.Usuarios
 import com.example.rent4xalapa.poko.Usuario
 
 private lateinit var binding: ActivityMainBinding
 private lateinit var db : Usuarios
 private lateinit var array: ArrayList<Usuario>
+private lateinit var publicacionesDB: PublicacionesBD
 
 class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -23,7 +25,8 @@ class LoginActivity : AppCompatActivity() {
 
 
         db= Usuarios(this@LoginActivity)
-
+        publicacionesDB = PublicacionesBD(this@LoginActivity)
+        publicacionesDB.crearTabla()
       db.crearTabla()
         array = arrayListOf<Usuario>()
         array = db.seleccionarUsuarios()
