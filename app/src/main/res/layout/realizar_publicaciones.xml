@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/logo_sin_letras">
-    <!-- tools:context=".RealizarPublicacion"> -->
+    <!-- tools:context=".RealizarPublicaciones"> -->
 
     <View
         android:id="@+id/dark_overlay"
