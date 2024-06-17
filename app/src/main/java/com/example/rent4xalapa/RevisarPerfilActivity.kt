@@ -75,6 +75,9 @@ class RevisarPerfilActivity : AppCompatActivity() {
         binding.btnDeleteAccount.setOnClickListener {
             eliminarUsuario(idUsuario)
         }
+        binding.btnCerrarSesion.setOnClickListener {
+            irPantallaLogin()
+        }
     }
 
     fun irActivityEditar(){
