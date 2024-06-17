@@ -15,8 +15,6 @@ class RevisarPerfilActivity : AppCompatActivity() {
 
     private lateinit var binding: RevisarPerfilBinding
 
-
-
     private var idUsuario=0
     private var nombre = ""
     private var correo = ""

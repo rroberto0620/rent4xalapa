@@ -24,9 +24,9 @@ class PublicacionesAdapter(val publicaciones: List<Publicacion>, val listenerRec
         holder.tv2TituloPublicacion.text = publicacion.titulo
         holder.tv2DescripcionPublicacion.text = publicacion.descripcion
 
-        holder.imageButtonFavoritoPublicacion.setOnClickListener {
+        /*holder.imageButtonFavoritoPublicacion.setOnClickListener {
             listenerRecyclerPublicaciones.clicFavoritoPublicacion(publicacion,position)
-        }
+        }*/
 
         holder.btnVerPublicacion.setOnClickListener {
             listenerRecyclerPublicaciones.clicVerPublicacion(publicacion,position)
@@ -36,8 +36,8 @@ class PublicacionesAdapter(val publicaciones: List<Publicacion>, val listenerRec
     override fun getItemCount(): Int = publicaciones.size
 
     class ViewHolderPublicacion(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val imageButtonFavoritoPublicacion: ImageButton = itemView.findViewById(R.id.tv_titulo_publicacion)
-        val btnVerPublicacion: Button = itemView.findViewById(R.id.tv_descripcion_publicacion)
+        //val imageButtonFavoritoPublicacion: ImageButton = itemView.findViewById(R.id.imageButton_favoritos)
+        val btnVerPublicacion: Button = itemView.findViewById(R.id.btn_ver_publicacion)
         val tv2TituloPublicacion: TextView = itemView.findViewById(R.id.tv2_titulo_publicacion)
         val tv2DescripcionPublicacion: TextView = itemView.findViewById(R.id.tv2_descripcion_publicacion)
 

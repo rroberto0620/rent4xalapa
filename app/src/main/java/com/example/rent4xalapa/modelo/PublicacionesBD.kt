@@ -78,9 +78,50 @@ class PublicacionesBD (contexto: Context) : SQLiteOpenHelper(contexto, NOMBRE_BD
         return filasAfectadas
     }
 
-    @SuppressLint("Range", "Recycle")
-    fun obtenerPublicaciones(idUsuario:Int): ArrayList<Publicacion>{
-        val publicaciones = arrayListOf<Publicacion>()
+    @SuppressLint("Range")
+    fun seleccionarNotas() : List<Publicacion>{
+        val publicaciones = mutableListOf<Publicacion>()
+        val db = readableDatabase
+        val resultadoConsulta : Cursor? = db.query(NOMBRE_TABLA,null,null,null,null,null,null)
+        if(resultadoConsulta !=null){
+            while(resultadoConsulta.moveToNext()){
+                val idPublicacion = resultadoConsulta.getInt(resultadoConsulta.getColumnIndex(
+                    COL_ID_PUBLICACION))
+                val titulo = resultadoConsulta.getString(resultadoConsulta.getColumnIndex(COL_TITULO))
+                val descripcion = resultadoConsulta.getString(resultadoConsulta.getColumnIndex(
+                    COL_DESCRIPCION))
+                val direccion = resultadoConsulta.getString(resultadoConsulta.getColumnIndex(
+                    COL_DIRECCION))
+                val tipo = resultadoConsulta.getString(resultadoConsulta.getColumnIndex(COL_TIPO))
+                val numHabitaciones = resultadoConsulta.getInt(resultadoConsulta.getColumnIndex(
+                    COL_NUM_HABITACIONES))
+                val costo = resultadoConsulta.getDouble(resultadoConsulta.getColumnIndex(COL_COSTO))
+                val petFriendly = resultadoConsulta.getInt(resultadoConsulta.getColumnIndex(
+                    COL_PET_FRIENDLY))
+                val servicios = resultadoConsulta.getInt(resultadoConsulta.getColumnIndex(COL_SERVICIOS))
+                val amueblado = resultadoConsulta.getInt(resultadoConsulta.getColumnIndex(COL_AMUEBLADO))
+                val entradaCompartida = resultadoConsulta.getInt(resultadoConsulta.getColumnIndex(
+                    COL_ENTRADA_COMPARTIDA))
+                val cochera = resultadoConsulta.getInt(resultadoConsulta.getColumnIndex(COL_COCHERA))
+                val aire = resultadoConsulta.getInt(resultadoConsulta.getColumnIndex(COL_AIRE))
+                val imagenes = resultadoConsulta.getString(resultadoConsulta.getColumnIndex(COL_IMAGENES))
+                val longitud = resultadoConsulta.getDouble(resultadoConsulta.getColumnIndex(COL_LONGITUD))
+                val latitud = resultadoConsulta.getDouble(resultadoConsulta.getColumnIndex(COL_LATITUD))
+                val califiacion = resultadoConsulta.getInt(resultadoConsulta.getColumnIndex(
+                    COL_CALIFICACION))
+                val idUsuario = resultadoConsulta.getInt(resultadoConsulta.getColumnIndex(COL_ID_USUARIO))
+                val publicacion = Publicacion(idPublicacion,titulo,descripcion,direccion,tipo,numHabitaciones,costo,petFriendly,servicios,amueblado,entradaCompartida,cochera,aire,imagenes,longitud,latitud,califiacion,idUsuario)
+                publicaciones.add(publicacion)
+            }
+            resultadoConsulta.close()
+        }
+        db.close()
+        return publicaciones
+    }
+
+    @SuppressLint("Range")
+    fun obtenerPublicaciones(idUsuario:Int): List<Publicacion>{
+        val publicaciones = mutableListOf<Publicacion>()
         val db = readableDatabase
         val resultadoConsulta : Cursor = db.query(NOMBRE_TABLA,null,"$COL_ID_USUARIO=?", arrayOf(arrayOf(idUsuario).toString()),null,null,null)
         while (resultadoConsulta.moveToNext()){

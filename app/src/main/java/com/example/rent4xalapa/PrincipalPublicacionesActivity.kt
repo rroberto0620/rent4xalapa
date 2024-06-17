@@ -17,7 +17,7 @@ import com.example.rent4xalapa.poko.Usuario
 class PrincipalPublicacionesActivity: AppCompatActivity(), ListenerRecyclerPublicaciones {
     private lateinit var binding : PrincipalPublicacionesBinding
 
-    private var idUsuario=0
+    private var idUsuario= 0
     private var nombre = ""
     private var correo = ""
     private var contrasena = ""
@@ -70,7 +70,7 @@ class PrincipalPublicacionesActivity: AppCompatActivity(), ListenerRecyclerPubli
     }
 
     fun cargarMisPublicaciones(){
-        val publicaciones = modeloPublicaciones.obtenerPublicaciones(idUsuario)
+        val publicaciones = modeloPublicaciones.seleccionarNotas()
         Toast.makeText(this@PrincipalPublicacionesActivity, "Las publicaciones = "+ publicaciones.size, Toast.LENGTH_LONG).show()
         if(publicaciones.size > 0){
             binding.recyclerPublicaciones.visibility = View.VISIBLE

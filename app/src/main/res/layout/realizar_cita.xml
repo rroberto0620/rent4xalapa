@@ -143,7 +143,7 @@
                 android:layout_marginStart="10dp"
                 android:layout_width="130dp"
                 android:layout_height="wrap_content"
-                android:backgroundTint="@color/blue_personalizado"
+                android:backgroundTint="@android:color/holo_blue_dark"
                 android:text="Aceptar"/>
 
         </LinearLayout>
@@ -159,35 +159,6 @@
         android:layout_height="match_parent"
         android:orientation="horizontal"
         android:layout_below="@id/linear_campos">
-
-        <ImageButton
-            android:id="@+id/imageButton_principal"
-            android:background="@color/white_personalizado"
-            android:layout_width="102.5dp"
-            android:layout_height="60dp"
-            android:src="@drawable/home_outline"/>
-
-        <ImageButton
-            android:id="@+id/imageButton_favoritos"
-            android:background="@color/white_personalizado"
-            android:layout_width="102.5dp"
-            android:layout_height="60dp"
-            android:src="@drawable/heart"/>
-
-        <ImageButton
-            android:id="@+id/imageButton_publicacion_nueva"
-            android:background="@color/white_personalizado"
-            android:layout_width="102.5dp"
-            android:layout_height="60dp"
-            android:src="@drawable/new_box"/>
-
-        <ImageButton
-            android:id="@+id/imageButton_mi_cuenta"
-            android:background="@color/white_personalizado"
-            android:layout_width="102.5dp"
-            android:layout_height="60dp"
-            android:src="@drawable/account_box"/>
-
 
     </LinearLayout>
 

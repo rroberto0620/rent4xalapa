@@ -47,7 +47,7 @@ class RevisarPublicacionesActivity : AppCompatActivity() {
         modelo=PublicacionesBD(this@RevisarPublicacionesActivity)
 
         array = arrayListOf<Publicacion>()
-        array = modelo.obtenerPublicaciones(idUsuario)
+        //array = modelo.obtenerPublicaciones(idUsuario)
 
         idPublicacion = intent.getIntExtra("idPublicacion", 0)
         titulo = intent.getStringExtra("titulo")!!
