@@ -2,6 +2,7 @@ package com.example.rent4xalapa
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Patterns
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.rent4xalapa.databinding.ActivityMainBinding
@@ -49,6 +50,23 @@ class LoginActivity : AppCompatActivity() {
     fun verificarCredenciales() {
         val correo = binding.etEmail.text.toString()
         val contrasena = binding.etContrasena.text.toString()
+
+        if (correo.isEmpty()) {
+            binding.etEmail.setError("Campo requerido")
+            return
+        }
+
+        if (contrasena.isEmpty()) {
+            binding.etContrasena.setError("Campo requerido")
+            return
+        }
+
+        // Validar el formato del correo
+        if (!esCorreoValido(correo)) {
+            binding.etEmail.setError("Formato de correo inválido")
+            return
+        }
+
         var usuarioEncontrado = false
 
         for (usuario in array) {
@@ -63,7 +81,6 @@ class LoginActivity : AppCompatActivity() {
                     usuario.perfil
                 )
                 usuarioEncontrado = true
-
                 break  // Salir del bucle una vez encontrado el usuario
             }
         }
@@ -71,6 +88,10 @@ class LoginActivity : AppCompatActivity() {
         if (!usuarioEncontrado) {
             mostrarToast("Usuario y/o contraseña son incorrectos")
         }
+    }
+
+    fun esCorreoValido(correo:String):Boolean{
+        return Patterns.EMAIL_ADDRESS.matcher(correo).matches()
     }
 
 
