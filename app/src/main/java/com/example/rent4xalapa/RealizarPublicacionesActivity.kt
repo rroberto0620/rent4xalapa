@@ -3,6 +3,7 @@ package com.example.rent4xalapa
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Patterns
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentManager
@@ -55,14 +56,15 @@ class RealizarPublicacionesActivity : AppCompatActivity(), OnMapReadyCallback {
         telefono = intent.getLongExtra("telefono",0)
         ine = intent.getStringExtra("ine")!!
         perfil = intent.getStringExtra("perfil")!!
+
         binding.btnRealizarPublicacion.setOnClickListener {
             if (validarCamposCorrectos()) {
                 val nuevaPublicacion = crearPublicacion()
                 if (nuevaPublicacion != null) {
                     agregarPublicacion(nuevaPublicacion)
+                    irActivityPublicaciones()  // Solo navega si se ha agregado la publicación correctamente
                 }
             }
-            irActivityPublicaciones()
         }
         binding.btnCancelar.setOnClickListener {
             irActivityPublicaciones()
@@ -163,7 +165,22 @@ class RealizarPublicacionesActivity : AppCompatActivity(), OnMapReadyCallback {
             binding.etCosto.setError("El costo es obligatorio")
             valido = false
         }
+        if(binding.etNumHabitaciones.text.isEmpty()){
+            binding.etNumHabitaciones.setError("El numero de habitaciones es obligatorio")
+            valido = false
+        }
+        if (binding.etImagenesUrl.text.isEmpty()){
+            binding.etImagenesUrl.setError("El formato es en URL")
+            valido = false
+        }else if (!esUrlValida(binding.etImagenesUrl.text.toString())) {
+            binding.etImagenesUrl.error = "Formato de URL inválido"
+            valido = false
+        }
         return valido
+    }
+
+    fun esUrlValida(url: String): Boolean {
+        return Patterns.WEB_URL.matcher(url).matches()
     }
 
     fun irPantallaPublicaciones(idUsuario:Int,nombre:String, correo:String , contrasena:String , telefono:Long , ine:String,perfil:String){

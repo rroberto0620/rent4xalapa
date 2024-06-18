@@ -2,6 +2,7 @@ package com.example.rent4xalapa
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Patterns
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.WindowInsetsCompat
@@ -49,13 +50,78 @@ class EditarPerfilActivity : AppCompatActivity() {
             irVerPerfil()
         }
         binding.btnActualizar.setOnClickListener {
-            val usuario = Usuario(idUsuario.toInt(), binding.etNombre.text.toString(), binding.etCorreo.text.toString(), binding.etContrasena.text.toString(), binding.etTelefono.text.toString().toLong(),binding.etIdentificacion.text.toString(),binding.etPerfil.text.toString())
-            actualizarUsuario(usuario)
+            if (validarCamposCorrectos()) {
+                val correo = binding.etCorreo.text.toString()
+                if (modelo.correoExiste(correo)) {
+                    Toast.makeText(this, "El correo ya está registrado", Toast.LENGTH_LONG).show()
+                } else {
+                    val usuario = Usuario(
+                        idUsuario.toInt(),
+                        binding.etNombre.text.toString(),
+                        binding.etCorreo.text.toString(),
+                        binding.etContrasena.text.toString(),
+                        binding.etTelefono.text.toString().toLong(),
+                        binding.etIdentificacion.text.toString(),
+                        binding.etPerfil.text.toString()
+                    )
+                    actualizarUsuario(usuario)
+                }
+            }
         }
 
 
     }
 
+    fun validarCamposCorrectos():Boolean{
+        var valido = true
+        if (binding.etNombre.text.isEmpty()){
+            binding.etNombre.setError("El nombre es obligatorio")
+            valido = false
+        }
+        if (binding.etCorreo.text.isEmpty()) {
+            binding.etCorreo.setError("El email es obligatorio")
+            valido = false
+        } else if (!esCorreoValido(binding.etCorreo.text.toString())) {
+            binding.etCorreo.setError("Formato de email inválido")
+            valido = false
+        }
+        if (binding.etContrasena.text.isEmpty()){
+            binding.etContrasena.setError("La contraseña es obligatoria")
+            valido = false
+        }
+        if (binding.etTelefono.text.isEmpty()) {
+            binding.etTelefono.setError("El número telefónico es obligatorio")
+            valido = false
+        } else if (!esTelefonoValido(binding.etTelefono.text.toString())) {
+            binding.etTelefono.error = "Formato de teléfono inválido"
+            valido = false
+        }
+
+        if (binding.etIdentificacion.text.isEmpty()){
+            binding.etIdentificacion.setError("Tu identifiacion es requerida")
+            valido = false
+        }else if (!esUrlValida(binding.etIdentificacion.text.toString())) {
+            binding.etIdentificacion.error = "Formato de URL inválido"
+            valido = false
+        }
+        if (binding.etPerfil.text.isNotEmpty() && !esUrlValida(binding.etPerfil.text.toString())) {
+            binding.etPerfil.setError("Formato de URL inválido")
+            valido = false
+        }
+
+        return valido
+    }
+
+    fun esUrlValida(url: String): Boolean {
+        return Patterns.WEB_URL.matcher(url).matches()
+    }
+    fun esTelefonoValido(tel : String): Boolean{
+        return Patterns.PHONE.matcher(tel).matches()
+    }
+
+    fun esCorreoValido(correo:String):Boolean{
+        return Patterns.EMAIL_ADDRESS.matcher(correo).matches()
+    }
     fun actualizarUsuario(usuario: Usuario){
         val resultadoActualizado = modelo.actualizarUsuario(usuario)
         var msg = ""
