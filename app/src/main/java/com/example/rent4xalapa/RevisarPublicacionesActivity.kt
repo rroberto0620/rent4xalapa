@@ -95,9 +95,9 @@ class RevisarPublicacionesActivity : AppCompatActivity(), OnMapReadyCallback {
         petFriendly = intent.getIntExtra("petFriendly", 0)
         servicios = intent.getIntExtra("servicios", 0)
         amueblado = intent.getIntExtra("amueblado", 0)
-        entradaCompartida = intent.getIntExtra("entrada compartida", 0)
+        entradaCompartida = intent.getIntExtra("entradaCompartida", 0)
         cochera = intent.getIntExtra("cochera", 0)
-        aire = intent.getIntExtra("aire acondicionado", 0)
+        aire = intent.getIntExtra("aire", 0)
         imagenes = intent.getStringExtra("imagenes")!!
         calificacion = intent.getIntExtra("calificacion", 0)
         idUsuario = intent.getIntExtra("idUsuario", 0)
