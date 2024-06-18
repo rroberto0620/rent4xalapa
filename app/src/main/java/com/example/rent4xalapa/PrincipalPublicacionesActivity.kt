@@ -80,7 +80,6 @@ class PrincipalPublicacionesActivity: AppCompatActivity(), ListenerRecyclerPubli
 
     fun cargarMisPublicaciones(){
         val publicaciones = modeloPublicaciones.seleccionarPublicaciones()
-        Toast.makeText(this@PrincipalPublicacionesActivity, "Las publicaciones = "+ publicaciones.size, Toast.LENGTH_LONG).show()
         if(publicaciones.size > 0){
             binding.recyclerPublicaciones.visibility = View.VISIBLE
             binding.recyclerPublicaciones.adapter = PublicacionesAdapter(publicaciones,this)
@@ -217,6 +216,5 @@ class PrincipalPublicacionesActivity: AppCompatActivity(), ListenerRecyclerPubli
         intent.putExtra("calificacion",publicacion.calificacion)
         intent.putExtra("idUser",publicacion.idUsuario)
         startActivity(intent)
-        Toast.makeText(this@PrincipalPublicacionesActivity, "Posicion $posicion, Titulo: ${publicacion.titulo}", Toast.LENGTH_LONG).show()
     }
 }

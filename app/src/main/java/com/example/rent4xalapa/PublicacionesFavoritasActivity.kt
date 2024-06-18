@@ -73,7 +73,6 @@ class PublicacionesFavoritasActivity : AppCompatActivity(), ListenerRecyclerPubl
 
     fun cargarMisPublicaciones(){
         val publicaciones = modeloPublicaciones.seleccionarPublicaciones()
-        Toast.makeText(this@PublicacionesFavoritasActivity, "Las publicaciones = "+ publicaciones.size, Toast.LENGTH_LONG).show()
         if(publicaciones.size > 0){
             binding.recyclerPublicaciones.visibility = View.VISIBLE
             binding.recyclerPublicaciones.adapter = PublicacionesAdapter(publicaciones,this)
@@ -177,10 +176,39 @@ class PublicacionesFavoritasActivity : AppCompatActivity(), ListenerRecyclerPubl
     }
 
     override fun clicFavoritoPublicacion(publicacion: Publicacion, posicion: Int) {
-        TODO("Not yet implemented")
+        Toast.makeText(this@PublicacionesFavoritasActivity, "Eliminando de favoritos...", Toast.LENGTH_LONG).show()
     }
 
     override fun clicVerPublicacion(publicacion: Publicacion, posicion: Int) {
-        TODO("Not yet implemented")
+        val intent = Intent(this@PublicacionesFavoritasActivity,RevisarPublicacionesActivity::class.java)
+
+        intent.putExtra("idUsuario",idUsuario)
+        intent.putExtra("nombre",nombre)
+        intent.putExtra("correo",correo)
+        intent.putExtra("contrasena",contrasena)
+        intent.putExtra("telefono",telefono)
+        intent.putExtra("ine",ine)
+        intent.putExtra("perfil",perfil)
+
+
+        intent.putExtra("idPublicacion",publicacion.idPublicacion)
+        intent.putExtra("titulo",publicacion.titulo)
+        intent.putExtra("descripcion",publicacion.descripcion)
+        intent.putExtra("direccion",publicacion.direccion)
+        intent.putExtra("tipo",publicacion.tipo)
+        intent.putExtra("numHabitaciones",publicacion.numHabitaciones)
+        intent.putExtra("costo",publicacion.costo)
+        intent.putExtra("petFriendly",publicacion.petFriendly)
+        intent.putExtra("servicios",publicacion.servicios)
+        intent.putExtra("amueblado",publicacion.amueblado)
+        intent.putExtra("entradaCompartida",publicacion.entradaCompartida)
+        intent.putExtra("cochera",publicacion.cochera)
+        intent.putExtra("aire",publicacion.aire)
+        intent.putExtra("imagenes",publicacion.imagenes)
+        intent.putExtra("latitud",publicacion.latitud)
+        intent.putExtra("longitud",publicacion.longitud)
+        intent.putExtra("calificacion",publicacion.calificacion)
+        intent.putExtra("idUser",publicacion.idUsuario)
+        startActivity(intent)
     }
 }

@@ -43,7 +43,6 @@ class FavoritosBD (contexto: Context) : SQLiteOpenHelper(contexto, FavoritosBD.N
         db.close()
         return filasAfectadas
     }
-
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
     }
 }

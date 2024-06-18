@@ -158,7 +158,7 @@ class RevisarPublicacionesActivity : AppCompatActivity(), OnMapReadyCallback {
         }
 
         binding.btnRealizar.setOnClickListener {
-            irPantallaRealizarCita()
+            irActivityRealizarCita()
         }
         binding.btnRegresar.setOnClickListener {
            irActivityPublicaciones()
@@ -223,15 +223,6 @@ class RevisarPublicacionesActivity : AppCompatActivity(), OnMapReadyCallback {
     }
 
 
-
-
-    fun irPantallaRealizarCita(){
-        val intent = Intent(this@RevisarPublicacionesActivity, RealizarCitaActivity::class.java)
-        startActivity(intent)
-        finish()
-    }
-
-
     fun irPantallaPublicaciones(idUsuario:Int,nombre:String, correo:String , contrasena:String , telefono:Long , ine:String,perfil:String){
         val intent = Intent(this@RevisarPublicacionesActivity, PrincipalPublicacionesActivity::class.java)
         intent.putExtra("idUsuario",idUsuario)
@@ -261,5 +252,34 @@ class RevisarPublicacionesActivity : AppCompatActivity(), OnMapReadyCallback {
                 break  // Salir del bucle una vez encontrado el usuario
             }
         }
+    }
+
+    fun irActivityRealizarCita(){
+        for (usuario in arrayUsu) {
+            if (usuario.correo == correo && usuario.contrasena == contrasena) {
+                irPantallaRealizarCita(
+                    usuario.idUsuario,
+                    usuario.nombre,
+                    usuario.correo,
+                    usuario.contrasena,
+                    usuario.telefono,
+                    usuario.ine,
+                    usuario.perfil
+                )
+                break  // Salir del bucle una vez encontrado el usuario
+            }
+        }
+    }
+
+    fun irPantallaRealizarCita(idUsuario:Int,nombre:String, correo:String , contrasena:String , telefono:Long , ine:String,perfil:String){
+        val intent = Intent(this@RevisarPublicacionesActivity,RealizarCitaActivity::class.java)
+        intent.putExtra("idUsuario",idUsuario)
+        intent.putExtra("nombre",nombre)
+        intent.putExtra("correo",correo)
+        intent.putExtra("contrasena",contrasena)
+        intent.putExtra("telefono",telefono)
+        intent.putExtra("ine",ine)
+        intent.putExtra("perfil",perfil)
+        startActivity(intent)
     }
 }
