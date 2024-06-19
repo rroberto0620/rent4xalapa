@@ -31,6 +31,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ScrollView
+        android:id="@+id/sc_total"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@+id/btn_regresar"
@@ -252,14 +253,14 @@
             <fragment
                 android:layout_marginTop="30dp"
                 android:id="@+id/frag_ubicacion2"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="300dp"
                 android:background="@drawable/rounded_edit_text"
                 android:name="com.google.android.gms.maps.SupportMapFragment"
                 android:contentDescription="Ubicacion"
                 android:layout_marginBottom="30dp" />
 
-        </LinearLayout>
+            </LinearLayout>
 
     </ScrollView>
 

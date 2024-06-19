@@ -1,9 +1,12 @@
 package com.example.rent4xalapa
 
+import android.annotation.SuppressLint
 import android.app.Dialog
 import android.os.Bundle
 import android.content.DialogInterface
 import android.content.Intent
+import android.net.Uri
+import android.view.MotionEvent
 import android.widget.Button
 import androidx.appcompat.app.AlertDialog
 import android.widget.Toast
@@ -61,14 +64,17 @@ class RevisarPublicacionesActivity : AppCompatActivity(), OnMapReadyCallback {
 
     private lateinit var modelo : PublicacionesBD
     private lateinit var array: ArrayList<Publicacion>
+    private var isScrollEnabled = true
 
 
 
+    @SuppressLint("ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = RevisarPublicacionesBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
+
         modelo=PublicacionesBD(this@RevisarPublicacionesActivity)
         modeloUsuarios=Usuarios(this@RevisarPublicacionesActivity)
         arrayUsu = arrayListOf<Usuario>()
@@ -151,7 +157,16 @@ class RevisarPublicacionesActivity : AppCompatActivity(), OnMapReadyCallback {
 
         Glide.with(this).load(imagenes).into(binding.imagenPerfil)
 
-
+        binding.scTotal.setOnTouchListener { v, event ->
+            if (event.action == MotionEvent.ACTION_UP) {
+                isScrollEnabled = true
+            }
+            if (isScrollEnabled) {
+                v.onTouchEvent(event)
+            } else {
+                true
+            }
+        }
 
         binding.btnCalificar.setOnClickListener {
             abrirDialogoCalificar()
@@ -172,10 +187,45 @@ class RevisarPublicacionesActivity : AppCompatActivity(), OnMapReadyCallback {
     }
     override fun onMapReady(googleMap: GoogleMap) {
         map = googleMap
+
+        map.uiSettings.isScrollGesturesEnabled = false
+        map.uiSettings.isZoomGesturesEnabled = false
+        map.uiSettings.isTiltGesturesEnabled = false
+        map.uiSettings.isRotateGesturesEnabled = false
+
         // Agregar un marcador inicial en una ubicación predeterminada
         val initialLocation = LatLng(latitud,longitud) // Reemplaza con la ubicación deseada
         val initialMarker = map.addMarker(MarkerOptions().position(initialLocation).title("Marcador inicial"))
-        map.moveCamera(CameraUpdateFactory.newLatLngZoom(initialLocation, 10f))
+        map.moveCamera(CameraUpdateFactory.newLatLngZoom(initialLocation, 15f))
+
+        map.setOnMapClickListener { latLng ->
+            // Obtener la latitud y longitud donde se hizo clic
+            val latitude = latLng.latitude
+            val longitude = latLng.longitude
+            Toast.makeText(this, "Latitud: $latitude, Longitud: $longitude", Toast.LENGTH_LONG).show()
+            // Redirigir a Google Maps con la ubicación clicada
+            openGoogleMaps(latitude, longitude)
+        }
+    }
+
+
+    @SuppressLint("QueryPermissionsNeeded")
+    private fun openGoogleMaps(latitude: Double, longitude: Double) {
+        try {
+            val gmmIntentUri = Uri.parse("geo:$latitude,$longitude?q=$latitude,$longitude")
+            val mapIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri)
+            mapIntent.setPackage("com.google.android.apps.maps")
+            startActivity(mapIntent)
+        } catch (e: Exception) {
+            Toast.makeText(this, "No se pudo abrir Google Maps, abriendo en el navegador", Toast.LENGTH_LONG).show()
+            openGoogleMapsInBrowser(latitude, longitude)
+        }
+    }
+
+    private fun openGoogleMapsInBrowser(latitude: Double, longitude: Double) {
+        val mapsUrl = "https://www.google.com/maps/search/?api=1&query=$latitude,$longitude"
+        val webIntent = Intent(Intent.ACTION_VIEW, Uri.parse(mapsUrl))
+        startActivity(webIntent)
     }
 
     private fun abrirDialogoCalificar() {
