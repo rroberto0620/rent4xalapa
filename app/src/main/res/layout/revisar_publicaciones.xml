@@ -47,9 +47,11 @@
                 android:id="@+id/tv_publicacion_titulo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/rounded_edit_text"
+                android:background="@drawable/cuadricular_edit_text"
                 android:gravity="center_horizontal"
-                android:layout_marginTop="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginTop="26dp"
                 android:layout_marginBottom="5dp"
                 android:padding="8dp"
                 android:text="Publicacion"
@@ -63,7 +65,7 @@
                 android:layout_height="100dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="10dp"
-                android:background="#CCCCCC" />
+                android:background="@drawable/cuadricular_edit_text" />
 
 
 
@@ -71,7 +73,7 @@
                 android:id="@+id/ubicacion_contenedor"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="20dp"
                 android:background="@drawable/rounded_edit_text"
                 android:orientation="vertical"
                 android:padding="10dp">
@@ -196,7 +198,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="20dp"
-                    android:text="Es PetFriendly: "
+                    android:text="Es Pet friendly: "
                     android:textColor="@color/black"
                     android:textSize="18sp" />
                 <TextView
@@ -204,7 +206,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="20dp"
-                    android:text="Servicios: "
+                    android:text="Cuenta con todos los servicios: "
                     android:textColor="@color/black"
                     android:textSize="18sp" />
 
@@ -213,7 +215,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="20dp"
-                    android:text="Amueblado: "
+                    android:text="Está amueblado: "
                     android:textColor="@color/black"
                     android:textSize="18sp" />
 
@@ -222,7 +224,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="20dp"
-                    android:text="Entrada compartida: "
+                    android:text="La entrada es compartida: "
                     android:textColor="@color/black"
                     android:textSize="18sp" />
 
@@ -231,7 +233,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="20dp"
-                    android:text="cochera"
+                    android:text="Tiene cochera"
                     android:textColor="@color/black"
                     android:textSize="18sp" />
 
@@ -240,7 +242,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="20dp"
-                    android:text="aire"
+                    android:text="Cuenta con aire acondicionado"
                     android:textColor="@color/black"
                     android:textSize="18sp" />
 

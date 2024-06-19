@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@color/gray_osc_personalizado"
+    android:background="@color/gris_paleta"
     tools:context=".PublicacionesFavoritasActivity">
 
     <TextView
@@ -12,7 +12,7 @@
         android:layout_marginTop="5dp"
         android:textColor="@color/black"
         android:layout_height="wrap_content"
-        android:background="@drawable/rounded_textview"
+        android:background="@drawable/cuadricular_edit_text"
         android:text="@string/favoritos"
         android:textSize="25sp"
         android:layout_marginBottom="10dp"
