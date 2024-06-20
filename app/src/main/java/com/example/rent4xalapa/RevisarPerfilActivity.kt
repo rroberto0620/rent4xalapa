@@ -48,7 +48,7 @@ class RevisarPerfilActivity : AppCompatActivity() {
 
 
         binding.tvName.setText("Nombre: "+"$nombre")
-        binding.tvTelefono.setText("Telefono: "+"$telefono")
+        binding.tvTelefono.setText("Teléfono: "+"$telefono")
         binding.tvEmail.setText("Correo: "+"$correo")
         Glide.with(this).load(ine).into(binding.imagenIne)
         Glide.with(this).load(perfil).into(binding.imagenPerfil)

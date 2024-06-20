@@ -127,7 +127,7 @@
             android:id="@+id/btnDeleteAccount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="10dp"
+            android:layout_marginEnd="11dp"
             android:backgroundTint="@color/red_personalizado"
             android:text="Eliminar cuenta"
             android:textColor="#FFFFFF" />
