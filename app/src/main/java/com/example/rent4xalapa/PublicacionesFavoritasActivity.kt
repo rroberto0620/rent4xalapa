@@ -68,16 +68,17 @@ class PublicacionesFavoritasActivity : AppCompatActivity(), ListenerRecyclerPubl
 
     override fun onResume(){
         super.onResume()
-        cargarMisPublicaciones()
+        cargarMisPublicacionesFavoritas()
     }
 
-    fun cargarMisPublicaciones(){
-        val publicaciones = modeloPublicaciones.seleccionarPublicaciones()
+    fun cargarMisPublicacionesFavoritas(){
+        val favoritos = modeloFavoritos.obtenerPublicaciones(idUsuario.toString())
+        val publicaciones = modeloPublicaciones.obtenerPublicaciones(favoritos)
         if(publicaciones.size > 0){
             binding.recyclerPublicaciones.visibility = View.VISIBLE
             binding.recyclerPublicaciones.adapter = PublicacionesAdapter(publicaciones,this)
         }else{
-            Toast.makeText(this@PublicacionesFavoritasActivity, "No se pueden mostrar las publicaciones = "+ idUsuario, Toast.LENGTH_LONG).show()
+            Toast.makeText(this@PublicacionesFavoritasActivity, "No se pueden mostrar las publicaciones =${publicaciones.size}  "+ idUsuario, Toast.LENGTH_LONG).show()
         }
     }
 

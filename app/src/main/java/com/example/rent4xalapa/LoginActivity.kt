@@ -6,6 +6,7 @@ import android.util.Patterns
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.rent4xalapa.databinding.ActivityMainBinding
+import com.example.rent4xalapa.modelo.FavoritosBD
 import com.example.rent4xalapa.modelo.PublicacionesBD
 import com.example.rent4xalapa.modelo.Usuarios
 import com.example.rent4xalapa.poko.Usuario
@@ -14,6 +15,7 @@ private lateinit var binding: ActivityMainBinding
 private lateinit var db : Usuarios
 private lateinit var array: ArrayList<Usuario>
 private lateinit var publicacionesDB: PublicacionesBD
+private lateinit var favoritosDB: FavoritosBD
 
 class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -22,12 +24,11 @@ class LoginActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
-
-
-
         db= Usuarios(this@LoginActivity)
         publicacionesDB = PublicacionesBD(this@LoginActivity)
         publicacionesDB.crearTabla()
+//        favoritosDB = FavoritosBD(this@LoginActivity)
+//        favoritosDB.eliminarTabla()
       db.crearTabla()
         array = arrayListOf<Usuario>()
         array = db.seleccionarUsuarios()

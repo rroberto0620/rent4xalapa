@@ -1,10 +1,15 @@
 package com.example.rent4xalapa.modelo
 
+import android.annotation.SuppressLint
 import android.content.ContentValues
 import android.content.Context
+import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
+import android.util.Log
+import com.example.rent4xalapa.poko.Favorito
 import com.example.rent4xalapa.poko.Publicacion
+import java.io.Console
 
 class FavoritosBD (contexto: Context) : SQLiteOpenHelper(contexto, FavoritosBD.NOMBRE_BD,null, FavoritosBD.VERSION_BD) {
 
@@ -40,8 +45,41 @@ class FavoritosBD (contexto: Context) : SQLiteOpenHelper(contexto, FavoritosBD.N
         contentValue.put(COL_ID_PUBLICACION, favorito.idPublicacion)
         contentValue.put(COL_ID_USUARIO,favorito.idUsuario)
         val filasAfectadas = db.insert(NOMBRE_TABLA,null,contentValue)
+        Log.d("mensaje", filasAfectadas.toString())
         db.close()
         return filasAfectadas
+    }
+
+    @SuppressLint("Range")
+    fun obtenerPublicaciones(idUsuario:String): List<Favorito>{
+        val favoritos = mutableListOf<Favorito>()
+        val db = readableDatabase
+        val resultadoConsulta : Cursor = db.query(
+            NOMBRE_TABLA,null,"$COL_ID_USUARIO=?",
+            arrayOf(idUsuario),null,null,null)
+        if(resultadoConsulta !=null) {
+            while (resultadoConsulta.moveToNext()) {
+                val idFavorito = resultadoConsulta.getInt(resultadoConsulta.getColumnIndex(
+                    COL_ID_FAVORITO)
+                )
+                val idPublicacion = resultadoConsulta.getInt(
+                    resultadoConsulta.getColumnIndex(
+                        COL_ID_PUBLICACION
+                    )
+                )
+                val idUsuario =
+                    resultadoConsulta.getInt(resultadoConsulta.getColumnIndex(COL_ID_USUARIO))
+                val favorito = Favorito(
+                    idFavorito,
+                    idPublicacion,
+                    idUsuario)
+                favoritos.add(favorito)
+            }
+            Log.d("msj", resultadoConsulta.count.toString())
+            resultadoConsulta.close()
+        }
+        db.close()
+        return favoritos
     }
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
     }

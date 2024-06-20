@@ -6,6 +6,7 @@ import android.content.Context
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
+import com.example.rent4xalapa.poko.Favorito
 import com.example.rent4xalapa.poko.Publicacion
 
 class PublicacionesBD (contexto: Context) : SQLiteOpenHelper(contexto, NOMBRE_BD,null, VERSION_BD){
@@ -120,11 +121,13 @@ class PublicacionesBD (contexto: Context) : SQLiteOpenHelper(contexto, NOMBRE_BD
     }
 
     @SuppressLint("Range")
-    fun obtenerPublicaciones(idUsuario:Int): List<Publicacion>{
+    fun obtenerPublicaciones(idPublicacion: List<Favorito>): List<Publicacion>{
         val publicaciones = mutableListOf<Publicacion>()
         val db = readableDatabase
-        val resultadoConsulta : Cursor = db.query(NOMBRE_TABLA,null,"$COL_ID_USUARIO=?",
-            arrayOf(arrayOf(idUsuario).toString()),null,null,null)
+        val idPublicacionString = idPublicacion.joinToString(",") { it.idPublicacion.toString() }
+        val query = "SELECT * FROM $NOMBRE_TABLA WHERE $COL_ID_PUBLICACION IN ($idPublicacionString)"
+
+        val resultadoConsulta: Cursor = db.rawQuery(query, null)
         if(resultadoConsulta !=null) {
             while (resultadoConsulta.moveToNext()) {
                 val idPublicacion = resultadoConsulta.getInt(
