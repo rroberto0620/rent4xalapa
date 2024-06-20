@@ -57,9 +57,9 @@ class RevisarPerfilActivity : AppCompatActivity() {
         binding.btnEditProfile.setOnClickListener {
             irActivityEditar()
         }
-        binding.btnBack.setOnClickListener {
+        /*binding.btnBack.setOnClickListener {
             irActivityPublicaciones()
-        }
+        }*/
 
         binding.imageButtonFavoritos.setOnClickListener {
             irActivityPublicacionesFavoritas()

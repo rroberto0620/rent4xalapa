@@ -286,7 +286,7 @@
         android:backgroundTint="@color/red_personalizado"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@id/btn_regresar"
-        android:layout_marginStart="30dp"
+        android:layout_marginStart="8dp"
         android:layout_marginBottom="16dp"
         android:layout_marginEnd="5dp" />
 

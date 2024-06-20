@@ -121,14 +121,7 @@
         android:layout_below="@id/profileContainer"
         android:layout_marginTop="45dp">
 
-        <Button
-            android:id="@+id/btnBack"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="10dp"
-            android:backgroundTint="@android:color/holo_blue_dark"
-            android:text="Regresar"
-            android:textColor="#FFFFFF" />
+
 
         <Button
             android:id="@+id/btnDeleteAccount"
