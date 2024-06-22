@@ -45,18 +45,18 @@ class EditarPerfilActivity : AppCompatActivity() {
         binding.etTelefono.setText(telefono.toString())
         binding.etIdentificacion.setText(ine)
         binding.etPerfil.setText(perfil)
-
         binding.btnBack.setOnClickListener {
             irVerPerfil()
         }
+
         binding.btnActualizar.setOnClickListener {
             if (validarCamposCorrectos()) {
                 val correo = binding.etCorreo.text.toString()
-                if (modelo.correoExiste(correo)) {
+                if (modelo.correoExiste(correo, idUsuario)) {
                     Toast.makeText(this, "El correo ya está registrado", Toast.LENGTH_LONG).show()
                 } else {
                     val usuario = Usuario(
-                        idUsuario.toInt(),
+                        idUsuario,
                         binding.etNombre.text.toString(),
                         binding.etCorreo.text.toString(),
                         binding.etContrasena.text.toString(),

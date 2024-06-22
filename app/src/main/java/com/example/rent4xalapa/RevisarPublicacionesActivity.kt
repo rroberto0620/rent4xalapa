@@ -9,6 +9,7 @@ import android.view.MotionEvent
 import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.media3.common.util.Log
 import com.bumptech.glide.Glide
 import com.example.rent4xalapa.databinding.RevisarPublicacionesBinding
 import com.example.rent4xalapa.modelo.PublicacionesBD
@@ -224,9 +225,7 @@ class RevisarPublicacionesActivity : AppCompatActivity(), OnMapReadyCallback {
 
     private fun abrirDialogoCalificar() {
         val dialog = Dialog(this)
-        dialog.setContentView(R.layout.layour_calificar)  // Asignar el layout del diálogo personalizado
-
-        // Asignar acciones a los botones de estrellas
+        dialog.setContentView(R.layout.layour_calificar)
         val btn1Estrella = dialog.findViewById<Button>(R.id.btn1Estrella)
         val btn2Estrella = dialog.findViewById<Button>(R.id.btn2Estrella)
         val btn3Estrella = dialog.findViewById<Button>(R.id.btn3Estrella)
@@ -263,7 +262,14 @@ class RevisarPublicacionesActivity : AppCompatActivity(), OnMapReadyCallback {
 
     private fun calificarConEstrellas(calificacion: Int) {
         Toast.makeText(this, "Gracias por calificar con $calificacion estrellas", Toast.LENGTH_SHORT).show()
-        // Aquí puedes realizar cualquier acción adicional con la calificación seleccionada
+        val filasAfectadas = modelo.actualizarCalificacion(idPublicacion, calificacion)
+        if (filasAfectadas > 0) {
+            Toast.makeText(this, "Calificación guardada", Toast.LENGTH_SHORT).show()
+            Log.d("RevisarPublicaciones", "Calificación actualizada: $calificacion para Publicación ID: $idPublicacion")
+        } else {
+            Toast.makeText(this, "Error al guardar la calificación", Toast.LENGTH_SHORT).show()
+            Log.e("RevisarPublicaciones", "Error al actualizar calificación para Publicación ID: $idPublicacion")
+        }
     }
 
 

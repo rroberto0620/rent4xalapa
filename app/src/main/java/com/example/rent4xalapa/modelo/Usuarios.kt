@@ -115,10 +115,20 @@ class Usuarios (contexto: Context) : SQLiteOpenHelper(contexto, NOMBRE_BD,null, 
         return resultado
     }
 
-    fun correoExiste(correo: String): Boolean {
+    fun correoExiste(correo: String, idUsuario: Int? = null): Boolean {
         val db = readableDatabase
+        val selection = if (idUsuario != null) {
+            "$COL_CORREO = ? AND $COL_ID_USUARIO != ?"
+        } else {
+            "$COL_CORREO = ?"
+        }
+        val selectionArgs = if (idUsuario != null) {
+            arrayOf(correo, idUsuario.toString())
+        } else {
+            arrayOf(correo)
+        }
         val cursor = db.query(
-            NOMBRE_TABLA, arrayOf(COL_CORREO), "$COL_CORREO = ?", arrayOf(correo),
+            NOMBRE_TABLA, arrayOf(COL_CORREO), selection, selectionArgs,
             null, null, null
         )
         val existe = cursor.count > 0
