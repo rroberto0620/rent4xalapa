@@ -3,16 +3,13 @@ package com.example.rent4xalapa
 import android.annotation.SuppressLint
 import android.app.Dialog
 import android.os.Bundle
-import android.content.DialogInterface
 import android.content.Intent
 import android.net.Uri
 import android.view.MotionEvent
 import android.widget.Button
-import androidx.appcompat.app.AlertDialog
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
-import com.example.rent4xalapa.databinding.RevisarPerfilBinding
 import com.example.rent4xalapa.databinding.RevisarPublicacionesBinding
 import com.example.rent4xalapa.modelo.PublicacionesBD
 import com.example.rent4xalapa.modelo.Usuarios
@@ -195,16 +192,13 @@ class RevisarPublicacionesActivity : AppCompatActivity(), OnMapReadyCallback {
 
         // Agregar un marcador inicial en una ubicación predeterminada
         val initialLocation = LatLng(latitud,longitud) // Reemplaza con la ubicación deseada
-        val initialMarker = map.addMarker(MarkerOptions().position(initialLocation).title("Marcador inicial"))
+        val initialMarker = map.addMarker(MarkerOptions().position(initialLocation).title("$titulo"))
         map.moveCamera(CameraUpdateFactory.newLatLngZoom(initialLocation, 15f))
 
-        map.setOnMapClickListener { latLng ->
-            // Obtener la latitud y longitud donde se hizo clic
-            val latitude = latLng.latitude
-            val longitude = latLng.longitude
-            Toast.makeText(this, "Latitud: $latitude, Longitud: $longitude", Toast.LENGTH_LONG).show()
+        map.setOnMapClickListener {
+            Toast.makeText(this, "Latitud: $latitud, Longitud: $longitud", Toast.LENGTH_LONG).show()
             // Redirigir a Google Maps con la ubicación clicada
-            openGoogleMaps(latitude, longitude)
+            openGoogleMaps(latitud, longitud)
         }
     }
 
@@ -330,6 +324,10 @@ class RevisarPublicacionesActivity : AppCompatActivity(), OnMapReadyCallback {
         intent.putExtra("telefono",telefono)
         intent.putExtra("ine",ine)
         intent.putExtra("perfil",perfil)
+        intent.putExtra("titulo",titulo)
+        intent.putExtra("direccion",direccion)
+        intent.putExtra("latitud",latitud)
+        intent.putExtra("longitud",longitud)
         startActivity(intent)
     }
 }

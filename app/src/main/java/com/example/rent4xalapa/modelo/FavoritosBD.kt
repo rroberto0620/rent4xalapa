@@ -59,14 +59,9 @@ class FavoritosBD (contexto: Context) : SQLiteOpenHelper(contexto, FavoritosBD.N
             arrayOf(idUsuario),null,null,null)
         if(resultadoConsulta !=null) {
             while (resultadoConsulta.moveToNext()) {
-                val idFavorito = resultadoConsulta.getInt(resultadoConsulta.getColumnIndex(
-                    COL_ID_FAVORITO)
-                )
+                val idFavorito = resultadoConsulta.getInt(resultadoConsulta.getColumnIndex(COL_ID_FAVORITO))
                 val idPublicacion = resultadoConsulta.getInt(
-                    resultadoConsulta.getColumnIndex(
-                        COL_ID_PUBLICACION
-                    )
-                )
+                    resultadoConsulta.getColumnIndex(COL_ID_PUBLICACION))
                 val idUsuario =
                     resultadoConsulta.getInt(resultadoConsulta.getColumnIndex(COL_ID_USUARIO))
                 val favorito = Favorito(

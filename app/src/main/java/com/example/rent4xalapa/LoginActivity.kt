@@ -16,6 +16,7 @@ private lateinit var db : Usuarios
 private lateinit var array: ArrayList<Usuario>
 private lateinit var publicacionesDB: PublicacionesBD
 private lateinit var favoritosDB: FavoritosBD
+private lateinit var usuariosDB:Usuarios
 
 class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,6 +30,8 @@ class LoginActivity : AppCompatActivity() {
         publicacionesDB.crearTabla()
 //        favoritosDB = FavoritosBD(this@LoginActivity)
 //        favoritosDB.eliminarTabla()
+//        usuariosDB = Usuarios(this@LoginActivity)
+//        usuariosDB.eliminarTabla()
       db.crearTabla()
         array = arrayListOf<Usuario>()
         array = db.seleccionarUsuarios()

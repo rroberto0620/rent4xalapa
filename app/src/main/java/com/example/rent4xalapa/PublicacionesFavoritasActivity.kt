@@ -3,6 +3,7 @@ package com.example.rent4xalapa
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -72,6 +73,7 @@ class PublicacionesFavoritasActivity : AppCompatActivity(), ListenerRecyclerPubl
     }
 
     fun cargarMisPublicacionesFavoritas(){
+        Log.d("msjCargarPublicaciones",idUsuario.toString())
         val favoritos = modeloFavoritos.obtenerPublicaciones(idUsuario.toString())
         val publicaciones = modeloPublicaciones.obtenerPublicaciones(favoritos)
         if(publicaciones.size > 0){
