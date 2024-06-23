@@ -49,6 +49,7 @@ dependencies {
 
     implementation ("com.github.bumptech.glide:glide:4.14.2")
     implementation(libs.androidx.material3.android)
+    implementation(libs.androidx.media3.common)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

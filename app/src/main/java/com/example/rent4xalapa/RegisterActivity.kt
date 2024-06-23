@@ -25,8 +25,8 @@ class RegisterActivity : AppCompatActivity() {
         setContentView(view)
         modelo = Usuarios(this)
 
-        binding.btnRegistrarse.setOnClickListener{
-            if(validarCamposCorrectos()){
+        binding.btnRegistrarse.setOnClickListener {
+            if (validarCamposCorrectos()) {
                 val correo = binding.etEmail.text.toString()
                 if (modelo.correoExiste(correo)) {
                     Toast.makeText(this, "El correo ya está registrado", Toast.LENGTH_LONG).show()

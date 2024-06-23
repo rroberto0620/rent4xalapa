@@ -221,4 +221,13 @@ class PublicacionesBD (contexto: Context) : SQLiteOpenHelper(contexto, NOMBRE_BD
         return resultado
     }
 
+    fun actualizarCalificacion(idPublicacion: Int, calificacion: Int): Int {
+        val db = writableDatabase
+        val contentValues = ContentValues()
+        contentValues.put(COL_CALIFICACION, calificacion)
+        val filasAfectadas = db.update(NOMBRE_TABLA, contentValues, "$COL_ID_PUBLICACION=?", arrayOf(idPublicacion.toString()))
+        db.close()
+        return filasAfectadas
+    }
+
 }
