@@ -56,6 +56,7 @@ class RealizarCitaActivity :AppCompatActivity(), OnMapReadyCallback {
         modelo = ReservacionBD(this@RealizarCitaActivity)
         modelo.crearTabla()
 
+        idUsuario = intent.getIntExtra("idUsuario",0)
         nombre = intent.getStringExtra("nombre")!!
         telefono = intent.getLongExtra("telefono",0)
         titulo = intent.getStringExtra("titulo")!!

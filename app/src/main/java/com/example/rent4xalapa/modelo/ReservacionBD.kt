@@ -54,11 +54,9 @@ override fun onCreate(p0: SQLiteDatabase?) {
     fun seleccionarReservacion(idUsuario: String): List<Reservacion> {
         val misReservaciones = mutableListOf<Reservacion>()
         val db = readableDatabase
-        if (db == null || !db.isOpen) {
-            Log.e("seleccionarReservacion", "La base de datos no está abierta o no se pudo abrir.")
-            return misReservaciones
-        }
-        val resultadoConsulta: Cursor? = db.query(NOMBRE_TABLA, null, "$COL_ID_USUARIO = ?", arrayOf(idUsuario), null, null, null)
+        val selection = "$COL_ID_USUARIO = ?"
+        val selectionArgs = arrayOf(idUsuario)
+        val resultadoConsulta: Cursor? = db.query(NOMBRE_TABLA, null, selection, selectionArgs, null, null, null)
         if (resultadoConsulta != null) {
             while (resultadoConsulta.moveToNext()) {
                 val idReservacion = resultadoConsulta.getInt(resultadoConsulta.getColumnIndex(COL_ID_RESERVACION))
@@ -76,4 +74,27 @@ override fun onCreate(p0: SQLiteDatabase?) {
         db.close()
         return misReservaciones
     }
+
+//    @SuppressLint("Range")
+//    fun seleccionarReservacion(): List<Reservacion> {
+//        val misReservaciones = mutableListOf<Reservacion>()
+//        val db = readableDatabase
+//        val resultadoConsulta: Cursor? = db.query(NOMBRE_TABLA, null, null, null, null, null, null)
+//        if (resultadoConsulta != null) {
+//            while (resultadoConsulta.moveToNext()) {
+//                val idReservacion = resultadoConsulta.getInt(resultadoConsulta.getColumnIndex(COL_ID_RESERVACION))
+//                val fecha = resultadoConsulta.getString(resultadoConsulta.getColumnIndex(COL_FECHA))
+//                val hora = resultadoConsulta.getString(resultadoConsulta.getColumnIndex(COL_HORA))
+//                val idUsuario = resultadoConsulta.getInt(resultadoConsulta.getColumnIndex(COL_ID_USUARIO))
+//                val idPublicacion = resultadoConsulta.getInt(resultadoConsulta.getColumnIndex(COL_ID_PUBLICACION))
+//                val reservacion = Reservacion(idReservacion,fecha,hora,idUsuario,idPublicacion)
+//                Log.d("msjReservacionConsulta","reservacion ${reservacion.idReservacion} ${reservacion.idPublicacion} ${reservacion.fecha}")
+//                misReservaciones.add(reservacion)
+//            }
+//            Log.d("msj", resultadoConsulta.count.toString())
+//            resultadoConsulta.close()
+//        }
+//        db.close()
+//        return misReservaciones
+//    }
 }

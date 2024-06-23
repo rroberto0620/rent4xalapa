@@ -181,7 +181,7 @@ class PrincipalPublicacionesActivity: AppCompatActivity(), ListenerRecyclerPubli
     }
 
     override fun clicFavoritoPublicacion(publicacion: Publicacion, posicion: Int) {
-        modeloFavoritos.agregarFavorito(publicacion)
+        modeloFavoritos.agregarFavorito(publicacion,idUsuario)
         Toast.makeText(this@PrincipalPublicacionesActivity, "Se agrego ${publicacion.titulo} a favorito ", Toast.LENGTH_LONG).show()
     }
 

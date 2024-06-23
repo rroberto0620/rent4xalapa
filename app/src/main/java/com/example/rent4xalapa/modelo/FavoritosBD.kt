@@ -39,11 +39,11 @@ class FavoritosBD (contexto: Context) : SQLiteOpenHelper(contexto, FavoritosBD.N
         db!!.execSQL(ELIMINAR_TABLA)
     }
 
-    fun agregarFavorito(favorito: Publicacion):Long{
+    fun agregarFavorito(favorito: Publicacion,idUsuario:Int):Long{
         val db= writableDatabase
         val contentValue = ContentValues()
         contentValue.put(COL_ID_PUBLICACION, favorito.idPublicacion)
-        contentValue.put(COL_ID_USUARIO,favorito.idUsuario)
+        contentValue.put(COL_ID_USUARIO,idUsuario)
         val filasAfectadas = db.insert(NOMBRE_TABLA,null,contentValue)
         Log.d("mensaje", filasAfectadas.toString())
         db.close()

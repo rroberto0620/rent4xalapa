@@ -5,11 +5,11 @@ import android.app.Dialog
 import android.os.Bundle
 import android.content.Intent
 import android.net.Uri
+import android.util.Log
 import android.view.MotionEvent
 import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.media3.common.util.Log
 import com.bumptech.glide.Glide
 import com.example.rent4xalapa.databinding.RevisarPublicacionesBinding
 import com.example.rent4xalapa.modelo.PublicacionesBD
