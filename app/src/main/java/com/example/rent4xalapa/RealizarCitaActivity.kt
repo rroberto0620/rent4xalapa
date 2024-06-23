@@ -4,15 +4,21 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.rent4xalapa.databinding.RealizarCitaBinding
+import com.example.rent4xalapa.modelo.ReservacionBD
+import com.example.rent4xalapa.poko.Publicacion
+import com.example.rent4xalapa.poko.Reservacion
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
+import java.util.Calendar
+import java.util.TimeZone
 
 class RealizarCitaActivity :AppCompatActivity(), OnMapReadyCallback {
 
@@ -32,11 +38,23 @@ class RealizarCitaActivity :AppCompatActivity(), OnMapReadyCallback {
     private var longitud = 0.0
     private var latitud = 0.0
 
+    private var dayExt = 0
+    private var monthExt = 0
+    private var yearExt = 0
+
+    private var hora = 0
+    private var minuto = 0
+
+    private lateinit var modelo : ReservacionBD
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = RealizarCitaBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
+
+        modelo = ReservacionBD(this@RealizarCitaActivity)
+        modelo.crearTabla()
 
         nombre = intent.getStringExtra("nombre")!!
         telefono = intent.getLongExtra("telefono",0)
@@ -60,19 +78,72 @@ class RealizarCitaActivity :AppCompatActivity(), OnMapReadyCallback {
         }
 
         binding.btnAceptar.setOnClickListener {
-            Toast.makeText(this@RealizarCitaActivity, "Se realizo la cita ", Toast.LENGTH_LONG).show()
-            finish()
+            Log.d("mensajeCitaValores","$dayExt/$monthExt/$yearExt")
+            if (validarCamposCorrectos()) {
+                val nuevaCita = crearCita()
+                if (nuevaCita != null) {
+                    agregarCita(nuevaCita)
+                    añadirEvento()
+                    Toast.makeText(this@RealizarCitaActivity, "Se realizo la cita ", Toast.LENGTH_LONG).show()
+                    finish()
+                }
+            }
         }
         createFragment()
     }
 
+    fun validarCamposCorrectos():Boolean{
+        var valido = true
+        if (binding.etFecha.text.isEmpty()){
+            binding.etFecha.setError("La fecha es obligatorio")
+            valido = false
+        }
+        if (binding.etHora.text.isEmpty()){
+            binding.etHora.setError("La hora es obligatorio")
+            valido = false
+        }
+        return valido
+    }
+
+
+    private fun crearCita(): Reservacion? {
+        return try {
+            Reservacion(
+                idReservacion = 0,
+                fecha = binding.etFecha.text.toString(),
+                hora = binding.etHora.text.toString(),
+                idPublicacion = 0,
+                idUsuario = idUsuario
+            )
+        } catch (e: NumberFormatException) {
+
+            Toast.makeText(this, "Error en los datos ingresados", Toast.LENGTH_SHORT).show()
+            null
+        }
+    }
+
+    fun agregarCita(reservacion : Reservacion){
+        val resultadoInsercion = modelo.agregarReservacion(reservacion)
+        var mensaje = ""
+        if (resultadoInsercion>0){
+            mensaje = "Cita registrada "
+        }else{
+            mensaje = "Hubo un error al guardar la cita"
+
+        }
+        Toast.makeText(this@RealizarCitaActivity, mensaje+reservacion.idReservacion, Toast.LENGTH_LONG).show()
+    }
+
     private fun showTimePickerDialog() {
-        val timePicker = TimePickerFragment{onTimeSelected(it)}
+        val timePicker = TimePickerFragment{time,hourOfDay,minute -> onTimeSelected(time,hourOfDay,minute)}
         timePicker.show(supportFragmentManager,"time")
     }
 
-    private fun onTimeSelected(time:String){
+    private fun onTimeSelected(time:String,hourOfDay:Int,minute:Int){
         binding.etHora.setText("$time")
+        hora = hourOfDay
+        minuto = minute
+
     }
 
     private fun showDatePickerDialog() {
@@ -82,25 +153,31 @@ class RealizarCitaActivity :AppCompatActivity(), OnMapReadyCallback {
 
     fun onDateSelected(day:Int, month:Int,year:Int){
         binding.etFecha.setText("$day/$month/$year")
+        dayExt = day
+        monthExt = month
+        yearExt = year
     }
 
-//    private fun addEventToCalendar() {
-//        val calendar = Calendar.getInstance()
-//        calendar.add(Calendar.SECOND, 10) // Configura la hora del recordatorio (ejemplo: 10 segundos desde ahora)
-//
-//        val intent = Intent(Intent.ACTION_INSERT).apply {
-//            data = android.provider.CalendarContract.Events.CONTENT_URI
-//            putExtra(android.provider.CalendarContract.Events.TITLE, titulo)
-//            putExtra(android.provider.CalendarContract.Events.DESCRIPTION, "Cita para acudir a revisar la casa en $direccion")
-//            putExtra(android.provider.CalendarContract.Events.EVENT_LOCATION, "$direccion")
-//            putExtra(android.provider.CalendarContract.EXTRA_EVENT_BEGIN_TIME, calendar.timeInMillis)
-//            putExtra(android.provider.CalendarContract.EXTRA_EVENT_END_TIME, calendar.timeInMillis + 60 * 60 * 1000) // Duración de una hora
-//        }
-//
-//        if (intent.resolveActivity(packageManager) != null) {
-//            startActivity(intent)
-//        }
-//    }
+    private fun añadirEvento() {
+        val beginCalendar = Calendar.getInstance()
+        beginCalendar.set(yearExt, monthExt, dayExt, hora, minuto)
+
+        val endCalendar = Calendar.getInstance()
+        endCalendar.set(yearExt, monthExt, dayExt, hora+1, minuto)
+
+        val intent = Intent(Intent.ACTION_INSERT).apply {
+            data = android.provider.CalendarContract.Events.CONTENT_URI
+            putExtra(android.provider.CalendarContract.Events.TITLE, "Cita $titulo")
+            putExtra(android.provider.CalendarContract.Events.DESCRIPTION, "Recordatorio de una cita para acudir a revisar la casa en $direccion")
+            putExtra(android.provider.CalendarContract.Events.EVENT_LOCATION, direccion)
+            putExtra(android.provider.CalendarContract.EXTRA_EVENT_BEGIN_TIME, beginCalendar.timeInMillis)
+            putExtra(android.provider.CalendarContract.EXTRA_EVENT_END_TIME, endCalendar.timeInMillis)
+            putExtra(android.provider.CalendarContract.Events.CALENDAR_ID, 1)  // Especifica el ID del calendario si es necesario
+            putExtra(android.provider.CalendarContract.Events.EVENT_TIMEZONE, TimeZone.getDefault().id)
+        }
+        intent.setPackage("com.google.android.calendar")
+        startActivity(intent)
+    }
 
     private fun createFragment(){
         val mapFragment: SupportMapFragment = supportFragmentManager.findFragmentById(R.id.frag_ubicacion3) as SupportMapFragment
@@ -138,7 +215,7 @@ class RealizarCitaActivity :AppCompatActivity(), OnMapReadyCallback {
             mapIntent.setPackage("com.google.android.apps.maps")
             startActivity(mapIntent)
         } catch (e: Exception) {
-            Toast.makeText(this, "No se pudo abrir Google Maps, abriendo en el navegador", Toast.LENGTH_LONG).show()
+            Toast.makeText(this, "No se pudo abrir Google Maps, abriendo en el navegador...", Toast.LENGTH_LONG).show()
             openGoogleMapsInBrowser(latitude, longitude)
         }
     }

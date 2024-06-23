@@ -80,10 +80,12 @@ class PublicacionesBD (contexto: Context) : SQLiteOpenHelper(contexto, NOMBRE_BD
     }
 
     @SuppressLint("Range")
-    fun seleccionarPublicaciones() : List<Publicacion>{
+    fun seleccionarPublicaciones(idUsuario:Int) : List<Publicacion>{
         val publicaciones = mutableListOf<Publicacion>()
         val db = readableDatabase
-        val resultadoConsulta : Cursor? = db.query(NOMBRE_TABLA,null,null,null,null,null,null)
+        val selection = "$COL_ID_USUARIO != ?"
+        val selectionArgs = arrayOf(idUsuario.toString())
+        val resultadoConsulta : Cursor? = db.query(NOMBRE_TABLA,null,selection,selectionArgs,null,null,null)
         if(resultadoConsulta !=null){
             while(resultadoConsulta.moveToNext()){
                 val idPublicacion = resultadoConsulta.getInt(resultadoConsulta.getColumnIndex(

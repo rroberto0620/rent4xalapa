@@ -79,7 +79,7 @@ class PrincipalPublicacionesActivity: AppCompatActivity(), ListenerRecyclerPubli
     }
 
     fun cargarMisPublicaciones(){
-        val publicaciones = modeloPublicaciones.seleccionarPublicaciones()
+        val publicaciones = modeloPublicaciones.seleccionarPublicaciones(idUsuario)
         if(publicaciones.size > 0){
             binding.recyclerPublicaciones.visibility = View.VISIBLE
             binding.recyclerPublicaciones.adapter = PublicacionesAdapter(publicaciones,this)

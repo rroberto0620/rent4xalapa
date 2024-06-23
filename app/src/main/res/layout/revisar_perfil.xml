@@ -139,6 +139,14 @@
             android:backgroundTint="@android:color/holo_blue_dark"
             android:text="Cerrar sesión"
             android:textColor="#FFFFFF" />
+
+        <Button
+            android:id="@+id/btn_citas"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@android:color/holo_blue_dark"
+            android:text="Citas"
+            android:textColor="#FFFFFF" />
     </LinearLayout>
 
     <LinearLayout

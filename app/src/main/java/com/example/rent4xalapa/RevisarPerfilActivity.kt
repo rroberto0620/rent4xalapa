@@ -45,8 +45,6 @@ class RevisarPerfilActivity : AppCompatActivity() {
         ine = intent.getStringExtra("ine")!!
         perfil = intent.getStringExtra("perfil")!!
 
-
-
         binding.tvName.setText("Nombre: "+"$nombre")
         binding.tvTelefono.setText("Teléfono: "+"$telefono")
         binding.tvEmail.setText("Correo: "+"$correo")
@@ -77,6 +75,9 @@ class RevisarPerfilActivity : AppCompatActivity() {
         }
         binding.btnCerrarSesion.setOnClickListener {
             irPantallaLogin()
+        }
+        binding.btnCitas.setOnClickListener {
+            irActivityAdministrarReservaciones()
         }
     }
 
@@ -206,6 +207,35 @@ class RevisarPerfilActivity : AppCompatActivity() {
 
     fun irPantallaRealizarPublicacion(idUsuario:Int,nombre:String, correo:String , contrasena:String , telefono:Long , ine:String,perfil:String){
         val intent = Intent(this@RevisarPerfilActivity,RealizarPublicacionesActivity::class.java)
+        intent.putExtra("idUsuario",idUsuario)
+        intent.putExtra("nombre",nombre)
+        intent.putExtra("correo",correo)
+        intent.putExtra("contrasena",contrasena)
+        intent.putExtra("telefono",telefono)
+        intent.putExtra("ine",ine)
+        intent.putExtra("perfil",perfil)
+        startActivity(intent)
+    }
+
+    fun irActivityAdministrarReservaciones(){
+        for (usuario in array) {
+            if (usuario.correo == correo && usuario.contrasena == contrasena) {
+                irPantallaAdministrarReservaciones(
+                    usuario.idUsuario,
+                    usuario.nombre,
+                    usuario.correo,
+                    usuario.contrasena,
+                    usuario.telefono,
+                    usuario.ine,
+                    usuario.perfil
+                )
+                break  // Salir del bucle una vez encontrado el usuario
+            }
+        }
+    }
+
+    fun irPantallaAdministrarReservaciones(idUsuario:Int,nombre:String, correo:String , contrasena:String , telefono:Long , ine:String,perfil:String){
+        val intent = Intent(this@RevisarPerfilActivity,AdministrarReservacionesActivity::class.java)
         intent.putExtra("idUsuario",idUsuario)
         intent.putExtra("nombre",nombre)
         intent.putExtra("correo",correo)

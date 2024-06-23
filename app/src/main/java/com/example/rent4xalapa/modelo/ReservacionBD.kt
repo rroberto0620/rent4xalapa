@@ -1,9 +1,12 @@
 package com.example.rent4xalapa.modelo
 
+import android.annotation.SuppressLint
 import android.content.ContentValues
 import android.content.Context
+import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
+import android.util.Log
 import com.example.rent4xalapa.poko.Publicacion
 import com.example.rent4xalapa.poko.Reservacion
 
@@ -42,7 +45,35 @@ override fun onCreate(p0: SQLiteDatabase?) {
         contentValue.put(COL_ID_PUBLICACION, reservacion.idPublicacion)
         contentValue.put(COL_ID_USUARIO,reservacion.idUsuario)
         val filasAfectadas = db.insert(NOMBRE_TABLA,null,contentValue)
+        Log.d("mensajeReservacion", filasAfectadas.toString())
         db.close()
         return filasAfectadas
+    }
+
+    @SuppressLint("Range")
+    fun seleccionarReservacion(idUsuario: String): List<Reservacion> {
+        val misReservaciones = mutableListOf<Reservacion>()
+        val db = readableDatabase
+        if (db == null || !db.isOpen) {
+            Log.e("seleccionarReservacion", "La base de datos no está abierta o no se pudo abrir.")
+            return misReservaciones
+        }
+        val resultadoConsulta: Cursor? = db.query(NOMBRE_TABLA, null, "$COL_ID_USUARIO = ?", arrayOf(idUsuario), null, null, null)
+        if (resultadoConsulta != null) {
+            while (resultadoConsulta.moveToNext()) {
+                val idReservacion = resultadoConsulta.getInt(resultadoConsulta.getColumnIndex(COL_ID_RESERVACION))
+                val fecha = resultadoConsulta.getString(resultadoConsulta.getColumnIndex(COL_FECHA))
+                val hora = resultadoConsulta.getString(resultadoConsulta.getColumnIndex(COL_HORA))
+                val idUsuario = resultadoConsulta.getInt(resultadoConsulta.getColumnIndex(COL_ID_USUARIO))
+                val idPublicacion = resultadoConsulta.getInt(resultadoConsulta.getColumnIndex(COL_ID_PUBLICACION))
+                val reservacion = Reservacion(idReservacion,fecha,hora,idUsuario,idPublicacion)
+                Log.d("msjReservacionConsulta","reservacion ${reservacion.idReservacion} ${reservacion.idPublicacion} ${reservacion.fecha}")
+                misReservaciones.add(reservacion)
+            }
+            Log.d("msj", resultadoConsulta.count.toString())
+            resultadoConsulta.close()
+        }
+        db.close()
+        return misReservaciones
     }
 }
