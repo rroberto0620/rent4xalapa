@@ -115,6 +115,7 @@ class RevisarPublicacionesActivity : AppCompatActivity(), OnMapReadyCallback {
         binding.tvTipo.setText("Tipo: "+"$tipo")
         binding.tvNumHabitaciones.setText("Numero de habitaciones: "+"$numHabitaciones")
         binding.tvCosto.setText("Costo: "+"$costo")
+        binding.tvCalificacion.setText("Calificacion: "+"$calificacion")
         //Pet Friendly
         if (petFriendly == 1){
             binding.tvPetFriendly.setText("Pet Friendly: Si")
