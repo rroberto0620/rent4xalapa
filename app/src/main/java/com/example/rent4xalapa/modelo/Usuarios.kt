@@ -7,6 +7,9 @@ import android.content.Context
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
+import android.util.Log
+import com.example.rent4xalapa.poko.Publicacion
+import com.example.rent4xalapa.poko.Reservacion
 import com.example.rent4xalapa.poko.Usuario
 
 
@@ -82,6 +85,36 @@ class Usuarios (contexto: Context) : SQLiteOpenHelper(contexto, NOMBRE_BD,null, 
                 val ine=resultadoConsulta.getString(resultadoConsulta.getColumnIndex(COL_INE))
                 val perfil = resultadoConsulta.getString(resultadoConsulta.getColumnIndex(COL_PERFIL))
 
+                val usuario = Usuario(idUsuario,nombre,correo,contrasena,telefono,ine,perfil)
+                misUsuarios.add(usuario)
+            }
+            resultadoConsulta.close()
+        }
+        db.close()
+        return misUsuarios
+    }
+
+    @SuppressLint("Range")
+    fun seleccionarUsuariosReservacion(reservaciones: List<Publicacion>) : List<Usuario>{
+        val misUsuarios = mutableListOf<Usuario>()
+        val db = readableDatabase
+        val idPublicacionString = reservaciones.joinToString(",") { it.idUsuario.toString() }
+        val query = "SELECT * FROM $NOMBRE_TABLA WHERE $COL_ID_USUARIO IN ($idPublicacionString)"
+        Log.d("SQL_QUERY", "Query: $query")
+        val resultadoConsulta: Cursor = db.rawQuery(query, null)
+        if (resultadoConsulta != null){
+            while (resultadoConsulta.moveToNext()){
+                val idUsuario = resultadoConsulta.getInt(resultadoConsulta.getColumnIndex(
+                    COL_ID_USUARIO))
+                val nombre = resultadoConsulta.getString(resultadoConsulta.getColumnIndex(COL_NOMBRE))
+                val correo = resultadoConsulta.getString(resultadoConsulta.getColumnIndex(
+                    COL_CORREO))
+                val contrasena =resultadoConsulta.getString(resultadoConsulta.getColumnIndex(
+                    COL_CONTRASENA))
+                val telefono = resultadoConsulta.getLong(resultadoConsulta.getColumnIndex(
+                    COL_TELEFONO))
+                val ine=resultadoConsulta.getString(resultadoConsulta.getColumnIndex(COL_INE))
+                val perfil = resultadoConsulta.getString(resultadoConsulta.getColumnIndex(COL_PERFIL))
 
                 val usuario = Usuario(idUsuario,nombre,correo,contrasena,telefono,ine,perfil)
                 misUsuarios.add(usuario)
@@ -90,6 +123,38 @@ class Usuarios (contexto: Context) : SQLiteOpenHelper(contexto, NOMBRE_BD,null, 
         }
         db.close()
         return misUsuarios
+    }
+
+    @SuppressLint("Range")
+    fun obtenerDatosUsuario(idUsuario: Int) : Usuario?{
+        val db = readableDatabase
+
+        // Añade la condición WHERE para filtrar por idUsuario específico
+        val selection = "$COL_ID_USUARIO = ?"
+        val selectionArgs = arrayOf(idUsuario.toString())
+
+        var usuario: Usuario? = null
+        val resultadoConsulta: Cursor = db.query(NOMBRE_TABLA, null, selection, selectionArgs, null, null, null)
+        if (resultadoConsulta != null){
+            while (resultadoConsulta.moveToNext()){
+                val idUsuario = resultadoConsulta.getInt(resultadoConsulta.getColumnIndex(
+                    COL_ID_USUARIO))
+                val nombre = resultadoConsulta.getString(resultadoConsulta.getColumnIndex(COL_NOMBRE))
+                val correo = resultadoConsulta.getString(resultadoConsulta.getColumnIndex(
+                    COL_CORREO))
+                val contrasena =resultadoConsulta.getString(resultadoConsulta.getColumnIndex(
+                    COL_CONTRASENA))
+                val telefono = resultadoConsulta.getLong(resultadoConsulta.getColumnIndex(
+                    COL_TELEFONO))
+                val ine=resultadoConsulta.getString(resultadoConsulta.getColumnIndex(COL_INE))
+                val perfil = resultadoConsulta.getString(resultadoConsulta.getColumnIndex(COL_PERFIL))
+
+                usuario = Usuario(idUsuario,nombre,correo,contrasena,telefono,ine,perfil)
+            }
+            resultadoConsulta.close()
+        }
+        db.close()
+        return usuario
     }
 
 

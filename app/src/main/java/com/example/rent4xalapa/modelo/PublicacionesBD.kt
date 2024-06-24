@@ -6,8 +6,11 @@ import android.content.Context
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
+import android.util.Log
 import com.example.rent4xalapa.poko.Favorito
 import com.example.rent4xalapa.poko.Publicacion
+import com.example.rent4xalapa.poko.Reservacion
+import com.example.rent4xalapa.poko.Usuario
 
 class PublicacionesBD (contexto: Context) : SQLiteOpenHelper(contexto, NOMBRE_BD,null, VERSION_BD){
 
@@ -122,13 +125,108 @@ class PublicacionesBD (contexto: Context) : SQLiteOpenHelper(contexto, NOMBRE_BD
         return publicaciones
     }
 
+
+
     @SuppressLint("Range")
     fun obtenerPublicaciones(idPublicacion: List<Favorito>): List<Publicacion>{
         val publicaciones = mutableListOf<Publicacion>()
         val db = readableDatabase
         val idPublicacionString = idPublicacion.joinToString(",") { it.idPublicacion.toString() }
         val query = "SELECT * FROM $NOMBRE_TABLA WHERE $COL_ID_PUBLICACION IN ($idPublicacionString)"
+        Log.d("SQL_QUERY", "Query: $query")
+        val resultadoConsulta: Cursor = db.rawQuery(query, null)
+        if(resultadoConsulta !=null) {
+            while (resultadoConsulta.moveToNext()) {
+                val idPublicacion = resultadoConsulta.getInt(
+                    resultadoConsulta.getColumnIndex(
+                        COL_ID_PUBLICACION
+                    )
+                )
+                val titulo =
+                    resultadoConsulta.getString(resultadoConsulta.getColumnIndex(COL_TITULO))
+                val descripcion = resultadoConsulta.getString(
+                    resultadoConsulta.getColumnIndex(
+                        COL_DESCRIPCION
+                    )
+                )
+                val direccion = resultadoConsulta.getString(
+                    resultadoConsulta.getColumnIndex(
+                        COL_DIRECCION
+                    )
+                )
+                val tipo = resultadoConsulta.getString(resultadoConsulta.getColumnIndex(COL_TIPO))
+                val numHabitaciones = resultadoConsulta.getInt(
+                    resultadoConsulta.getColumnIndex(
+                        COL_NUM_HABITACIONES
+                    )
+                )
+                val costo = resultadoConsulta.getDouble(resultadoConsulta.getColumnIndex(COL_COSTO))
+                val petFriendly = resultadoConsulta.getInt(
+                    resultadoConsulta.getColumnIndex(
+                        COL_PET_FRIENDLY
+                    )
+                )
+                val servicios =
+                    resultadoConsulta.getInt(resultadoConsulta.getColumnIndex(COL_SERVICIOS))
+                val amueblado =
+                    resultadoConsulta.getInt(resultadoConsulta.getColumnIndex(COL_AMUEBLADO))
+                val entradaCompartida = resultadoConsulta.getInt(
+                    resultadoConsulta.getColumnIndex(
+                        COL_ENTRADA_COMPARTIDA
+                    )
+                )
+                val cochera =
+                    resultadoConsulta.getInt(resultadoConsulta.getColumnIndex(COL_COCHERA))
+                val aire = resultadoConsulta.getInt(resultadoConsulta.getColumnIndex(COL_AIRE))
+                val imagenes =
+                    resultadoConsulta.getString(resultadoConsulta.getColumnIndex(COL_IMAGENES))
+                val longitud =
+                    resultadoConsulta.getDouble(resultadoConsulta.getColumnIndex(COL_LONGITUD))
+                val latitud =
+                    resultadoConsulta.getDouble(resultadoConsulta.getColumnIndex(COL_LATITUD))
+                val califiacion = resultadoConsulta.getInt(
+                    resultadoConsulta.getColumnIndex(
+                        COL_CALIFICACION
+                    )
+                )
+                val idUsuario =
+                    resultadoConsulta.getInt(resultadoConsulta.getColumnIndex(COL_ID_USUARIO))
+                val publicacion = Publicacion(
+                    idPublicacion,
+                    titulo,
+                    descripcion,
+                    direccion,
+                    tipo,
+                    numHabitaciones,
+                    costo,
+                    petFriendly,
+                    servicios,
+                    amueblado,
+                    entradaCompartida,
+                    cochera,
+                    aire,
+                    imagenes,
+                    longitud,
+                    latitud,
+                    califiacion,
+                    idUsuario
+                )
+                publicaciones.add(publicacion)
+            }
+            resultadoConsulta.close()
+        }
+        db.close()
+        return publicaciones
+    }
 
+    @SuppressLint("Range")
+    fun obtenerPublicacionesReservacion(reservaciones: List<Reservacion>): List<Publicacion>{
+        val publicaciones = mutableListOf<Publicacion>()
+        Log.d("sizeReservaciones",reservaciones.size.toString())
+        val db = readableDatabase
+        val idPublicacionString = reservaciones.joinToString(",") { it.idPublicacion.toString() }
+        val query = "SELECT * FROM $NOMBRE_TABLA WHERE $COL_ID_PUBLICACION IN ($idPublicacionString)"
+        Log.d("SQL_QUERY", "Query: $query")
         val resultadoConsulta: Cursor = db.rawQuery(query, null)
         if(resultadoConsulta !=null) {
             while (resultadoConsulta.moveToNext()) {

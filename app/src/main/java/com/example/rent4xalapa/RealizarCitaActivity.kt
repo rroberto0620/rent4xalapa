@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.rent4xalapa.databinding.RealizarCitaBinding
 import com.example.rent4xalapa.modelo.ReservacionBD
+import com.example.rent4xalapa.modelo.Usuarios
 import com.example.rent4xalapa.poko.Publicacion
 import com.example.rent4xalapa.poko.Reservacion
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -24,6 +25,8 @@ class RealizarCitaActivity :AppCompatActivity(), OnMapReadyCallback {
 
     private lateinit var binding : RealizarCitaBinding
     private lateinit var map: GoogleMap
+
+    private var idUsuarioPub = 0
     private var idUsuario= 0
     private var nombre = ""
     private var correo = ""
@@ -32,6 +35,7 @@ class RealizarCitaActivity :AppCompatActivity(), OnMapReadyCallback {
     private var ine = ""
     private var perfil = ""
 
+    private var idPublicacion = 0
     private var titulo = ""
     private var direccion = ""
 
@@ -46,6 +50,7 @@ class RealizarCitaActivity :AppCompatActivity(), OnMapReadyCallback {
     private var minuto = 0
 
     private lateinit var modelo : ReservacionBD
+    private lateinit var modeloUsuario: Usuarios
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,17 +59,26 @@ class RealizarCitaActivity :AppCompatActivity(), OnMapReadyCallback {
         setContentView(view)
 
         modelo = ReservacionBD(this@RealizarCitaActivity)
+        modeloUsuario = Usuarios(this@RealizarCitaActivity)
         modelo.crearTabla()
+
+        idUsuarioPub = intent.getIntExtra("idUser",0)
+        Log.d("idUsuarioPub",idUsuarioPub.toString())
+        val usuarioPublicacion = modeloUsuario.obtenerDatosUsuario(idUsuarioPub)
 
         idUsuario = intent.getIntExtra("idUsuario",0)
         nombre = intent.getStringExtra("nombre")!!
         telefono = intent.getLongExtra("telefono",0)
+        idPublicacion = intent.getIntExtra("idPublicacion",0)
         titulo = intent.getStringExtra("titulo")!!
         direccion = intent.getStringExtra("direccion")!!
         latitud = intent.getDoubleExtra("latitud",0.0)
         longitud = intent.getDoubleExtra("longitud",0.0)
 
-        binding.etArrendador.setText(nombre)
+        if (usuarioPublicacion != null) {
+            binding.etArrendador.setText(usuarioPublicacion.nombre)
+        }
+
         binding.etContacto.setText(telefono.toString())
 
         binding.etFecha.setOnClickListener {
@@ -113,7 +127,7 @@ class RealizarCitaActivity :AppCompatActivity(), OnMapReadyCallback {
                 idReservacion = 0,
                 fecha = binding.etFecha.text.toString(),
                 hora = binding.etHora.text.toString(),
-                idPublicacion = 0,
+                idPublicacion = idPublicacion,
                 idUsuario = idUsuario
             )
         } catch (e: NumberFormatException) {

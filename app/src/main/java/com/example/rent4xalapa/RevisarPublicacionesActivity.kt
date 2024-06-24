@@ -29,7 +29,7 @@ class RevisarPublicacionesActivity : AppCompatActivity(), OnMapReadyCallback {
     private lateinit var binding: RevisarPublicacionesBinding
     private lateinit var map: GoogleMap
 
-    private var idUsuario1=0
+    private var idUsuario=0
     private var nombre = ""
     private var correo = ""
     private var contrasena = ""
@@ -54,7 +54,7 @@ class RevisarPublicacionesActivity : AppCompatActivity(), OnMapReadyCallback {
     private var longitud = 0.0
     private var latitud = 0.0
     private var calificacion = 0
-    private var idUsuario = 0
+    private var idUsuarioPub = 0
 
     private lateinit var modeloUsuarios : Usuarios
     private lateinit var arrayUsu: ArrayList<Usuario>
@@ -80,7 +80,7 @@ class RevisarPublicacionesActivity : AppCompatActivity(), OnMapReadyCallback {
 
         array = arrayListOf<Publicacion>()
 
-        idUsuario1 = intent.getIntExtra("idUsuario",0)
+        idUsuario = intent.getIntExtra("idUsuario",0)
         nombre = intent.getStringExtra("nombre")!!
         correo = intent.getStringExtra("correo")!!
         contrasena = intent.getStringExtra("contrasena")!!
@@ -104,7 +104,7 @@ class RevisarPublicacionesActivity : AppCompatActivity(), OnMapReadyCallback {
         aire = intent.getIntExtra("aire", 0)
         imagenes = intent.getStringExtra("imagenes")!!
         calificacion = intent.getIntExtra("calificacion", 0)
-        idUsuario = intent.getIntExtra("idUsuario", 0)
+        idUsuarioPub = intent.getIntExtra("idUser", 0)
         latitud = intent.getDoubleExtra("latitud",0.0)
         longitud = intent.getDoubleExtra("longitud",0.0)
 
@@ -152,7 +152,6 @@ class RevisarPublicacionesActivity : AppCompatActivity(), OnMapReadyCallback {
         }else{
             binding.tvAire.setText("Aire acondicionado: No")
         }
-
 
         Glide.with(this).load(imagenes).into(binding.imagenPerfil)
 
@@ -324,6 +323,8 @@ class RevisarPublicacionesActivity : AppCompatActivity(), OnMapReadyCallback {
 
     fun irPantallaRealizarCita(idUsuario:Int,nombre:String, correo:String , contrasena:String , telefono:Long , ine:String,perfil:String){
         val intent = Intent(this@RevisarPublicacionesActivity,RealizarCitaActivity::class.java)
+        intent.putExtra("idUser",idUsuarioPub)
+        intent.putExtra("idPublicacion",idPublicacion)
         intent.putExtra("idUsuario",idUsuario)
         intent.putExtra("nombre",nombre)
         intent.putExtra("correo",correo)

@@ -24,15 +24,100 @@
                 android:layout_height="wrap_content"
                 android:text="Datos de la cita"
                 android:textStyle="bold"
+                android:textSize="22sp"
+                android:layout_marginStart="8dp"/>
+
+            <TextView
+                android:id="@+id/tv_titulo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_cita"
+                android:text="Titulo:"
+                android:textStyle="bold"
                 android:textSize="16sp"
                 android:layout_marginTop="8dp"
                 android:layout_marginStart="8dp"/>
+            <TextView
+                android:id="@+id/tv2_titulo"
+                android:layout_below="@id/tv_cita"
+                android:layout_toEndOf="@id/tv_fecha"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginTop="8dp"
+                android:text="fasdds"/>
+
+            <TextView
+                android:id="@+id/tv_nombre"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_titulo"
+                android:text="Nombre arrendador:"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:layout_marginTop="8dp"
+                android:layout_marginStart="8dp"/>
+            <TextView
+                android:id="@+id/tv2_nombre"
+                android:layout_below="@id/tv_titulo"
+                android:layout_toEndOf="@id/tv_nombre"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginTop="8dp"
+                android:text="fasdds"/>
+
+            <TextView
+                android:id="@+id/tv_contacto"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_nombre"
+                android:text="Contacto:"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:layout_marginTop="8dp"
+                android:layout_marginStart="8dp"/>
+            <TextView
+                android:id="@+id/tv2_contacto"
+                android:layout_below="@id/tv_nombre"
+                android:layout_toEndOf="@id/tv_contacto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginTop="8dp"
+                android:text="fasdds"/>
+
+            <TextView
+                android:id="@+id/tv_direccion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_contacto"
+                android:text="Direccion:"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:layout_marginTop="8dp"
+                android:layout_marginStart="8dp"/>
+            <TextView
+                android:id="@+id/tv2_direccion"
+                android:layout_below="@id/tv_contacto"
+                android:layout_toEndOf="@id/tv_contacto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginTop="8dp"
+                android:text="fasdds"
+                android:textStyle="bold"
+                android:textColor="@color/design_default_color_secondary"/>
 
             <TextView
                 android:id="@+id/tv_fecha"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/tv_cita"
+                android:layout_below="@id/tv_direccion"
                 android:text="Fecha:"
                 android:textStyle="bold"
                 android:textSize="16sp"
@@ -40,7 +125,7 @@
                 android:layout_marginStart="8dp"/>
             <TextView
                 android:id="@+id/tv2_fecha"
-                android:layout_below="@id/tv_cita"
+                android:layout_below="@id/tv_direccion"
                 android:layout_toEndOf="@id/tv_fecha"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

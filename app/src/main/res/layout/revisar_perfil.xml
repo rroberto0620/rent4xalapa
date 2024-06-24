@@ -47,7 +47,6 @@
         android:layout_below="@+id/tv_mi_cuenta"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="15dp"
-        android:background="@drawable/cuadricular_edit_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 

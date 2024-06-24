@@ -7,6 +7,7 @@ import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import android.util.Log
+import com.example.rent4xalapa.poko.Favorito
 import com.example.rent4xalapa.poko.Publicacion
 import com.example.rent4xalapa.poko.Reservacion
 
@@ -75,26 +76,42 @@ override fun onCreate(p0: SQLiteDatabase?) {
         return misReservaciones
     }
 
-//    @SuppressLint("Range")
-//    fun seleccionarReservacion(): List<Reservacion> {
-//        val misReservaciones = mutableListOf<Reservacion>()
-//        val db = readableDatabase
-//        val resultadoConsulta: Cursor? = db.query(NOMBRE_TABLA, null, null, null, null, null, null)
-//        if (resultadoConsulta != null) {
-//            while (resultadoConsulta.moveToNext()) {
-//                val idReservacion = resultadoConsulta.getInt(resultadoConsulta.getColumnIndex(COL_ID_RESERVACION))
-//                val fecha = resultadoConsulta.getString(resultadoConsulta.getColumnIndex(COL_FECHA))
-//                val hora = resultadoConsulta.getString(resultadoConsulta.getColumnIndex(COL_HORA))
-//                val idUsuario = resultadoConsulta.getInt(resultadoConsulta.getColumnIndex(COL_ID_USUARIO))
-//                val idPublicacion = resultadoConsulta.getInt(resultadoConsulta.getColumnIndex(COL_ID_PUBLICACION))
-//                val reservacion = Reservacion(idReservacion,fecha,hora,idUsuario,idPublicacion)
-//                Log.d("msjReservacionConsulta","reservacion ${reservacion.idReservacion} ${reservacion.idPublicacion} ${reservacion.fecha}")
-//                misReservaciones.add(reservacion)
-//            }
-//            Log.d("msj", resultadoConsulta.count.toString())
-//            resultadoConsulta.close()
-//        }
-//        db.close()
-//        return misReservaciones
-//    }
+    @SuppressLint("Range")
+    fun obtenerPublicacionesReservacion(idUsuario:String): List<Reservacion>{
+        val reservaciones = mutableListOf<Reservacion>()
+        val db = readableDatabase
+        val resultadoConsulta : Cursor = db.query(
+            NOMBRE_TABLA,null,"$COL_ID_USUARIO=?",
+            arrayOf(idUsuario),null,null,null)
+        if(resultadoConsulta !=null) {
+            while (resultadoConsulta.moveToNext()) {
+                val idReservacion = resultadoConsulta.getInt(resultadoConsulta.getColumnIndex(
+                    COL_ID_RESERVACION
+                ))
+                val fecha = resultadoConsulta.getString(resultadoConsulta.getColumnIndex(COL_FECHA))
+                val hora = resultadoConsulta.getString(resultadoConsulta.getColumnIndex(COL_HORA))
+                val idUsuario =
+                    resultadoConsulta.getInt(resultadoConsulta.getColumnIndex(COL_ID_USUARIO))
+                val idPublicacion = resultadoConsulta.getInt(resultadoConsulta.getColumnIndex(
+                    COL_ID_PUBLICACION))
+                val reservacion = Reservacion(
+                    idReservacion,
+                    fecha,
+                    hora,
+                    idUsuario,
+                    idPublicacion)
+                reservaciones.add(reservacion)
+            }
+            Log.d("msj", resultadoConsulta.count.toString())
+            resultadoConsulta.close()
+        }
+        db.close()
+        return reservaciones
+    }
+
+    fun eliminarTabla(){
+        val db = writableDatabase
+        val ELIMINAR_TABLA = ("DROP TABLE $NOMBRE_TABLA")
+        db!!.execSQL(ELIMINAR_TABLA)
+    }
 }

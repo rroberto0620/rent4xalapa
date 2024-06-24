@@ -46,7 +46,6 @@ dependencies {
     implementation(libs.androidx.constraintlayout)
 
     implementation("com.google.android.gms:play-services-maps:17.0.0")
-
     implementation ("com.github.bumptech.glide:glide:4.14.2")
     implementation(libs.androidx.material3.android)
     implementation(libs.androidx.media3.common)
