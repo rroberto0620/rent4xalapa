@@ -55,9 +55,9 @@ class RevisarPerfilActivity : AppCompatActivity() {
         binding.btnEditProfile.setOnClickListener {
             irActivityEditar()
         }
-        /*binding.btnBack.setOnClickListener {
-            irActivityPublicaciones()
-        }*/
+        binding.btnMisPublicaciones.setOnClickListener {
+            irActivityMisPublicaciones()
+        }
 
         binding.imageButtonFavoritos.setOnClickListener {
             irActivityPublicacionesFavoritas()
@@ -236,6 +236,35 @@ class RevisarPerfilActivity : AppCompatActivity() {
 
     fun irPantallaAdministrarReservaciones(idUsuario:Int,nombre:String, correo:String , contrasena:String , telefono:Long , ine:String,perfil:String){
         val intent = Intent(this@RevisarPerfilActivity,AdministrarReservacionesActivity::class.java)
+        intent.putExtra("idUsuario",idUsuario)
+        intent.putExtra("nombre",nombre)
+        intent.putExtra("correo",correo)
+        intent.putExtra("contrasena",contrasena)
+        intent.putExtra("telefono",telefono)
+        intent.putExtra("ine",ine)
+        intent.putExtra("perfil",perfil)
+        startActivity(intent)
+    }
+
+    fun irActivityMisPublicaciones(){
+        for (usuario in array) {
+            if (usuario.correo == correo && usuario.contrasena == contrasena) {
+                irPantallaMisPublicaciones(
+                    usuario.idUsuario,
+                    usuario.nombre,
+                    usuario.correo,
+                    usuario.contrasena,
+                    usuario.telefono,
+                    usuario.ine,
+                    usuario.perfil
+                )
+                break  // Salir del bucle una vez encontrado el usuario
+            }
+        }
+    }
+
+    fun irPantallaMisPublicaciones(idUsuario:Int,nombre:String, correo:String , contrasena:String , telefono:Long , ine:String,perfil:String){
+        val intent = Intent(this@RevisarPerfilActivity,MisPublicacionesActivity::class.java)
         intent.putExtra("idUsuario",idUsuario)
         intent.putExtra("nombre",nombre)
         intent.putExtra("correo",correo)
