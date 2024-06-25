@@ -109,6 +109,27 @@ override fun onCreate(p0: SQLiteDatabase?) {
         return reservaciones
     }
 
+    fun reservacionExiste(idUsuario: Int, idPublicacion: Int): Boolean {
+        val db = readableDatabase
+        val selection = "$COL_ID_USUARIO = ? AND $COL_ID_PUBLICACION = ?"
+        val selectionArgs = arrayOf(idUsuario.toString(), idPublicacion.toString())
+
+        val cursor = db.query(
+            NOMBRE_TABLA,
+            arrayOf(COL_ID_USUARIO,COL_ID_PUBLICACION),
+            selection,
+            selectionArgs,
+            null,
+            null,
+            null
+        )
+
+        val existe = cursor.count > 0
+        cursor.close()
+        db.close()
+        return existe
+    }
+
     fun eliminarTabla(){
         val db = writableDatabase
         val ELIMINAR_TABLA = ("DROP TABLE $NOMBRE_TABLA")

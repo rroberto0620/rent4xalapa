@@ -76,6 +76,28 @@ class FavoritosBD (contexto: Context) : SQLiteOpenHelper(contexto, FavoritosBD.N
         db.close()
         return favoritos
     }
+
+    fun favoritoExiste(idUsuario: Int, idPublicacion: Int): Boolean {
+        val db = readableDatabase
+        val selection = "$COL_ID_USUARIO = ? AND $COL_ID_PUBLICACION = ?"
+        val selectionArgs = arrayOf(idUsuario.toString(), idPublicacion.toString())
+
+        val cursor = db.query(
+            NOMBRE_TABLA,
+            arrayOf(COL_ID_USUARIO,COL_ID_PUBLICACION),
+            selection,
+            selectionArgs,
+            null,
+            null,
+            null
+        )
+
+        val existe = cursor.count > 0
+        cursor.close()
+        db.close()
+        return existe
+    }
+
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
     }
 }

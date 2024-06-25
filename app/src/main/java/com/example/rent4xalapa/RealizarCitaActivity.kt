@@ -95,12 +95,16 @@ class RealizarCitaActivity :AppCompatActivity(), OnMapReadyCallback {
         binding.btnAceptar.setOnClickListener {
             Log.d("mensajeCitaValores","$dayExt/$monthExt/$yearExt")
             if (validarCamposCorrectos()) {
-                val nuevaCita = crearCita()
-                if (nuevaCita != null) {
-                    agregarCita(nuevaCita)
-                    añadirEvento()
-                    Toast.makeText(this@RealizarCitaActivity, "Se realizo la cita ", Toast.LENGTH_LONG).show()
-                    finish()
+                if (modelo.reservacionExiste(idUsuario,idPublicacion)){
+                    Toast.makeText(this, "Ya se realizo una cita para esta publicacion", Toast.LENGTH_LONG).show()
+                }else{
+                    val nuevaCita = crearCita()
+                    if (nuevaCita != null) {
+                        agregarCita(nuevaCita)
+                        añadirEvento()
+                        Toast.makeText(this@RealizarCitaActivity, "Se realizo la cita ", Toast.LENGTH_LONG).show()
+                        finish()
+                    }
                 }
             }
         }
