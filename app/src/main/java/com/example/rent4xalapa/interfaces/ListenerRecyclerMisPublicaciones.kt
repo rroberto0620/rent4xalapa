@@ -4,4 +4,5 @@ import com.example.rent4xalapa.poko.Publicacion
 
 interface ListenerRecyclerMisPublicaciones {
     fun clicVerPublicacion(publicacion : Publicacion, posicion: Int)
+    fun clicEliminarPublicacion(publicacion: Publicacion,posicion:Int)
 }

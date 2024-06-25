@@ -115,4 +115,10 @@ class MisPublicacionesActivity : AppCompatActivity(),ListenerRecyclerMisPublicac
         intent.putExtra("idUser",publicacion.idUsuario)
         startActivity(intent)
     }
+
+    override fun clicEliminarPublicacion(publicacion: Publicacion, posicion: Int) {
+        modeloPublicaciones.eliminarPublicacion(publicacion.idPublicacion)
+        Toast.makeText(this@MisPublicacionesActivity, "Se elimina la publicacion", Toast.LENGTH_LONG).show()
+        recreate()
+    }
 }

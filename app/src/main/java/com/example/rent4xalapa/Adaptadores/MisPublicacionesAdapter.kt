@@ -29,12 +29,17 @@ class MisPublicacionesAdapter(val publicaciones: List<Publicacion>, val listener
         holder.btnVerPublicacion.setOnClickListener {
             listenerRecyclerMisPublicaciones.clicVerPublicacion(publicacion,position)
         }
+
+        holder.btnEliminarPublicacion.setOnClickListener {
+            listenerRecyclerMisPublicaciones.clicEliminarPublicacion(publicacion,position)
+        }
     }
 
     override fun getItemCount(): Int = publicaciones.size
 
     class ViewHolderMiPublicacion(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val btnVerPublicacion: Button = itemView.findViewById(R.id.btn_ver_publicacion)
+        val btnEliminarPublicacion: Button = itemView.findViewById(R.id.btn_eliminar)
         val tv2TituloPublicacion: TextView = itemView.findViewById(R.id.tv_titulo_publicacion)
         val tv2DescripcionPublicacion: TextView = itemView.findViewById(R.id.tv2_direccion)
         val imagen: ImageView = itemView.findViewById(R.id.imagen)

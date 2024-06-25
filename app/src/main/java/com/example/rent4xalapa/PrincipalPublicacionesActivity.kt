@@ -84,7 +84,7 @@ class PrincipalPublicacionesActivity: AppCompatActivity(), ListenerRecyclerPubli
             binding.recyclerPublicaciones.visibility = View.VISIBLE
             binding.recyclerPublicaciones.adapter = PublicacionesAdapter(publicaciones,this)
         }else{
-            Toast.makeText(this@PrincipalPublicacionesActivity, "No se pueden mostrar las publicaciones = "+ idUsuario, Toast.LENGTH_LONG).show()
+            Toast.makeText(this@PrincipalPublicacionesActivity, "No hay publicaciones disponibles para mostrar", Toast.LENGTH_LONG).show()
         }
     }
 
@@ -186,7 +186,7 @@ class PrincipalPublicacionesActivity: AppCompatActivity(), ListenerRecyclerPubli
             Toast.makeText(this, "La publicacion ya está en favoritos", Toast.LENGTH_LONG).show()
         }else {
             modeloFavoritos.agregarFavorito(publicacion,idUsuario)
-            Toast.makeText(this@PrincipalPublicacionesActivity, "Se agrego ${publicacion.titulo} a favorito ", Toast.LENGTH_LONG).show()
+            Toast.makeText(this@PrincipalPublicacionesActivity, "Se agrego ${publicacion.titulo} a favoritos ", Toast.LENGTH_LONG).show()
         }
     }
 

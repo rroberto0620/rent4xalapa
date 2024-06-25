@@ -85,6 +85,23 @@
                 android:layout_marginTop="6dp">
 
                 <Button
+                    android:id="@+id/btn_eliminar"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Eliminar publicacion"
+                    android:backgroundTint="@color/red_personalizado"
+                    android:gravity="center_horizontal"
+                    android:layout_weight="1"
+                    android:textColor="@color/black"
+                    android:padding="8dp"
+                    android:layout_marginEnd="4dp" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="#969797"/>
+
+                <Button
                     android:id="@+id/btn_ver_publicacion"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"

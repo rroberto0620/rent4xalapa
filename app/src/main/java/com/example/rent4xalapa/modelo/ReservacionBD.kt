@@ -130,6 +130,13 @@ override fun onCreate(p0: SQLiteDatabase?) {
         return existe
     }
 
+    fun eliminarReservacion(idReservacion: Int): Int{
+        val db = writableDatabase
+        val resultado = db.delete(NOMBRE_TABLA,"$COL_ID_RESERVACION=?", arrayOf(idReservacion.toString()))
+        db.close()
+        return resultado
+    }
+
     fun eliminarTabla(){
         val db = writableDatabase
         val ELIMINAR_TABLA = ("DROP TABLE $NOMBRE_TABLA")

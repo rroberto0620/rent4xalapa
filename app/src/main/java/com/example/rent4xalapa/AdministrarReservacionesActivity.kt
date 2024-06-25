@@ -79,7 +79,7 @@ class AdministrarReservacionesActivity : AppCompatActivity(), ListenerRecyclerRe
             binding.recyclerReservaciones.visibility = View.VISIBLE
             binding.recyclerReservaciones.adapter = ReservacionesAdapter(citas,publicaciones,usuarios,this)
         }else{
-            Toast.makeText(this@AdministrarReservacionesActivity, "No se pueden mostrar las citas = ${citas.size}  "+ idUsuario, Toast.LENGTH_LONG).show()
+            Toast.makeText(this@AdministrarReservacionesActivity, "Aun no haz realizado ninguna cita", Toast.LENGTH_LONG).show()
         }
     }
 
@@ -89,7 +89,9 @@ class AdministrarReservacionesActivity : AppCompatActivity(), ListenerRecyclerRe
     }
 
     override fun clicEliminarReservacion(reservacion: Reservacion, posicion: Int) {
-        TODO("Not yet implemented")
+        modeloReservacion.eliminarReservacion(reservacion.idReservacion)
+        Toast.makeText(this@AdministrarReservacionesActivity, "Se elimina la reservacion", Toast.LENGTH_LONG).show()
+        recreate()
     }
 
     override fun clicDireccion(publicacion: Publicacion, posicion: Int) {

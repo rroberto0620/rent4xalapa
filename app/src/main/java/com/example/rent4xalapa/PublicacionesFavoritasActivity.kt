@@ -80,7 +80,7 @@ class PublicacionesFavoritasActivity : AppCompatActivity(), ListenerRecyclerPubl
             binding.recyclerPublicaciones.visibility = View.VISIBLE
             binding.recyclerPublicaciones.adapter = PublicacionesAdapter(publicaciones,this)
         }else{
-            Toast.makeText(this@PublicacionesFavoritasActivity, "No se pueden mostrar las publicaciones =${publicaciones.size}  "+ idUsuario, Toast.LENGTH_LONG).show()
+            Toast.makeText(this@PublicacionesFavoritasActivity, "Aun no haz agregado publicaciones a favoritos", Toast.LENGTH_LONG).show()
         }
     }
 

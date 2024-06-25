@@ -102,7 +102,7 @@ class RealizarCitaActivity :AppCompatActivity(), OnMapReadyCallback {
                     if (nuevaCita != null) {
                         agregarCita(nuevaCita)
                         añadirEvento()
-                        Toast.makeText(this@RealizarCitaActivity, "Se realizo la cita ", Toast.LENGTH_LONG).show()
+                        //Toast.makeText(this@RealizarCitaActivity, "Se realizo la cita", Toast.LENGTH_LONG).show()
                         finish()
                     }
                 }
@@ -145,7 +145,7 @@ class RealizarCitaActivity :AppCompatActivity(), OnMapReadyCallback {
         val resultadoInsercion = modelo.agregarReservacion(reservacion)
         var mensaje = ""
         if (resultadoInsercion>0){
-            mensaje = "Cita registrada "
+            mensaje = "Cita registrada"
         }else{
             mensaje = "Hubo un error al guardar la cita"
 
