@@ -10,6 +10,9 @@
         android:id="@+id/btn_regresar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@id/recycler_mis_publicaciones"
+        android:backgroundTint="@android:color/holo_blue_dark"
+        android:layout_marginStart="20dp"
         android:text="Regresar"/>
 
     <TextView
@@ -36,7 +39,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_mis_publicaciones"
         android:layout_width="match_parent"
-        android:layout_height="710dp"
+        android:layout_height="680dp"
         android:layout_below="@id/tv_mis_publicaciones"
         android:layout_marginTop="2dp"
         android:layout_marginStart="8dp"

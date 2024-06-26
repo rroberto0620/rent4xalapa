@@ -73,7 +73,7 @@ class MisPublicacionesActivity : AppCompatActivity(),ListenerRecyclerMisPublicac
             binding.recyclerMisPublicaciones.visibility = View.VISIBLE
             binding.recyclerMisPublicaciones.adapter = MisPublicacionesAdapter(publicaciones,this)
         }else{
-            Toast.makeText(this@MisPublicacionesActivity, "No se pueden mostrar las publicaciones =${publicaciones.size}  "+ idUsuario, Toast.LENGTH_LONG).show()
+            Toast.makeText(this@MisPublicacionesActivity, "Aun no haz realizado ninguna publicacion", Toast.LENGTH_LONG).show()
         }
     }
 

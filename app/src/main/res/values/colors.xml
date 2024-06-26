@@ -9,4 +9,7 @@
     <color name="gris_paleta">#374C61</color>
     <color name="red_personalizado">#E01010</color>
     <color name="dark_grey">#181818</color>
+    <color name="verde_btn">#26B62B</color>
+    <color name="lavanda_btn">#E7DDFF</color>
+    <color name="naranja_btn">#FE9900</color>
 </resources>

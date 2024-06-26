@@ -16,16 +16,10 @@
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"/>
 
-    <Button
-        android:id="@+id/btn_mis_publicaciones"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Mis Publicaciones"/>
-
     <TextView
         android:id="@+id/tv_mi_cuenta"
         android:layout_width="200dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="5dp"
         android:textColor="@color/black"
         android:layout_height="wrap_content"
         android:background="@drawable/cuadricular_edit_text"
@@ -65,6 +59,7 @@
         android:layout_marginStart="10dp"
         android:layout_marginTop="26dp"
         android:layout_marginEnd="10dp"
+        android:layout_marginBottom="20dp"
         android:background="@drawable/rounded_edit_text"
         android:orientation="vertical"
         android:padding="8dp">
@@ -119,40 +114,68 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/linear_sup"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:gravity="center"
         android:layout_below="@id/profileContainer"
-        android:layout_marginTop="45dp">
-
-
+        android:layout_marginTop="35dp">
 
         <Button
-            android:id="@+id/btnDeleteAccount"
-            android:layout_width="wrap_content"
+            android:id="@+id/btn_mis_publicaciones"
+            android:layout_width="0dp"
+            android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="11dp"
-            android:backgroundTint="@color/red_personalizado"
-            android:text="Eliminar cuenta"
-            android:textColor="#FFFFFF" />
+            android:text="Mis Publicaciones"
+            android:layout_gravity="center"
+            android:backgroundTint="@color/verde_btn"
+            android:padding="2dp"/>
 
         <Button
-            android:id="@+id/btn_cerrar_sesion"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:backgroundTint="@android:color/holo_blue_dark"
-            android:text="Cerrar sesión"
-            android:textColor="#FFFFFF" />
-
-        <Button
+            android:layout_gravity="center"
             android:id="@+id/btn_citas"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
+            android:padding="2dp"
+            android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:backgroundTint="@android:color/holo_blue_dark"
-            android:text="Citas"
+            android:backgroundTint="@color/naranja_btn"
+            android:text="Mis Citas"
             android:textColor="#FFFFFF" />
+
     </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_below="@id/linear_sup"
+        android:layout_marginTop="5dp">
+    <Button
+        android:id="@+id/btn_cerrar_sesion"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_gravity="center"
+        android:padding="2dp"
+        android:backgroundTint="@color/gray_personalizado"
+        android:text="Cerrar sesión"
+        android:textColor="#FFFFFF" />
+
+    <Button
+        android:id="@+id/btnDeleteAccount"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:padding="2dp"
+        android:backgroundTint="@color/red_personalizado"
+        android:text="Eliminar cuenta"
+        android:textColor="#FFFFFF" />
+
+    </LinearLayout>
+
+
 
     <LinearLayout
         android:id="@+id/linear_menus"
@@ -160,6 +183,7 @@
         android:layout_height="match_parent"
         android:orientation="horizontal"
         android:gravity="bottom"
+        android:layout_marginTop="5dp"
         android:layout_below="@id/profileContainer">
 
         <ImageButton

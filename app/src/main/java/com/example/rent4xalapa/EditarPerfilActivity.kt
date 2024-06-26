@@ -65,6 +65,7 @@ class EditarPerfilActivity : AppCompatActivity() {
                         binding.etPerfil.text.toString()
                     )
                     actualizarUsuario(usuario)
+                    irPantallaLogin()
                 }
             }
         }
@@ -169,4 +170,9 @@ class EditarPerfilActivity : AppCompatActivity() {
         finish()
     }
 
+    fun irPantallaLogin(){
+        val intent = Intent(this@EditarPerfilActivity, LoginActivity::class.java)
+        startActivity(intent)
+        finish()
+    }
 }

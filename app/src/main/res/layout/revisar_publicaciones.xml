@@ -275,16 +275,17 @@
 
     <Button
         android:id="@+id/btn_regresar"
-        android:layout_width="100dp"
+        android:layout_width="0dp"
         android:layout_height="60dp"
         android:text="Atrás"
         android:textColor="@android:color/white"
         android:backgroundTint="@android:color/holo_blue_dark"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         android:layout_marginStart="15dp"
         android:layout_marginBottom="16dp"
-        android:layout_marginEnd="16dp" />
+        android:layout_marginEnd="5dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btn_realizar" />
 
     <Button
         android:id="@+id/btn_realizar"
@@ -293,11 +294,12 @@
         android:text="Realizar Cita"
         android:textColor="@android:color/white"
         android:backgroundTint="@color/red_personalizado"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@id/btn_regresar"
-        android:layout_marginStart="7dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="5dp"
         android:layout_marginBottom="16dp"
-        android:layout_marginEnd="5dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/btn_regresar"
+        app:layout_constraintEnd_toStartOf="@+id/btn_calificar" />
 
     <Button
         android:id="@+id/btn_calificar"
@@ -305,11 +307,13 @@
         android:layout_height="60dp"
         android:text="Calificar"
         android:textColor="@android:color/white"
-        android:backgroundTint="@android:color/holo_blue_dark"
+        android:backgroundTint="@color/verde_btn"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginBottom="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginEnd="2dp"
-        android:layout_marginBottom="16dp" />
+        app:layout_constraintStart_toEndOf="@+id/btn_realizar"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

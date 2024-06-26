@@ -197,7 +197,7 @@ class RevisarPublicacionesActivity : AppCompatActivity(), OnMapReadyCallback {
         map.moveCamera(CameraUpdateFactory.newLatLngZoom(initialLocation, 15f))
 
         map.setOnMapClickListener {
-            Toast.makeText(this, "Latitud: $latitud, Longitud: $longitud", Toast.LENGTH_LONG).show()
+            Toast.makeText(this, "Reedirigiendo a Maps", Toast.LENGTH_LONG).show()
             // Redirigir a Google Maps con la ubicación clicada
             openGoogleMaps(latitud, longitud)
         }
